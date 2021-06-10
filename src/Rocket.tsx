@@ -10,6 +10,7 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
+import {point} from './point';
 
 export const Rocket: React.FC<{
 	targetX: number;
@@ -76,26 +77,6 @@ export const Rocket: React.FC<{
 			'2d'
 		) as CanvasRenderingContext2D;
 
-		// That's how you define the value of a pixel //
-		function point({
-			x,
-			y,
-			canvas,
-			color,
-			size,
-		}: {
-			x: number;
-			y: number;
-			canvas: CanvasRenderingContext2D;
-			color: string;
-			size: number;
-		}) {
-			canvas.beginPath();
-			canvas.arc(x, y, size, 0, 2 * Math.PI, true);
-			canvas.fillStyle = color; // add a fill color: ;
-
-			canvas.fill();
-		}
 		if (!context) {
 			return;
 		}

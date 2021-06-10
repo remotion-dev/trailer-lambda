@@ -34,7 +34,7 @@ export const Main: React.FC = () => {
 	return (
 		<div style={container}>
 			<BackgroundNoise />
-			{/* <Rocket
+			<Rocket
 				fumeOut
 				originX={rocket3OriginX}
 				originY={rocket3OriginY}
@@ -51,7 +51,7 @@ export const Main: React.FC = () => {
 				targetX={rocket2TargetX}
 				targetY={rocket2TargetY}
 				delay={60}
-			/> */}
+			/>
 			<Rocket
 				originX={rocket1OriginX}
 				originY={rocket1OriginY}
