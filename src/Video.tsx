@@ -2,6 +2,7 @@ import {Composition} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Main} from './Main';
 import {ManySpin} from './ManySpin';
+import {Rollercoaster} from './Rollercoaster';
 import {Spin} from './Spin';
 
 export const RemotionVideo: React.FC = () => {
@@ -52,6 +53,14 @@ export const RemotionVideo: React.FC = () => {
 				defaultProps={{
 					seed: '0',
 				}}
+			/>
+			<Composition
+				id="Rollercoaster"
+				component={Rollercoaster}
+				durationInFrames={300}
+				fps={30}
+				width={1920}
+				height={1080}
 			/>
 		</>
 	);
