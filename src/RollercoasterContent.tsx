@@ -32,7 +32,7 @@ export const RollercoasterContent: React.FC = () => {
 	const three = useThree();
 
 	const frame = useCurrentFrame();
-	const alongLine = interpolate(frame, [0, 150], [0, 1 - delta], {
+	const alongLine = interpolate(frame, [0, 700], [0, 1 - delta], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
