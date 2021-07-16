@@ -4,6 +4,7 @@ import {Main} from './Main';
 import {ManySpin} from './ManySpin';
 import {Rollercoaster} from './Rollercoaster';
 import {Spin} from './Spin';
+import {TextStretch} from './TextStretch';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -61,6 +62,14 @@ export const RemotionVideo: React.FC = () => {
 				fps={30}
 				width={1920}
 				height={1080}
+			/>
+			<Composition
+				id="TextStretch"
+				component={TextStretch}
+				durationInFrames={180}
+				fps={30}
+				width={600}
+				height={470}
 			/>
 		</>
 	);
