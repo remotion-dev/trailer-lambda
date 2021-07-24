@@ -7,7 +7,7 @@ export const ManySpin: React.FC = () => {
 	return (
 		<AbsoluteFill>
 			<BackgroundNoise />
-			{new Array(100).fill(1).map((_, i) => {
+			{new Array(50).fill(1).map((_, i) => {
 				return (
 					<Sequence
 						key={String(i)}

@@ -1,5 +1,6 @@
 import {Composition} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
+import {HugeOrb} from './HugeOrb';
 import {Main} from './Main';
 import {ManySpin} from './ManySpin';
 import {Olympia} from './Olympia/Master';
@@ -75,6 +76,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Olympia"
 				component={Olympia}
+				durationInFrames={180}
+				fps={30}
+				width={1280}
+				height={720}
+			/>
+			<Composition
+				id="HugeOrb"
+				component={HugeOrb}
 				durationInFrames={180}
 				fps={30}
 				width={1280}
