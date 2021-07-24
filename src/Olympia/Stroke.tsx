@@ -1,5 +1,11 @@
 import React from 'react';
-import {interpolate, random, useCurrentFrame, useVideoConfig} from 'remotion';
+import {
+	interpolate,
+	interpolateColors,
+	random,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
 import SimplexNoise from 'simplex-noise';
 
 const n = new SimplexNoise();
@@ -8,8 +14,22 @@ export const Stroke: React.FC<{
 	seed: number;
 }> = ({seed}) => {
 	const frame = useCurrentFrame();
-	const {width, height, durationInFrames} = useVideoConfig();
+	const {
+		width: origWidth,
+		height: origHeight,
+		durationInFrames,
+	} = useVideoConfig();
 
+	const size = Math.sqrt(origWidth * origWidth + origHeight * origHeight);
+
+	const color = interpolateColors(
+		random('color' + seed),
+		[0, 1],
+		['#42e9f5', '#4290f5']
+	);
+
+	const height = size;
+	const width = size;
 	const randomValue = n.noise2D(0, seed / 20) * 2 - 1;
 
 	const radius = random(seed + 'i') * 800 + 200;
@@ -54,7 +74,7 @@ export const Stroke: React.FC<{
 				transform: `translateX(${translateX}px) translateY(${translateY}px)`,
 				opacity,
 			}}
-			fill="#4090f3"
+			fill={color}
 		/>
 	);
 };
