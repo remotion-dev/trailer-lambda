@@ -56,6 +56,8 @@ class Outside extends Curve<Vector3> {
 }
 
 const delta = 0.001;
+const path = new CustomSinCurve(1);
+const path2 = new Outside(1);
 
 export const RollercoasterContent: React.FC = () => {
 	const three = useThree();
@@ -65,9 +67,6 @@ export const RollercoasterContent: React.FC = () => {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
-
-	const path = new CustomSinCurve(alongLine + 0.05);
-	const path2 = new Outside(alongLine + 0.05);
 
 	useEffect(() => {
 		const point = path.getPointAt(alongLine);
@@ -79,7 +78,7 @@ export const RollercoasterContent: React.FC = () => {
 			point.y + 10 + tangent.y,
 			point.z + tangent.z
 		);
-	}, [alongLine, path, three.camera]);
+	}, [alongLine, three.camera]);
 
 	return (
 		<>
