@@ -5,7 +5,7 @@ import {Drop} from './Drop';
 const radius = 300;
 const strokeWidth = 55;
 const amountOfMarkers = 35;
-const duration = 30;
+const duration = 40;
 
 export const HugeOrb: React.FC = () => {
 	const {width, height, fps} = useVideoConfig();
