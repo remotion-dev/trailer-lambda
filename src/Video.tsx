@@ -2,6 +2,7 @@ import {Composition} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Main} from './Main';
 import {ManySpin} from './ManySpin';
+import {Olympia} from './Olympia/Master';
 import {Rollercoaster} from './Rollercoaster';
 import {Spin} from './Spin';
 import {TextStretch} from './TextStretch';
@@ -70,6 +71,14 @@ export const RemotionVideo: React.FC = () => {
 				fps={30}
 				width={600}
 				height={470}
+			/>
+			<Composition
+				id="Olympia"
+				component={Olympia}
+				durationInFrames={180}
+				fps={30}
+				width={1280}
+				height={720}
 			/>
 		</>
 	);
