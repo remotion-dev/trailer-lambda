@@ -99,6 +99,7 @@ export const TextStretchWord: React.FC<{
 	);
 
 	useEffect(() => {
+		// @ts-expect-error not typed
 		document.fonts.ready.then(() => {
 			const context = ref.current?.getContext('2d') as CanvasRenderingContext2D;
 			context.clearRect(left, top, fullWidth, textHeight);
