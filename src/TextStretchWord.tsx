@@ -6,8 +6,14 @@ import {measureText} from './measure-text';
 const cache: {[key: string]: number} = {};
 
 const areaOfRanges = (ranges: [number, number][], weights: number[]) => {
+	if (ranges.length === 0) {
+		return 0;
+	}
 	const totalWeights = weights.reduce((a, b) => a + b, 0);
 	const avgWeight = totalWeights / weights.length;
+	if (avgWeight === 0) {
+		return 0;
+	}
 	return ranges.reduce((a, b, i) => {
 		return a + ((b[1] - b[0]) * weights[i]) / avgWeight;
 	}, 0);
@@ -41,7 +47,7 @@ const stretchFn = (
 	const extraSpace = targetWidth - originalWidth;
 	const stretchArea = areaOfRanges(ranges, weights);
 
-	const defaultStretchFactor = extraSpace / stretchArea;
+	const defaultStretchFactor = stretchArea === 0 ? 1 : extraSpace / stretchArea;
 
 	const result = interpolate(
 		y,
