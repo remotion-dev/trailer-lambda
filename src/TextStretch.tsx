@@ -2,7 +2,7 @@ import React from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {TextStretchWord} from './TextStretchWord';
 
-const fullWidth = 300;
+const fullWidth = 350;
 
 export const TextStretch: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -14,13 +14,7 @@ export const TextStretch: React.FC = () => {
 		[0, 1]
 	);
 
-	const entry = spring({
-		frame: frame - 40,
-		fps,
-		config: {
-			damping: 200,
-		},
-	});
+	const entry = 1;
 
 	const fadeOut = spring({
 		frame: frame - (durationInFrames - 40),
@@ -46,10 +40,10 @@ export const TextStretch: React.FC = () => {
 				fullWidth={fullWidth}
 				fontSize={60}
 				fontFamily="Kanit"
-				text="TEXT"
+				text="NAGLER"
 				stretchProgress={stretching}
 				weightForLetter={({letter}) => {
-					if (letter === 'T') {
+					if (letter === 'L') {
 						return 1 - textStretchProgressEnter;
 					}
 					if (letter === 'E') {
@@ -63,16 +57,28 @@ export const TextStretch: React.FC = () => {
 				fullWidth={fullWidth}
 				fontSize={60}
 				fontFamily="Kanit"
-				text="STRETCH"
+				text="WIESEN"
 				stretchProgress={stretching}
 				weightForLetter={({letter, nthLetter}) => {
-					if (letter === 'T') {
-						return textStretchProgressEnter;
-					}
-					if (nthLetter === 6) {
-						return textStretchProgressEnter;
-					}
 					if (letter === 'E') {
+						return textStretchProgressEnter;
+					}
+					return 0;
+				}}
+			/>
+			<div style={{marginTop: -40}} />
+
+			<TextStretchWord
+				fullWidth={fullWidth}
+				fontSize={60}
+				fontFamily="Kanit"
+				text="STRASSE"
+				stretchProgress={stretching}
+				weightForLetter={({nthLetter, letter}) => {
+					if (nthLetter === 1) {
+						return textStretchProgressEnter;
+					}
+					if (nthLetter === 2) {
 						return 1 - textStretchProgressEnter;
 					}
 					return 0;
@@ -84,13 +90,13 @@ export const TextStretch: React.FC = () => {
 				fullWidth={fullWidth}
 				fontSize={60}
 				fontFamily="Kanit"
-				text="EFFECT"
+				text="WG-PARTY"
 				stretchProgress={stretching}
 				weightForLetter={({nthLetter, letter}) => {
-					if (nthLetter === 1) {
+					if (letter === 'R') {
 						return textStretchProgressEnter;
 					}
-					if (nthLetter === 2) {
+					if (letter === '-') {
 						return 1 - textStretchProgressEnter;
 					}
 					return 0;
