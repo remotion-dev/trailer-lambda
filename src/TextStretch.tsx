@@ -40,7 +40,6 @@ export const TextStretch: React.FC = () => {
 				alignItems: 'center',
 				flexDirection: 'column',
 				flex: 1,
-				backgroundColor: 'white',
 			}}
 		>
 			<TextStretchWord
@@ -88,13 +87,10 @@ export const TextStretch: React.FC = () => {
 				text="EFFECT"
 				stretchProgress={stretching}
 				weightForLetter={({nthLetter, letter}) => {
-					if (letter === 'F') {
-						return 0.5;
-					}
-					if (nthLetter === 3) {
+					if (nthLetter === 1) {
 						return textStretchProgressEnter;
 					}
-					if (nthLetter === 0) {
+					if (nthLetter === 2) {
 						return 1 - textStretchProgressEnter;
 					}
 					return 0;
