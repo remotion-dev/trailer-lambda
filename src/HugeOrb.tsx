@@ -1,5 +1,6 @@
 import React from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {css} from 'styled-components';
 import {Drop} from './Drop';
 
 const radius = 300;
@@ -7,10 +8,19 @@ const strokeWidth = 55;
 const amountOfMarkers = 35;
 const duration = 40;
 
+const innerR = radius - (strokeWidth / 4) * 3;
+const innerCircumference = innerR * Math.PI * 2;
+const transition = css`
+	from {
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dashoffset: ${innerCircumference};
+	}
+`;
+
 export const HugeOrb: React.FC = () => {
 	const {width, height, fps} = useVideoConfig();
-	const innerR = radius - (strokeWidth / 4) * 3;
-	const innerCircumference = innerR * Math.PI * 2;
 	const frame = useCurrentFrame();
 
 	const spr = spring({
@@ -64,7 +74,10 @@ export const HugeOrb: React.FC = () => {
 					strokeWidth={strokeWidth}
 					r={innerR}
 					fill="none"
-					strokeDashoffset={progress}
+					style={{
+						backgroundColor: 'yellow',
+						animation: `${transition} 3s`,
+					}}
 					strokeLinecap="round"
 					strokeDasharray={`${innerCircumference}`}
 					cx={width / 2}

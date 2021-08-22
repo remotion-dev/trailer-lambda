@@ -1,5 +1,7 @@
-import React, {RefObject, useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {getStretchRanges} from './get-stretch-points';
+import {measureText} from './measure-text';
 
 const cache: {[key: string]: number} = {};
 
@@ -53,29 +55,21 @@ const stretchFn = (
 	return cache[key];
 };
 
+const font = new FontFace(
+	'Kanit',
+	'url(https://fonts.gstatic.com/s/kanit/v7/nKKU-Go6G5tXcr4uPhWnVaFrNlJz.woff2) format("woff2")'
+);
+font.load();
+
 export const TextStretchWord: React.FC<{
-	canvas: RefObject<HTMLCanvasElement>;
-	textHeight: number;
 	fullWidth: number;
 	text: string;
-	top: number;
-	left: number;
-	range1: (width: number) => [number, number];
-	range2: (width: number) => [number, number];
 	alternate: boolean;
 	delay: number;
-}> = ({
-	canvas: ref,
-	textHeight,
-	fullWidth,
-	range1,
-	range2,
-	text,
-	top,
-	left,
-	alternate,
-	delay,
-}) => {
+	fontSize: number;
+	fontFamily: string;
+}> = ({fullWidth, text, alternate, delay, fontSize, fontFamily}) => {
+	const ref = useRef<HTMLCanvasElement>(null);
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
 	const textStretchProgressEnter = spring({
@@ -99,75 +93,108 @@ export const TextStretchWord: React.FC<{
 	);
 
 	useEffect(() => {
-		// @ts-expect-error not typed
-		document.fonts.ready.then(() => {
-			const context = ref.current?.getContext('2d') as CanvasRenderingContext2D;
-			context.clearRect(left, top, fullWidth, textHeight);
-			context.font = '80px "Kanit"';
-			context.fillStyle = '#222';
-			context.textBaseline = 'top';
-			context.imageSmoothingEnabled = false;
-			const measuring = context.measureText(text);
-			const textWidth = Math.round(
-				interpolate(
-					(1 - textStretchProgressOut) * textStretchProgressEnter,
-					[0, 1],
-					[fullWidth, measuring.width],
-					{
-						extrapolateLeft: 'clamp',
-						extrapolateRight: 'clamp',
-					}
-				)
-			);
-			context.fillText(text, left, top);
-
-			const imageData = context.getImageData(
-				left,
-				top,
-				fullWidth,
-				textHeight
-			).data;
-
-			const newArray = new ImageData(fullWidth, textHeight);
-
-			const getPixelFor = (row: number, column: number, channel: number) => {
-				const index = row * fullWidth * 4 + column * 4 + channel;
-				return imageData[index];
-			};
-
-			for (let i = 0; i < imageData.length; i++) {
-				const currentPixel = Math.floor(i / 4);
-				const currentRow = Math.floor(currentPixel / fullWidth);
-				const currentColumn = currentPixel % fullWidth;
-				const currentChannel = i % 4;
-				const actualColumn = Math.floor(
-					stretchFn(
-						currentColumn,
-						textWidth,
-						fullWidth,
-						range1(textWidth),
-						range2(textWidth),
-						progress
+		font
+			.load()
+			.then(() => {
+				if (!document.fonts.has(font)) {
+					document.fonts.add(font);
+				}
+				const dimensions = measureText({
+					text,
+					fontSize,
+					fontFamily,
+				});
+				if (!ref.current) {
+					throw new Error('Canvas is not mounted');
+				}
+				ref.current.width = fullWidth;
+				ref.current.height = dimensions.boxHeight;
+				const context = ref.current?.getContext(
+					'2d'
+				) as CanvasRenderingContext2D;
+				context.clearRect(0, 0, fullWidth, dimensions.boxHeight);
+				context.font = `${fontSize}px "${fontFamily}"`;
+				context.fillStyle = '#222';
+				context.fillText(text, 0, fontSize);
+				const imageData = context.getImageData(
+					0,
+					0,
+					// Optimization, get only area needed
+					fullWidth,
+					dimensions.boxHeight
+				).data;
+				const stretchRanges = getStretchRanges(
+					imageData,
+					fullWidth,
+					dimensions.boxHeight
+				);
+				// for (const range of stretchRanges) {
+				// 	context.fillStyle = 'red';
+				// 	context.fillRect(
+				// 		range[0],
+				// 		0,
+				// 		range[1] - range[0],
+				// 		dimensions.boxHeight
+				// 	);
+				// }
+				const textWidth = Math.round(
+					interpolate(
+						(1 - textStretchProgressOut) * textStretchProgressEnter,
+						[0, 1],
+						[fullWidth, dimensions.width],
+						{
+							extrapolateLeft: 'clamp',
+							extrapolateRight: 'clamp',
+						}
 					)
 				);
-				const pixel = getPixelFor(currentRow, actualColumn, currentChannel);
-				newArray.data[i] = pixel;
-			}
-			context.putImageData(newArray, left, top);
-		});
+
+				const newArray = new ImageData(fullWidth, dimensions.boxHeight);
+
+				const getPixelFor = (row: number, column: number, channel: number) => {
+					const index = row * fullWidth * 4 + column * 4 + channel;
+					return imageData[index];
+				};
+
+				for (let column = 0; column < fullWidth; column++) {
+					const actualColumn = Math.floor(
+						stretchFn(
+							column,
+							textWidth,
+							fullWidth,
+							stretchRanges[0],
+							stretchRanges[1],
+							progress
+						)
+					);
+					for (
+						let currentRow = 0;
+						currentRow < dimensions.boxHeight;
+						currentRow++
+					) {
+						const index = currentRow * 4 * fullWidth + column * 4;
+						for (let channel = 0; channel < 4; channel++) {
+							const pixel = getPixelFor(currentRow, actualColumn, channel);
+							newArray.data[index + channel] = pixel;
+						}
+					}
+				}
+
+				context.putImageData(newArray, 0, 0);
+			})
+			.catch((err) => {
+				console.log({err});
+			});
 	}, [
+		fontFamily,
+		fontSize,
 		fullWidth,
-		left,
 		progress,
-		range1,
-		range2,
 		ref,
 		text,
-		textHeight,
 		textStretchProgressEnter,
 		textStretchProgressOut,
-		top,
 	]);
 
-	return null;
+	return <canvas ref={ref} />;
 };
