@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {interpolate, useCurrentFrame} from 'remotion';
+import {interpolate} from 'remotion';
 import {getStretchRanges} from './get-stretch-points';
 import {measureText} from './measure-text';
 
@@ -11,6 +11,11 @@ const areaOfRanges = (ranges: [number, number][], weights: number[]) => {
 	return ranges.reduce((a, b, i) => {
 		return a + ((b[1] - b[0]) * weights[i]) / avgWeight;
 	}, 0);
+};
+
+type LetterCallbackObject = {
+	letter: string;
+	nthLetter: number;
 };
 
 const stretchFn = (
@@ -73,16 +78,16 @@ export const TextStretchWord: React.FC<{
 	fontSize: number;
 	fontFamily: string;
 	stretchProgress: number;
-}> = ({fullWidth, text, fontSize, fontFamily, stretchProgress}) => {
+	weightForLetter: (letter: LetterCallbackObject) => number;
+}> = ({
+	fullWidth,
+	text,
+	fontSize,
+	fontFamily,
+	stretchProgress,
+	weightForLetter,
+}) => {
 	const ref = useRef<HTMLCanvasElement>(null);
-	const frame = useCurrentFrame();
-
-	const textStretchProgressEnter = interpolate(
-		Math.cos((frame / 20) % (Math.PI * 2)),
-		[-1, 1],
-		[0, 1]
-	);
-	console.log(textStretchProgressEnter);
 
 	useEffect(() => {
 		font
@@ -96,6 +101,13 @@ export const TextStretchWord: React.FC<{
 					fontSize,
 					fontFamily,
 				});
+				const dimensionsForLetter = text.split('').map((letter, i) =>
+					measureText({
+						fontFamily,
+						fontSize,
+						text: text.substr(0, i + 1),
+					})
+				);
 				if (!ref.current) {
 					throw new Error('Canvas is not mounted');
 				}
@@ -141,9 +153,13 @@ export const TextStretchWord: React.FC<{
 							dimensions.width,
 							textWidth,
 							stretchRanges,
-							stretchRanges.map((x, _) =>
-								Math.abs(_ / stretchRanges.length - textStretchProgressEnter)
-							)
+							stretchRanges.map((x, _) => {
+								const indexOfLetter = dimensionsForLetter.findIndex(
+									(l) => l.width >= x[0] && l.width >= x[1]
+								);
+								const letter = text[indexOfLetter];
+								return weightForLetter({letter, nthLetter: indexOfLetter});
+							})
 						)
 					);
 					if (column > textWidth) {
@@ -167,7 +183,15 @@ export const TextStretchWord: React.FC<{
 			.catch((err) => {
 				console.log({err});
 			});
-	}, [fontFamily, fontSize, fullWidth, ref, text, textStretchProgressEnter]);
+	}, [
+		fontFamily,
+		fontSize,
+		fullWidth,
+		ref,
+		stretchProgress,
+		text,
+		weightForLetter,
+	]);
 
 	return <canvas ref={ref} />;
 };
