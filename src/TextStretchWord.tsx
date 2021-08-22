@@ -1,55 +1,61 @@
 import React, {useEffect, useRef} from 'react';
-import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, useCurrentFrame} from 'remotion';
 import {getStretchRanges} from './get-stretch-points';
 import {measureText} from './measure-text';
 
 const cache: {[key: string]: number} = {};
 
+const areaOfRanges = (ranges: [number, number][], weights: number[]) => {
+	const totalWeights = weights.reduce((a, b) => a + b, 0);
+	const avgWeight = totalWeights / weights.length;
+	return ranges.reduce((a, b, i) => {
+		return a + ((b[1] - b[0]) * weights[i]) / avgWeight;
+	}, 0);
+};
+
 const stretchFn = (
 	y: number,
 	originalWidth: number,
 	targetWidth: number,
-	stretchRange1: [number, number],
-	stretchRange2: [number, number],
-	progress: number
+	ranges: [number, number][],
+	weights: number[]
 ) => {
+	if (weights.length !== ranges.length) {
+		throw new Error('Weights array must be the same as ranges array');
+	}
 	const key =
 		y +
-		originalWidth +
-		targetWidth +
-		stretchRange1[0] +
-		stretchRange1[1] +
-		stretchRange2[0] +
-		String(stretchRange2[1]) +
-		String(progress);
+		String(originalWidth) +
+		String(targetWidth) +
+		ranges.join(',') +
+		weights.join(',');
 	if (cache[key]) {
 		return cache[key];
 	}
+
 	const extraSpace = targetWidth - originalWidth;
-	const stretchWidth1 = stretchRange1[1] - stretchRange1[0];
-	const stretchWidth2 = stretchRange2[1] - stretchRange2[0];
-	const spaceInbetweenStretch = stretchRange2[0] - stretchRange1[1];
-	const stretchedTo1 = extraSpace * progress + stretchWidth1;
-	const stretchedTo2 = extraSpace * (1 - progress) + stretchWidth2;
+	const stretchArea = areaOfRanges(ranges, weights);
+
+	const defaultStretchFactor = extraSpace / stretchArea;
 
 	const result = interpolate(
 		y,
 		[
 			0,
-			stretchRange1[0],
-			stretchRange1[0] + stretchedTo1,
-			stretchRange1[0] + stretchedTo1 + spaceInbetweenStretch,
-			stretchRange1[0] + stretchedTo1 + spaceInbetweenStretch + stretchedTo2,
+			...ranges.flat(1).map((r) => {
+				const stretchAreasBefore = areaOfRanges(
+					ranges.filter((_) => _[1] <= r),
+					weights
+				);
+				return r + stretchAreasBefore * defaultStretchFactor;
+			}),
 			targetWidth,
 		],
-		[
-			0,
-			stretchRange1[0],
-			stretchRange1[1],
-			stretchRange2[0],
-			stretchRange2[1],
-			originalWidth,
-		]
+		[0, ...ranges.flat(1), originalWidth],
+		{
+			extrapolateLeft: 'clamp',
+			extrapolateRight: 'clamp',
+		}
 	);
 	cache[key] = result;
 	return cache[key];
@@ -64,33 +70,19 @@ font.load();
 export const TextStretchWord: React.FC<{
 	fullWidth: number;
 	text: string;
-	alternate: boolean;
-	delay: number;
 	fontSize: number;
 	fontFamily: string;
-}> = ({fullWidth, text, alternate, delay, fontSize, fontFamily}) => {
+	stretchProgress: number;
+}> = ({fullWidth, text, fontSize, fontFamily, stretchProgress}) => {
 	const ref = useRef<HTMLCanvasElement>(null);
 	const frame = useCurrentFrame();
-	const {fps} = useVideoConfig();
-	const textStretchProgressEnter = spring({
-		fps,
-		frame,
-		config: {
-			damping: 100,
-		},
-	});
-	const textStretchProgressOut = spring({
-		fps,
-		frame: frame - 60 - delay,
-		config: {
-			damping: 100,
-		},
-	});
-	const progress = interpolate(
-		Math.cos(frame / 8),
+
+	const textStretchProgressEnter = interpolate(
+		Math.cos((frame / 20) % (Math.PI * 2)),
 		[-1, 1],
-		alternate ? [1, 0] : [0, 1]
+		[0, 1]
 	);
+	console.log(textStretchProgressEnter);
 
 	useEffect(() => {
 		font
@@ -128,25 +120,11 @@ export const TextStretchWord: React.FC<{
 					fullWidth,
 					dimensions.boxHeight
 				);
-				// for (const range of stretchRanges) {
-				// 	context.fillStyle = 'red';
-				// 	context.fillRect(
-				// 		range[0],
-				// 		0,
-				// 		range[1] - range[0],
-				// 		dimensions.boxHeight
-				// 	);
-				// }
 				const textWidth = Math.round(
-					interpolate(
-						(1 - textStretchProgressOut) * textStretchProgressEnter,
-						[0, 1],
-						[fullWidth, dimensions.width],
-						{
-							extrapolateLeft: 'clamp',
-							extrapolateRight: 'clamp',
-						}
-					)
+					interpolate(stretchProgress, [0, 1], [dimensions.width, fullWidth], {
+						extrapolateLeft: 'clamp',
+						extrapolateRight: 'clamp',
+					})
 				);
 
 				const newArray = new ImageData(fullWidth, dimensions.boxHeight);
@@ -160,13 +138,17 @@ export const TextStretchWord: React.FC<{
 					const actualColumn = Math.floor(
 						stretchFn(
 							column,
+							dimensions.width,
 							textWidth,
-							fullWidth,
-							stretchRanges[0],
-							stretchRanges[1],
-							progress
+							stretchRanges,
+							stretchRanges.map((x, _) =>
+								Math.abs(_ / stretchRanges.length - textStretchProgressEnter)
+							)
 						)
 					);
+					if (column > textWidth) {
+						continue;
+					}
 					for (
 						let currentRow = 0;
 						currentRow < dimensions.boxHeight;
@@ -185,16 +167,7 @@ export const TextStretchWord: React.FC<{
 			.catch((err) => {
 				console.log({err});
 			});
-	}, [
-		fontFamily,
-		fontSize,
-		fullWidth,
-		progress,
-		ref,
-		text,
-		textStretchProgressEnter,
-		textStretchProgressOut,
-	]);
+	}, [fontFamily, fontSize, fullWidth, ref, text, textStretchProgressEnter]);
 
 	return <canvas ref={ref} />;
 };

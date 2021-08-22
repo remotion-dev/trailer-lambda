@@ -39,7 +39,6 @@ export const getStretchRanges = (
 		if (opaquePixels === 0) {
 			isSameAsPreviousRow[column] = false;
 		}
-		console.log(opaquePixels);
 		if (opaquePixels > height * 0.4) {
 			isSameAsPreviousRow[column] = false;
 		}
