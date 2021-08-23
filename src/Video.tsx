@@ -129,7 +129,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Clocks"
 				component={Clocks}
-				durationInFrames={500}
+				durationInFrames={650}
 				fps={30}
 				width={1080}
 				height={1080}

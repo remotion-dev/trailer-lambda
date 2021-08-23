@@ -41,12 +41,12 @@ export const Party: React.FC = () => {
 				<Dust />
 			</AbsoluteFill>
 
-			<Sequence from={0} durationInFrames={67}>
+			<Sequence from={0} durationInFrames={68}>
 				<AbsoluteFill style={{}}>
-					<Img src={invited} />
+					<Img src={date} />
 				</AbsoluteFill>
 			</Sequence>
-			<Sequence from={67} durationInFrames={150 - 67}>
+			<Sequence from={68} durationInFrames={150 - 68}>
 				<AbsoluteFill
 					style={{
 						transform: `scale(2)`,
@@ -57,7 +57,7 @@ export const Party: React.FC = () => {
 			</Sequence>
 			<Sequence from={150} durationInFrames={63}>
 				<AbsoluteFill>
-					<Img src={date} />
+					<Img src={clock} />
 				</AbsoluteFill>
 			</Sequence>
 			<Sequence from={213} durationInFrames={68}>
@@ -67,7 +67,7 @@ export const Party: React.FC = () => {
 			</Sequence>
 			<Sequence from={281} durationInFrames={58}>
 				<AbsoluteFill>
-					<Img src={clock} />
+					<Img src={invited} />
 				</AbsoluteFill>
 			</Sequence>
 			<Sequence from={339} durationInFrames={Infinity}>
