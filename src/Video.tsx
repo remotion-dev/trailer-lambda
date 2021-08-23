@@ -1,5 +1,6 @@
 import {Composition} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
+import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {HugeOrb} from './HugeOrb';
 import {Main} from './Main';
@@ -120,6 +121,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Party"
 				component={Party}
+				durationInFrames={500}
+				fps={30}
+				width={1080}
+				height={1080}
+			/>
+			<Composition
+				id="Clocks"
+				component={Clocks}
 				durationInFrames={500}
 				fps={30}
 				width={1080}

@@ -1,9 +1,12 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Sequence, Video} from 'remotion';
+import {Clocks} from '../Clocks';
 import {Dust} from '../Dust';
 import {TextStretch} from '../TextStretch';
 import {Texture} from '../Texture';
+import {Ticket} from '../Ticket';
 import bahnhof from './bahnhof.png';
+import clock from './clock.png';
 import date from './date.png';
 import invited from './invited.png';
 import music from './music.mp3';
@@ -30,6 +33,9 @@ export const Party: React.FC = () => {
 					color1="rgba(255, 255, 0, 0.5)"
 					color2="rgba(255, 255, 255, 0.5)"
 				/>
+				<AbsoluteFill style={{opacity: 0.8}}>
+					<Clocks />
+				</AbsoluteFill>
 			</AbsoluteFill>
 			<AbsoluteFill style={{opacity: 0.14}}>
 				<Dust />
@@ -54,9 +60,19 @@ export const Party: React.FC = () => {
 					<Img src={date} />
 				</AbsoluteFill>
 			</Sequence>
-			<Sequence from={213} durationInFrames={63}>
+			<Sequence from={213} durationInFrames={68}>
 				<AbsoluteFill>
 					<Img src={bahnhof} />
+				</AbsoluteFill>
+			</Sequence>
+			<Sequence from={281} durationInFrames={58}>
+				<AbsoluteFill>
+					<Img src={clock} />
+				</AbsoluteFill>
+			</Sequence>
+			<Sequence from={339} durationInFrames={Infinity}>
+				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
+					<Ticket name="ANDREAS GRUHLER" />
 				</AbsoluteFill>
 			</Sequence>
 			<Audio src={music} startFrom={70 * 30} />
