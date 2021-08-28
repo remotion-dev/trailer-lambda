@@ -2,7 +2,7 @@ import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 
 export const Ticket = ({name}: {name: string}) => {
 	const frame = useCurrentFrame();
-	const characterProgress = Math.max(0, frame / 4 - 5);
+	const characterProgress = Math.max(0, frame / 3 - 5);
 	const {fps} = useVideoConfig();
 	const transition = spring({
 		fps,
@@ -73,13 +73,25 @@ export const Ticket = ({name}: {name: string}) => {
 				/>
 				<text
 					x={20}
-					y={280}
+					y={260}
 					fontSize={30}
 					fontWeight="bold"
 					fontFamily="Courier"
 					fill="#333"
+					style={{
+						whiteSpace: 'pre',
+					}}
 				>
-					{name.slice(0, characterProgress).toUpperCase()}
+					{name
+						.substr(0, characterProgress)
+						.split('\n')
+						.map((n, i) => {
+							return (
+								<tspan x="20" dy={i * 1.2 + 'em'}>
+									{n.toUpperCase()}
+								</tspan>
+							);
+						})}
 				</text>
 				<text x={24} y={390} fontSize={16} fontFamily="Arial" fill="#333">
 					NICHT ÜBERTRAGBAR

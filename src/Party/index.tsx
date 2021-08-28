@@ -1,5 +1,13 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Img, Sequence, Video} from 'remotion';
+import {
+	AbsoluteFill,
+	Audio,
+	Img,
+	interpolate,
+	Sequence,
+	useVideoConfig,
+	Video,
+} from 'remotion';
 import {Clocks} from '../Clocks';
 import {Dust} from '../Dust';
 import {TextStretch} from '../TextStretch';
@@ -12,7 +20,10 @@ import invited from './invited.png';
 import music from './music.mp3';
 import party from './party.mp4';
 
-export const Party: React.FC = () => {
+export const Party: React.FC<{
+	ticketName: string;
+}> = ({ticketName}) => {
+	const {durationInFrames} = useVideoConfig();
 	return (
 		<AbsoluteFill>
 			<Video src={party} />
@@ -72,10 +83,18 @@ export const Party: React.FC = () => {
 			</Sequence>
 			<Sequence from={339} durationInFrames={Infinity}>
 				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Ticket name="ANDREAS GRUHLER" />
+					<Ticket name={ticketName} />
 				</AbsoluteFill>
 			</Sequence>
-			<Audio src={music} startFrom={70 * 30} />
+			<Audio
+				src={music}
+				startFrom={70 * 30}
+				volume={(f) =>
+					interpolate(f, [durationInFrames - 45, durationInFrames], [1, 0], {
+						extrapolateLeft: 'clamp',
+					})
+				}
+			/>
 		</AbsoluteFill>
 	);
 };

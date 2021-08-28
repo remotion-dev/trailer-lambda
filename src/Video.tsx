@@ -125,6 +125,7 @@ export const RemotionVideo: React.FC = () => {
 				fps={30}
 				width={1080}
 				height={1080}
+				defaultProps={{ticketName: 'Severin Wullschleger\nLaura Fiala'}}
 			/>
 			<Composition
 				id="Clocks"
