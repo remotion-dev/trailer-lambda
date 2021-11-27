@@ -11,7 +11,7 @@ export const getBezierControlPoints = (
 	focalX: number,
 	width: number
 ): BezierPoints => {
-	const bezierPointOffset = interpolate(focalX, [0, 1], [-width, width]) / 2;
+	const bezierPointOffset = interpolate(focalX, [0, 1], [-width, width]) / 4;
 	return {
 		cp1: [start[0] + bezierPointOffset, start[1]],
 		cp2: [end[0] + bezierPointOffset, end[1]],
