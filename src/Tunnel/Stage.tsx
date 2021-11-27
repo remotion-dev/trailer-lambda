@@ -1,10 +1,14 @@
 import React from 'react';
-import {AbsoluteFill, useVideoConfig} from 'remotion';
+import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
+import {getBezierControlPoints} from './point-on-bezier-curve';
 
-export const Stage: React.FC = () => {
+export const Stage: React.FC<{
+	focalX: number;
+	focalY: number;
+}> = ({focalX, focalY}) => {
 	const {height, width} = useVideoConfig();
-	const centerX = width / 2;
-	const centerY = height / 2;
+	const centerX = interpolate(focalX, [0, 1], [0, width]);
+	const centerY = interpolate(focalY, [0, 1], [0, height]);
 
 	const extend = width / 6;
 
@@ -14,12 +18,33 @@ export const Stage: React.FC = () => {
 	const rightX = centerX + extend;
 	const rightY = height;
 
-	const triangle = `M ${centerX} ${centerY} L ${leftX} ${leftY} L ${rightX} ${rightY} z`;
+	const controlPoints1 = getBezierControlPoints(
+		[leftX, leftY],
+		[centerX, centerY],
+		focalX,
+		width
+	);
+
+	const controlPoints2 = getBezierControlPoints(
+		[centerX, centerY],
+		[rightX, rightY],
+		focalX,
+		width
+	);
+
+	const triangle = `
+	M ${leftX} ${leftY}
+	C ${controlPoints1.cp1.join(' ')},
+		${controlPoints1.cp2.join(' ')},
+		${centerX} ${centerY}
+	C ${controlPoints2.cp1.join(' ')},
+		${controlPoints2.cp2.join(' ')},
+		${rightX} ${rightY}`;
 
 	return (
 		<AbsoluteFill>
 			<svg viewBox={`0 0 ${width} ${height}`}>
-				<path d={triangle} fill="white" />
+				<path d={triangle} stroke="white" strokeWidth={6} fill="white" />
 			</svg>
 		</AbsoluteFill>
 	);

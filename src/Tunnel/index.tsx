@@ -1,20 +1,41 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
+import {
+	AbsoluteFill,
+	interpolate,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
+import SimplexNoise from 'simplex-noise';
+import {pointOnBezierCurve} from './point-on-bezier-curve';
 import {Stage} from './Stage';
 
-const focalPoint = [0.2, 0.5];
+const noise = new SimplexNoise();
 
 const Circle: React.FC<{
 	scale: number;
-	closeness: number;
-}> = ({scale, closeness}) => {
+	distance: number;
+	focalPoint: readonly [number, number];
+}> = ({scale, distance: distance, focalPoint}) => {
 	const {height, width} = useVideoConfig();
+	const extend = width / 6;
 
-	const xPoint = interpolate(closeness, [0, 1], [0.5, focalPoint[0]]);
+	const centerX = interpolate(focalPoint[0], [0, 1], [0, width]);
+	const centerY = interpolate(focalPoint[1], [0, 1], [0, height]);
 
-	const offsetX = interpolate(xPoint, [0, 1], [-width / 2, width / 2]);
+	const leftX = interpolate(centerX, [0, width], [0 - extend, width + extend]);
+	const leftY = height;
 
-	console.log(xPoint);
+	const point = pointOnBezierCurve(
+		distance,
+		[centerX, centerY],
+		[leftX, leftY],
+		focalPoint[0],
+		width
+	);
+
+	const offX = (point[0] - width / 2) * (1 - distance);
+	const offY = (point[0] - height / 2) * (1 - distance);
+
 	return (
 		<AbsoluteFill
 			style={{
@@ -27,9 +48,9 @@ const Circle: React.FC<{
 					borderRadius: '50%',
 					width: height,
 					height,
-					transformOrigin: '50% 50%',
-					transform: ` scale(${scale}) translateX(${offsetX}px)`,
-					backgroundColor: '#222',
+					transform: `translateX(${centerX - width / 2 + offX}px) translateY(${
+						centerY - height / 2 + offY
+					}px) scale(${scale})`,
 					boxShadow: 'inset 0 0 30px white',
 				}}
 			/>
@@ -40,18 +61,27 @@ const Circle: React.FC<{
 const amount = 15;
 
 export const Tunnel: React.FC = () => {
+	const frame = useCurrentFrame();
+	const noiseX = noise.noise2D(0, frame / 80) * 0.2;
+	const noisey = noise.noise2D(frame / 80, 0) * 0.1;
+	const focalPoint = [0.5 + noiseX, noisey + 0.6] as const;
+
 	return (
-		<AbsoluteFill>
+		<AbsoluteFill
+			style={{
+				backgroundColor: '#222',
+			}}
+		>
 			{new Array(amount).fill(true).map((fill, i) => {
-				const closeness = interpolate(i, [0, amount - 1], [0, 1]);
-				const scale = interpolate(closeness, [0, 1], [6, 0]);
+				const distance = interpolate(i, [0, amount - 1], [1, 0]);
+				const scale = interpolate(distance, [0, 1], [4, 0]);
 				return (
 					<AbsoluteFill style={{}}>
-						<Circle scale={scale} closeness={closeness} />
+						<Circle focalPoint={focalPoint} scale={scale} distance={distance} />
 					</AbsoluteFill>
 				);
 			})}
-			<Stage />
+			<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
 		</AbsoluteFill>
 	);
 };
