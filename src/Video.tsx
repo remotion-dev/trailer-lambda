@@ -10,6 +10,7 @@ import {Spin} from './Spin';
 import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
+import {Tunnel} from './Tunnel';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -63,6 +64,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Rollercoaster"
 				component={Rollercoaster}
+				durationInFrames={900}
+				fps={30}
+				width={1920}
+				height={1080}
+			/>
+			<Composition
+				id="Tunnel"
+				component={Tunnel}
 				durationInFrames={900}
 				fps={30}
 				width={1920}
