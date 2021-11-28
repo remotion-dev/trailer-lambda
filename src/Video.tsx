@@ -1,10 +1,13 @@
 import {Composition} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
+import {Model} from './Casette';
+import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {HugeOrb} from './HugeOrb';
 import {Main} from './Main';
 import {ManySpin} from './ManySpin';
 import {Olympia} from './Olympia/Master';
+import {Party} from './Party';
 import {Rollercoaster} from './Rollercoaster';
 import {Spin} from './Spin';
 import {TextStretch} from './TextStretch';
@@ -123,6 +126,31 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={180}
 				fps={30}
 				width={1920}
+				height={1080}
+			/>
+			<Composition
+				id="Party"
+				component={Party}
+				durationInFrames={500}
+				fps={30}
+				width={1080}
+				height={1080}
+				defaultProps={{ticketName: 'Severin Wullschleger\nLaura Fiala'}}
+			/>
+			<Composition
+				id="Clocks"
+				component={Clocks}
+				durationInFrames={650}
+				fps={30}
+				width={1080}
+				height={1080}
+			/>
+			<Composition
+				id="Casette"
+				component={Model}
+				durationInFrames={100}
+				fps={30}
+				width={1080}
 				height={1080}
 			/>
 		</>
