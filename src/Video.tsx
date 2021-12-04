@@ -1,4 +1,5 @@
 import {Composition} from 'remotion';
+import {ThreeDText} from './3DText/3DText';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {Clocks} from './Clocks';
@@ -95,6 +96,10 @@ export const RemotionVideo: React.FC = () => {
 				fps={30}
 				width={1280}
 				height={720}
+				defaultProps={{
+					focalPoint: [0.5, 0.5],
+					backgroundColor: 'white',
+				}}
 			/>
 			<Composition
 				id="HugeOrb"
@@ -152,6 +157,18 @@ export const RemotionVideo: React.FC = () => {
 				fps={30}
 				width={1080}
 				height={1080}
+			/>
+			<Composition
+				id="3D-Text"
+				component={ThreeDText}
+				durationInFrames={100}
+				fps={30}
+				width={1080}
+				height={1080}
+				defaultProps={{
+					num: 10,
+					scale: 2,
+				}}
 			/>
 		</>
 	);

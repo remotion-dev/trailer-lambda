@@ -9,10 +9,12 @@ import {
 import SimplexNoise from 'simplex-noise';
 
 const n = new SimplexNoise();
+const pos = new SimplexNoise();
 
 export const Stroke: React.FC<{
 	seed: number;
-}> = ({seed}) => {
+	focalPoint: readonly [number, number];
+}> = ({seed, focalPoint}) => {
 	const frame = useCurrentFrame();
 	const {
 		width: origWidth,
@@ -23,13 +25,16 @@ export const Stroke: React.FC<{
 	const size = Math.sqrt(origWidth * origWidth + origHeight * origHeight);
 
 	const color = interpolateColors(
-		random('color' + seed),
+		pos.noise2D(0, seed / 20),
 		[0, 1],
 		['#42e9f5', '#4290f5']
 	);
 
 	const height = size;
 	const width = size;
+	const centerX = interpolate(focalPoint[0], [0, 1], [0, width]);
+	const centerY = interpolate(focalPoint[1], [0, 1], [0, height]);
+
 	const randomValue = n.noise2D(0, seed / 20) * 2 - 1;
 
 	const radius = random(seed + 'i') * 800 + 200;
@@ -44,17 +49,17 @@ export const Stroke: React.FC<{
 
 	const surroundWidth = 10;
 	const point1 = [
-		Math.cos(randomValue * Math.PI * 2) * (radius - 150) + width / 2,
-		Math.sin(randomValue * Math.PI * 2) * (radius - 150) + height / 2,
+		Math.cos(randomValue * Math.PI * 2) * (radius - 150) + centerX,
+		Math.sin(randomValue * Math.PI * 2) * (radius - 150) + centerY,
 	];
 	const point2 = [
-		Math.cos(randomValue * Math.PI * 2) * radius + width / 2,
-		Math.sin(randomValue * Math.PI * 2) * radius + height / 2,
+		Math.cos(randomValue * Math.PI * 2) * radius + centerX,
+		Math.sin(randomValue * Math.PI * 2) * radius + centerY,
 	];
 	const shift = surroundWidth / circumference;
 	const point3 = [
-		Math.cos((randomValue + shift) * Math.PI * 2) * radius + width / 2,
-		Math.sin((randomValue + shift) * Math.PI * 2) * radius + height / 2,
+		Math.cos((randomValue + shift) * Math.PI * 2) * radius + centerX,
+		Math.sin((randomValue + shift) * Math.PI * 2) * radius + centerY,
 	];
 
 	const opacity = interpolate(enterFrame, [0, 15], [0, 1], {

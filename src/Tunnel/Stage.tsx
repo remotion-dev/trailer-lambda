@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
+import {COLORS} from '../colors';
 import {getBezierControlPoints} from './point-on-bezier-curve';
 
 export const Stage: React.FC<{
@@ -32,8 +33,6 @@ export const Stage: React.FC<{
 		width
 	);
 
-	console.log(controlPoints2);
-
 	const triangle = `
 	M ${leftX} ${leftY}
 	C ${controlPoints1.cp1.join(' ')},
@@ -46,11 +45,18 @@ export const Stage: React.FC<{
 	return (
 		<AbsoluteFill>
 			<svg viewBox={`0 0 ${width} ${height}`}>
+				<defs>
+					<linearGradient id="remotion">
+						<stop offset={0} stopOpacity={0.95} stopColor={COLORS[0]} />
+						<stop offset={0.5} stopOpacity={1} stopColor={COLORS[1]} />
+						<stop offset={1} stopOpacity={0.5} stopColor={COLORS[0]} />
+					</linearGradient>
+				</defs>
 				<path
+					fill="url(#remotion)"
 					d={triangle}
-					fill="#000"
 					style={{
-						filter: 'drop-shadow(0 0 10px white)',
+						filter: 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.2))',
 					}}
 				/>
 			</svg>
