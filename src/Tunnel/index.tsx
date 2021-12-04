@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -8,6 +8,7 @@ import {
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
 import {ThreeDText} from '../3DText/3DText';
+import {Grid} from './Grid';
 import {pointOnBezierCurve} from './point-on-bezier-curve';
 import {Stage} from './Stage';
 
@@ -36,8 +37,29 @@ const Circle: React.FC<{
 		width
 	);
 
+	const ref = useRef<HTMLCanvasElement>(null);
+
 	const offX = (point[0] - width / 2) * (1 - distance);
 	const offY = (point[0] - height / 2) * (1 - distance);
+
+	useEffect(() => {
+		const canv = ref.current;
+		if (!canv) {
+			return;
+		}
+
+		const context = canv.getContext('2d');
+		if (!context) {
+			return;
+		}
+
+		console.log('hi');
+		context.moveTo(height / 2, height / 2);
+		context.strokeStyle = 'white';
+		context.lineWidth = 4;
+		context.lineTo(0, 0);
+		context.stroke();
+	}, [height]);
 
 	return (
 		<AbsoluteFill
@@ -55,6 +77,7 @@ const Circle: React.FC<{
 						centerY - height / 2 + offY
 					}px) scale(${scale})`,
 					backgroundColor: background,
+					overflow: 'hidden',
 					boxShadow: '0 0 40px ' + 'rgba(255, 255, 255, 0.5)',
 				}}
 			/>
@@ -118,6 +141,8 @@ export const Tunnel: React.FC = () => {
 					</AbsoluteFill>
 				);
 			})}
+
+			<Grid focalPoint={focalPoint} />
 			<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
 			{new Array(numbersAmount).fill(true).map((_, num) => {
 				const i = numbersAmount - num - 1;
