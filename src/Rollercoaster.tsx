@@ -9,6 +9,7 @@ export const Rollercoaster: React.FC = () => {
 
 	return (
 		<ThreeCanvas
+			linear
 			width={width}
 			height={height}
 			style={{backgroundColor: 'white'}}

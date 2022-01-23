@@ -1,8 +1,11 @@
-import {useFrame} from '@react-three/fiber';
+import {extend, useFrame} from '@react-three/fiber';
 import React, {createRef, Fragment, useMemo} from 'react';
 import {interpolate, spring} from 'remotion';
-import * as THREE from 'three';
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
+import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
 import JSONfont from './Bold.json';
+
+extend({TextGeometry});
 
 export const TextMesh: React.FC<{
 	frame: number;
@@ -30,7 +33,7 @@ export const TextMesh: React.FC<{
 	);
 
 	// load in font
-	const font = useMemo(() => new THREE.FontLoader().parse(JSONfont), []);
+	const font = useMemo(() => new FontLoader().parse(JSONfont), []);
 	const height = 200;
 	const progress = () =>
 		spring({
