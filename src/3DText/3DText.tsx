@@ -22,7 +22,6 @@ export const ThreeDText: React.FC<{
 	}, [handle]);
 	return (
 		<ThreeCanvas
-			linear
 			orthographic
 			width={width * 2}
 			height={height * 2}
