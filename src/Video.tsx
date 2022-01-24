@@ -10,6 +10,7 @@ import {ManySpin} from './ManySpin';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
 import {Rollercoaster} from './Rollercoaster';
+import {Rounder} from './Rounder';
 import {Spin} from './Spin';
 import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
@@ -164,6 +165,18 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={100}
 				fps={30}
 				width={1080}
+				height={1080}
+				defaultProps={{
+					num: 10,
+					scale: 2,
+				}}
+			/>
+			<Composition
+				id="rounder"
+				component={Rounder}
+				durationInFrames={100}
+				fps={30}
+				width={1920}
 				height={1080}
 				defaultProps={{
 					num: 10,
