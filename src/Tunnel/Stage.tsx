@@ -45,13 +45,6 @@ export const Stage: React.FC<{
 	return (
 		<AbsoluteFill>
 			<svg viewBox={`0 0 ${width} ${height}`}>
-				<defs>
-					<linearGradient id="remotion">
-						<stop offset={0} stopOpacity={1} stopColor={COLORS[0]} />
-						<stop offset={0.5} stopOpacity={1} stopColor={COLORS[1]} />
-						<stop offset={1} stopOpacity={1} stopColor={COLORS[0]} />
-					</linearGradient>
-				</defs>
 				<path fill="white" d={triangle} stroke={COLORS[0]} strokeWidth={4} />
 			</svg>
 		</AbsoluteFill>

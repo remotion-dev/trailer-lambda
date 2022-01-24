@@ -6,6 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import * as THREE from 'three';
 import {TextMesh} from './TextMesh';
 
 export const ThreeDText: React.FC<{
@@ -17,9 +18,13 @@ export const ThreeDText: React.FC<{
 	const [handle] = useState(() => delayRender());
 	const frame = useCurrentFrame();
 	const {fps, width, height} = useVideoConfig();
-	const onCreated = useCallback(() => {
-		continueRender(handle);
-	}, [handle]);
+	const onCreated = useCallback(
+		({gl}) => {
+			gl.toneMapping = THREE.NoToneMapping;
+			continueRender(handle);
+		},
+		[handle]
+	);
 	return (
 		<ThreeCanvas
 			orthographic

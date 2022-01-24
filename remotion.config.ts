@@ -1,4 +1,4 @@
 import {Config} from 'remotion';
 
 Config.Rendering.setImageFormat('jpeg');
-Config.Rendering.setConcurrency(1);
+Config.Rendering.setConcurrency(4);

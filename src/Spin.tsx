@@ -8,6 +8,7 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
+import {COLORS} from './colors';
 import {point} from './point';
 
 export const Spin: React.FC<{
@@ -31,7 +32,7 @@ export const Spin: React.FC<{
 		return new Array(frame + 1).fill(1).map((_, i) => {
 			xNoise += noiseX.noise2D(i / 50, 0) * 20;
 			const upward = interpolate(i, [0, 100], [height, -height / 2]);
-			const upwardNoise = noiseUpward.noise2D(i / 50, 0) * 400;
+			const upwardNoise = noiseUpward.noise2D(i / 50, 0) * 50;
 			const randomXStart = random(String(seed)) * width;
 			return {
 				x: randomXStart + xNoise,
@@ -105,10 +106,12 @@ export const Spin: React.FC<{
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `rotate(${rotation + Math.PI / 4}rad)`,
+					color: COLORS[0],
+					fontFamily: 'SF Pro Display',
+					transform: `rotate(${rotation + Math.PI / 2}rad)`,
 				}}
 			>
-				🚀
+				λ
 			</div>
 		</AbsoluteFill>
 	);

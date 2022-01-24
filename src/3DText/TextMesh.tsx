@@ -3,6 +3,7 @@ import React, {createRef, Fragment, useMemo} from 'react';
 import {interpolate, spring} from 'remotion';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
+import {COLORS} from '../colors';
 import JSONfont from './Bold.json';
 
 extend({TextGeometry});
@@ -93,7 +94,7 @@ export const TextMesh: React.FC<{
 										},
 									]}
 								/>
-								<meshBasicMaterial color="#000" />
+								<meshBasicMaterial color={COLORS[0]} />
 							</mesh>
 							<mesh ref={surfaceRefs[i]}>
 								<textGeometry
@@ -106,7 +107,7 @@ export const TextMesh: React.FC<{
 										},
 									]}
 								/>
-								<meshBasicMaterial color="#f3f3f3" />
+								<meshBasicMaterial color="#fff" />
 							</mesh>
 						</Fragment>
 					);
