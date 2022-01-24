@@ -11,7 +11,7 @@ export const Stage: React.FC<{
 	const centerX = interpolate(focalX, [0, 1], [0, width]);
 	const centerY = interpolate(focalY, [0, 1], [0, height]);
 
-	const extend = width / 3;
+	const extend = width / 2;
 
 	const leftX = centerX - extend;
 	const leftY = height;
@@ -52,7 +52,7 @@ export const Stage: React.FC<{
 						<stop offset={1} stopOpacity={1} stopColor={COLORS[0]} />
 					</linearGradient>
 				</defs>
-				<path fill="url(#remotion)" d={triangle} />
+				<path fill="white" d={triangle} stroke={COLORS[0]} strokeWidth={4} />
 			</svg>
 		</AbsoluteFill>
 	);

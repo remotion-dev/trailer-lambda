@@ -1,89 +1,17 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
-	interpolateColors,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
 import {ThreeDText} from '../3DText/3DText';
-import {Grid} from './Grid';
-import {pointOnBezierCurve} from './point-on-bezier-curve';
+import {COLORS} from '../colors';
+import {Circle} from './Circle';
 import {Stage} from './Stage';
 
-const noise = new SimplexNoise();
-
-const Circle: React.FC<{
-	scale: number;
-	distance: number;
-	focalPoint: readonly [number, number];
-	background: string;
-}> = ({scale, distance, background, focalPoint}) => {
-	const {height, width} = useVideoConfig();
-	const extend = width / 3;
-
-	const centerX = interpolate(focalPoint[0], [0, 1], [0, width]);
-	const centerY = interpolate(focalPoint[1], [0, 1], [0, height]);
-
-	const leftX = interpolate(centerX, [0, width], [0 - extend, width + extend]);
-	const leftY = height;
-
-	const point = pointOnBezierCurve(
-		distance,
-		[centerX, centerY],
-		[leftX, leftY],
-		focalPoint[0],
-		width
-	);
-
-	const ref = useRef<HTMLCanvasElement>(null);
-
-	const offX = (point[0] - width / 2) * (1 - distance);
-	const offY = (point[0] - height / 2) * (1 - distance);
-
-	useEffect(() => {
-		const canv = ref.current;
-		if (!canv) {
-			return;
-		}
-
-		const context = canv.getContext('2d');
-		if (!context) {
-			return;
-		}
-
-		console.log('hi');
-		context.moveTo(height / 2, height / 2);
-		context.strokeStyle = 'white';
-		context.lineWidth = 4;
-		context.lineTo(0, 0);
-		context.stroke();
-	}, [height]);
-
-	return (
-		<AbsoluteFill
-			style={{
-				justifyContent: 'center',
-				alignItems: 'center',
-			}}
-		>
-			<div
-				style={{
-					borderRadius: '50%',
-					width: height,
-					height,
-					transform: `translateX(${centerX - width / 2 + offX}px) translateY(${
-						centerY - height / 2 + offY
-					}px) scale(${scale})`,
-					backgroundColor: background,
-					overflow: 'hidden',
-					boxShadow: '0 0 40px ' + 'rgba(255, 255, 255, 0.5)',
-				}}
-			/>
-		</AbsoluteFill>
-	);
-};
+const noise = new SimplexNoise('tunnel');
 
 const amount = 1000;
 
@@ -92,10 +20,10 @@ const numbersAmount = 13;
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width, height} = useVideoConfig();
-	const distanceProgressed = interpolate(frame, [0, 7000], [0, 1]);
+	const distanceProgressed = interpolate(frame, [0, 14000], [0, 1]);
 	const numbersDistanceProgressed = interpolate(frame, [0, 600], [0, 1]);
-	const noiseX = noise.noise2D(0, frame / 80) * 0.2;
-	const noisey = noise.noise2D(frame / 80, 0) * 0.1;
+	const noiseX = noise.noise2D(0, frame / 80) * 0.06;
+	const noisey = noise.noise2D(frame / 80, 0) * 0.04;
 	const focalPoint = [0.5 + noiseX, noisey + 0.6] as const;
 	const offX = interpolate(focalPoint[0], [0, 1], [-width / 1.8, width / 1.8]);
 	const offY = interpolate(focalPoint[1], [0, 1], [-height / 2, height / 2]);
@@ -124,25 +52,18 @@ export const Tunnel: React.FC = () => {
 					return null;
 				}
 
-				const background = interpolateColors(
-					relativeDistance,
-					[0.8, 1],
-					['#111', '#333']
-				);
-
 				return (
 					<AbsoluteFill style={{}}>
 						<Circle
 							focalPoint={focalPoint}
 							scale={scale}
 							distance={relativeDistance}
-							background={background}
+							background={idx % 2 ? COLORS[0] : '#fff'}
 						/>
 					</AbsoluteFill>
 				);
 			})}
 
-			<Grid focalPoint={focalPoint} />
 			<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
 			{new Array(numbersAmount).fill(true).map((_, num) => {
 				const i = numbersAmount - num - 1;

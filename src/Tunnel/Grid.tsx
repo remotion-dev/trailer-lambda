@@ -16,8 +16,6 @@ export const Grid: React.FC<{
 	const toX = interpolate(x, [0, 1], [0, width]);
 	const toY = interpolate(y, [0, 1], [0, height]);
 
-	const extend = 0;
-
 	return (
 		<AbsoluteFill>
 			<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
@@ -25,15 +23,15 @@ export const Grid: React.FC<{
 					const offset = (i / lines) * Math.PI * 2;
 					const startX = Math.sin(offset) * size + toX;
 					const startY = Math.cos(offset) * size + toY;
-					const leftX = toX - extend;
-					const leftY = toY - extend;
 
 					const controlPoints1 = getBezierControlPoints(
-						[leftX, leftY],
+						[startX, startY],
 						[toX, toY],
 						focalPoint[0],
 						width
 					);
+
+					console.log('grid', controlPoints1);
 
 					const triangle = `
           M ${startX} ${startY}
@@ -45,7 +43,7 @@ export const Grid: React.FC<{
 						<path
 							fill="none"
 							d={triangle}
-							stroke="rgba(255, 255, 255, 0.1)"
+							stroke="rgba(0, 0, 0, 0.1)"
 							strokeWidth={1}
 						/>
 					);
