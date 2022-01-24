@@ -13,3 +13,4 @@ dist
 !src**/*.aac
 *.wav
 !src**/*.wav
+.env

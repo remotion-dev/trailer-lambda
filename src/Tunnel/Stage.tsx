@@ -47,18 +47,12 @@ export const Stage: React.FC<{
 			<svg viewBox={`0 0 ${width} ${height}`}>
 				<defs>
 					<linearGradient id="remotion">
-						<stop offset={0} stopOpacity={0.95} stopColor={COLORS[0]} />
+						<stop offset={0} stopOpacity={1} stopColor={COLORS[0]} />
 						<stop offset={0.5} stopOpacity={1} stopColor={COLORS[1]} />
-						<stop offset={1} stopOpacity={0.5} stopColor={COLORS[0]} />
+						<stop offset={1} stopOpacity={1} stopColor={COLORS[0]} />
 					</linearGradient>
 				</defs>
-				<path
-					fill="url(#remotion)"
-					d={triangle}
-					style={{
-						filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.2))',
-					}}
-				/>
+				<path fill="url(#remotion)" d={triangle} />
 			</svg>
 		</AbsoluteFill>
 	);
