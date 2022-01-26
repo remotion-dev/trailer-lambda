@@ -7,6 +7,7 @@ import {Dust} from './Dust';
 import {HugeOrb} from './HugeOrb';
 import {Main} from './Main';
 import {ManySpin} from './ManySpin';
+import {MasterComp} from './MasterComp';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
 import {Rollercoaster} from './Rollercoaster';
@@ -77,7 +78,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Tunnel"
 				component={Tunnel}
-				durationInFrames={900}
+				durationInFrames={200}
 				fps={30}
 				width={1920}
 				height={1080}
@@ -182,6 +183,14 @@ export const RemotionVideo: React.FC = () => {
 					num: 10,
 					scale: 2,
 				}}
+			/>
+			<Composition
+				id="Main"
+				component={MasterComp}
+				fps={30}
+				width={1920}
+				height={1080}
+				durationInFrames={2400}
 			/>
 		</>
 	);

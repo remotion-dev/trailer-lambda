@@ -20,8 +20,8 @@ const numbersAmount = 13;
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width, height} = useVideoConfig();
-	const distanceProgressed = interpolate(frame, [0, 14000], [0, 1]);
-	const numbersDistanceProgressed = interpolate(frame, [0, 600], [0, 1]);
+	const distanceProgressed = interpolate(frame, [0, 5000], [0, 1]);
+	const numbersDistanceProgressed = interpolate(frame, [0, 200], [0, 1]);
 	const noiseX = noise.noise2D(0, frame / 80) * 0.06;
 	const noisey = noise.noise2D(frame / 80, 0) * 0.04;
 	const focalPoint = [0.5 + noiseX, noisey + 0.6] as const;

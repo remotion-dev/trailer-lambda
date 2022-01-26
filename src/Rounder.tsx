@@ -1,25 +1,37 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
+import {
+	AbsoluteFill,
+	interpolate,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
 import {COLORS} from './colors';
 import {getBezierControlPoints} from './Tunnel/point-on-bezier-curve';
 
-const lines = 1;
+const lines = 10;
 
 const focalPoint = [0.5, 0.5];
 
+const strokeWidth = 15;
 export const Rounder: React.FC = () => {
 	const [x, y] = focalPoint;
 
 	const {height, width} = useVideoConfig();
+	const frame = useCurrentFrame();
 
 	const size = Math.sqrt(height ** 2 + width ** 2);
 
 	const toX = interpolate(x, [0, 1], [0, width]);
 	const toY = interpolate(y, [0, 1], [0, height]);
+
+	const curvature = interpolate(frame, [0, 50], [Math.PI * 0.6, 0]);
+	const scale = interpolate(frame, [0, 50], [1, 5]);
+
 	return (
 		<AbsoluteFill
 			style={{
 				backgroundColor: 'white',
+				transform: `scale(${scale})`,
 			}}
 		>
 			<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
@@ -28,12 +40,12 @@ export const Rounder: React.FC = () => {
 					const startX = Math.sin(offset) * size + toX;
 					const startY = Math.cos(offset) * size + toY;
 
-					const arcX = Math.sin(offset + 2) * size + toX;
-					const arcY = Math.cos(offset + 2) * size + toY;
+					const arcX = Math.sin(offset + curvature) * size * 0.75 + toX;
+					const arcY = Math.cos(offset + curvature) * size * 0.75 + toY;
 
 					const controlPoints1 = getBezierControlPoints(
 						[startX, startY],
-						[arcX - toX / 2, arcY - toY / 2],
+						[arcX, arcY],
 						focalPoint[0],
 						width
 					);
@@ -45,7 +57,12 @@ export const Rounder: React.FC = () => {
             ${toX} ${toY}
           `;
 					return (
-						<path fill="none" d={triangle} stroke={COLORS[0]} strokeWidth={5} />
+						<path
+							fill="none"
+							d={triangle}
+							stroke={COLORS[0]}
+							strokeWidth={strokeWidth}
+						/>
 					);
 				})}
 				<circle
@@ -54,7 +71,7 @@ export const Rounder: React.FC = () => {
 					r={200}
 					fill="white"
 					stroke={COLORS[0]}
-					strokeWidth={5}
+					strokeWidth={strokeWidth}
 				/>
 			</svg>
 		</AbsoluteFill>
