@@ -5,6 +5,7 @@ import {Model} from './Casette';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {HugeOrb} from './HugeOrb';
+import {Lambda} from './Lambda/Lambda';
 import {Main} from './Main';
 import {ManySpin} from './ManySpin';
 import {MasterComp} from './MasterComp';
@@ -175,6 +176,18 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="rounder"
 				component={Rounder}
+				durationInFrames={100}
+				fps={30}
+				width={1920}
+				height={1080}
+				defaultProps={{
+					num: 10,
+					scale: 2,
+				}}
+			/>
+			<Composition
+				id="lambda"
+				component={Lambda}
 				durationInFrames={100}
 				fps={30}
 				width={1920}
