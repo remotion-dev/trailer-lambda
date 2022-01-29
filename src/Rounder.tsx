@@ -8,7 +8,7 @@ import {
 import {COLORS} from './colors';
 import {getBezierControlPoints} from './Tunnel/point-on-bezier-curve';
 
-const lines = 10;
+const lines = 5;
 
 const focalPoint = [0.5, 0.5];
 
@@ -26,6 +26,7 @@ export const Rounder: React.FC = () => {
 
 	const curvature = interpolate(frame, [0, 50], [Math.PI * 0.6, 0]);
 	const scale = interpolate(frame, [0, 50], [1, 5]);
+	const radius = interpolate(frame, [0, 50], [0, 200]);
 
 	return (
 		<AbsoluteFill
@@ -37,7 +38,7 @@ export const Rounder: React.FC = () => {
 				<circle
 					cx={width / 2}
 					cy={height / 2}
-					r={200}
+					r={radius}
 					stroke={COLORS[0]}
 					strokeWidth={strokeWidth}
 					fill="transparent"
@@ -56,7 +57,7 @@ export const Rounder: React.FC = () => {
 						<circle
 							cx={width / 2}
 							cy={height / 2}
-							r={200}
+							r={radius}
 							strokeWidth={strokeWidth}
 						/>
 					</mask>

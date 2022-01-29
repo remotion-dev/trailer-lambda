@@ -55,7 +55,7 @@ export const Lambda: React.FC = () => {
 	const staticScale =
 		spring({
 			fps,
-			frame: frame - 20,
+			frame: frame - 70,
 			config: {
 				damping: 200,
 			},
