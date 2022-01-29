@@ -6,6 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import {Mask} from '../Mask';
 
 const greekLetterOriginalWidth = 463;
 const greekLetterOriginalHeight = 738;
@@ -66,11 +67,8 @@ export const Lambda: React.FC = () => {
 			extrapolateRight: 'clamp',
 		});
 	return (
-		<AbsoluteFill
-			style={{
-				backgroundColor: 'white',
-			}}
-		>
+		<AbsoluteFill style={{}}>
+			<Mask radius={100} strokeWidth={0} />
 			<AbsoluteFill style={{transform: `scale(${staticScale})`}}>
 				{new Array(layers).fill(1).map((_, layer) => {
 					const alternate = layer % 2 === 0;
