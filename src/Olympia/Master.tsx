@@ -22,7 +22,7 @@ export const Olympia: React.FC<{
 				height={size}
 				viewBox={`0 0 ${size} ${size}`}
 			>
-				{new Array(2400).fill(1).map((key, i) => {
+				{new Array(1200).fill(1).map((key, i) => {
 					return <Stroke key={i} seed={i} focalPoint={focalPoint} />;
 				})}
 			</svg>

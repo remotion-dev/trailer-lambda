@@ -7,6 +7,7 @@ import {Dust} from './Dust';
 import {HugeOrb} from './HugeOrb';
 import {Lambda} from './Lambda/Lambda';
 import {Main} from './Main';
+import {ManyOrbs} from './ManyOrbs';
 import {ManySpin} from './ManySpin';
 import {MasterComp} from './MasterComp';
 import {Olympia} from './Olympia/Master';
@@ -18,7 +19,7 @@ import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
 import {Tunnel} from './Tunnel';
-import {Wave} from './Wave';
+import {ManyWaves} from './Wave';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -108,6 +109,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="HugeOrb"
 				component={HugeOrb}
+				durationInFrames={180}
+				fps={30}
+				width={1280}
+				height={720}
+			/>
+			<Composition
+				id="ManyOrbs"
+				component={ManyOrbs}
 				durationInFrames={180}
 				fps={30}
 				width={1280}
@@ -208,7 +217,7 @@ export const RemotionVideo: React.FC = () => {
 			/>
 			<Composition
 				id="Wave"
-				component={Wave}
+				component={ManyWaves}
 				fps={30}
 				width={1920}
 				height={1080}

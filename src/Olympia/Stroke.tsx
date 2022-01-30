@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-	interpolate,
-	interpolateColors,
-	random,
-	useCurrentFrame,
-	useVideoConfig,
-} from 'remotion';
+import {interpolate, random, useCurrentFrame, useVideoConfig} from 'remotion';
 import SimplexNoise from 'simplex-noise';
+import {COLORS} from '../colors';
 
 const n = new SimplexNoise();
 const pos = new SimplexNoise();
@@ -23,12 +18,6 @@ export const Stroke: React.FC<{
 	} = useVideoConfig();
 
 	const size = Math.sqrt(origWidth * origWidth + origHeight * origHeight);
-
-	const color = interpolateColors(
-		pos.noise2D(0, seed / 20),
-		[0, 1],
-		['#42e9f5', '#4290f5']
-	);
 
 	const height = size;
 	const width = size;
@@ -62,9 +51,7 @@ export const Stroke: React.FC<{
 		Math.sin((randomValue + shift) * Math.PI * 2) * radius + centerY,
 	];
 
-	const opacity = interpolate(enterFrame, [0, 15], [0, 1], {
-		extrapolateRight: 'clamp',
-	});
+	const opacity = 1;
 
 	if (frame < delay) return null;
 
@@ -79,7 +66,7 @@ export const Stroke: React.FC<{
 				transform: `translateX(${translateX}px) translateY(${translateY}px)`,
 				opacity,
 			}}
-			fill={color}
+			fill={COLORS[0]}
 		/>
 	);
 };

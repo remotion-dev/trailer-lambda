@@ -3,7 +3,7 @@ import {AbsoluteFill, Loop, Sequence, Series} from 'remotion';
 import {Lambda} from './Lambda/Lambda';
 import {ManySpin} from './ManySpin';
 import {Rounder} from './Rounder';
-import {Wave} from './Wave';
+import {ManyWaves} from './Wave';
 
 export const MasterComp: React.FC = () => {
 	return (
@@ -16,10 +16,12 @@ export const MasterComp: React.FC = () => {
 								backgroundColor: 'white',
 							}}
 						/>
-						<Sequence from={60}>
-							<Wave />
+						<Sequence from={100}>
+							<ManyWaves />
 						</Sequence>
-						<Lambda />
+						<Sequence from={20}>
+							<Lambda />
+						</Sequence>
 						<Rounder />
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={100}>

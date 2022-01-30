@@ -2,50 +2,41 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
-import {makeSvgWave, svgPathToD} from './make-svg-wave';
+import {Wave} from './SingleWave';
 
-export const Wave: React.FC = () => {
-	const {height, width, fps} = useVideoConfig();
+export const ManyWaves: React.FC = () => {
+	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
-
-	const progress = spring({
-		fps,
-		frame,
-		config: {
-			damping: 200,
-			mass: 100,
-		},
-	});
-
-	const amplitude = interpolate(progress, [0, 1], [0, 100]);
-	const radius = interpolate(progress, [0, 1], [0, 7000]);
-	const topOffset = interpolate(progress, [0, 1], [0, 7000]);
-
-	const rotation = interpolate(progress, [0, 1], [0, Math.PI * 0.05]);
-
-	const path = makeSvgWave({
-		height,
-		numberOfCurves: 50,
-		amplitude,
-		radius,
-		width,
-		topOffset,
-		rotation,
-	});
 	return (
-		<AbsoluteFill
-			style={{
-				backgroundColor: 'white',
-			}}
-		>
-			<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-				<path d={svgPathToD(path)} fill={COLORS[0]} strokeWidth={10} />
-			</svg>
+		<AbsoluteFill>
+			{new Array(20)
+				.fill(true)
+				.map((_, index) => {
+					const progress = spring({
+						fps,
+						frame: frame - index * 10,
+						config: {
+							damping: 200,
+							mass: 3,
+						},
+					});
+					const topOffset = interpolate(frame, [0, 10], [0, 100]);
+					return (
+						<Sequence from={index * 10}>
+							<Wave
+								color={index % 2 === 0 ? COLORS[0] : 'white'}
+								topOffset={-index * 100 + topOffset - 200}
+							/>
+						</Sequence>
+					);
+				})
+				.reverse()}
 		</AbsoluteFill>
 	);
 };

@@ -54,34 +54,12 @@ export const HugeOrb: React.FC = () => {
 					transform: `rotate(90deg)`,
 				}}
 			>
-				<defs>
-					<linearGradient id="lg">
-						<stop stopColor="#4290f5" offset="0" />
-						<stop stopColor="#42e9f5" offset="1" />
-					</linearGradient>
-				</defs>
 				<circle
 					cx={width / 2}
 					cy={height / 2}
 					r={radius}
-					fill="white"
-					style={{
-						filter: `drop-shadow(0 0 5px rgba(0, 0, 0, 0.1))`,
-					}}
-				/>
-				<circle
-					stroke="url(#lg)"
-					strokeWidth={strokeWidth}
-					r={innerR}
-					fill="none"
-					style={{
-						backgroundColor: 'yellow',
-						animation: `${transition} 3s`,
-					}}
-					strokeLinecap="round"
-					strokeDasharray={`${innerCircumference}`}
-					cx={width / 2}
-					cy={height / 2}
+					fill="transparent"
+					style={{}}
 				/>
 			</svg>
 		</>
