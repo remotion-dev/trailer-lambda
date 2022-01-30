@@ -18,6 +18,7 @@ import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
 import {Tunnel} from './Tunnel';
+import {Wave} from './Wave';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -200,6 +201,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Main"
 				component={MasterComp}
+				fps={30}
+				width={1920}
+				height={1080}
+				durationInFrames={2400}
+			/>
+			<Composition
+				id="Wave"
+				component={Wave}
 				fps={30}
 				width={1920}
 				height={1080}
