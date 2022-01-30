@@ -6,7 +6,6 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
-import {ThreeDText} from '../3DText/3DText';
 import {COLORS} from '../colors';
 import {Circle} from './Circle';
 import {Stage} from './Stage';
@@ -106,18 +105,7 @@ export const Tunnel: React.FC = () => {
 								offY + Y_DOWNSHIFT
 							}px)`,
 						}}
-					>
-						<ThreeDText
-							uprightRotation={uprightRotation}
-							sideRotation={interpolate(
-								focalPoint[0],
-								[0, 1],
-								[Math.PI / 20, -Math.PI / 20]
-							)}
-							scale={scale}
-							num={130 - i * 10}
-						/>
-					</AbsoluteFill>
+					/>
 				);
 			})}
 		</AbsoluteFill>

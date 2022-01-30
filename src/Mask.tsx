@@ -1,18 +1,19 @@
-import React from 'react';
-import {useVideoConfig} from 'remotion';
+import React, {useState} from 'react';
+import {random, useVideoConfig} from 'remotion';
 
 export const Mask: React.FC<{
 	radius: number;
 	strokeWidth: number;
 }> = ({strokeWidth, radius}) => {
 	const {height, width} = useVideoConfig();
+	const [id] = useState(() => random(null));
 
 	return (
 		<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 			<defs>
-				<mask id="mask">
+				<mask id={String(id)}>
 					<rect
-						mask="url(#mask)"
+						mask={`url(#${id})`}
 						x={0}
 						y={0}
 						width={width}
@@ -28,7 +29,7 @@ export const Mask: React.FC<{
 				</mask>
 			</defs>
 			<rect
-				mask="url(#mask)"
+				mask={`url(#${id})`}
 				x={0}
 				y={0}
 				width={width}

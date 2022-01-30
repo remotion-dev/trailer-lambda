@@ -45,7 +45,7 @@ export const Stage: React.FC<{
 	return (
 		<AbsoluteFill>
 			<svg viewBox={`0 0 ${width} ${height}`}>
-				<path fill="white" d={triangle} stroke={COLORS[0]} strokeWidth={4} />
+				<path fill="white" d={triangle} stroke={COLORS[0]} strokeWidth={0} />
 			</svg>
 		</AbsoluteFill>
 	);

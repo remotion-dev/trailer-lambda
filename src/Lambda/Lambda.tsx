@@ -52,7 +52,14 @@ const layers = 15;
 export const Lambda: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {height, width, fps} = useVideoConfig();
-	const holeInTheMiddle = interpolate(frame, [0, 100], [0, 1200]);
+	const holeInTheMiddle = interpolate(
+		frame,
+		[0, 120],
+		[0, Math.sqrt(height ** 2 + width ** 2)],
+		{
+			extrapolateLeft: 'clamp',
+		}
+	);
 	const staticScale =
 		spring({
 			fps,
@@ -62,14 +69,14 @@ export const Lambda: React.FC = () => {
 			},
 		}) *
 			1.5 +
-		interpolate(frame, [40, 100], [1, 2], {
+		interpolate(frame, [0, 140], [1, 2], {
 			extrapolateLeft: 'clamp',
 			extrapolateRight: 'clamp',
 		});
 	return (
 		<AbsoluteFill style={{}}>
-			<Mask radius={100} strokeWidth={0} />
 			<AbsoluteFill style={{transform: `scale(${staticScale})`}}>
+				<Mask radius={holeInTheMiddle / 4} strokeWidth={0} />
 				{new Array(layers).fill(1).map((_, layer) => {
 					const alternate = layer % 2 === 0;
 					const staticRotation = interpolate(

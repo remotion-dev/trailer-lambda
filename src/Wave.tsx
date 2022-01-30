@@ -1,16 +1,41 @@
 import React from 'react';
-import {AbsoluteFill, useVideoConfig} from 'remotion';
-import {DebugSvg} from './DebugSvg';
+import {
+	AbsoluteFill,
+	interpolate,
+	spring,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
+import {COLORS} from './colors';
 import {makeSvgWave, svgPathToD} from './make-svg-wave';
 
 export const Wave: React.FC = () => {
-	const {width, height} = useVideoConfig();
+	const {height, width, fps} = useVideoConfig();
+	const frame = useCurrentFrame();
+
+	const progress = spring({
+		fps,
+		frame,
+		config: {
+			damping: 200,
+			mass: 100,
+		},
+	});
+
+	const amplitude = interpolate(progress, [0, 1], [0, 100]);
+	const radius = interpolate(progress, [0, 1], [0, 7000]);
+	const topOffset = interpolate(progress, [0, 1], [0, 7000]);
+
+	const rotation = interpolate(progress, [0, 1], [0, Math.PI * 0.05]);
+
 	const path = makeSvgWave({
-		width,
 		height,
-		numberOfCurves: 16,
-		amplitude: height / 4,
-		radius: 6000,
+		numberOfCurves: 50,
+		amplitude,
+		radius,
+		width,
+		topOffset,
+		rotation,
 	});
 	return (
 		<AbsoluteFill
@@ -19,13 +44,7 @@ export const Wave: React.FC = () => {
 			}}
 		>
 			<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-				<path
-					d={svgPathToD(path)}
-					stroke="black"
-					fill="transparent"
-					strokeWidth={10}
-				/>
-				<DebugSvg path={path} />
+				<path d={svgPathToD(path)} fill={COLORS[0]} strokeWidth={10} />
 			</svg>
 		</AbsoluteFill>
 	);

@@ -1,29 +1,22 @@
-import {interpolate} from 'remotion';
+const getTopOffset = ({
+	radius,
+	middleOfWave,
+	amplitude,
+	width,
+	height,
+}: {
+	radius: number;
+	middleOfWave: number;
+	amplitude: number;
+	width: number;
+	height: number;
+}) => {
+	const xPos = Math.sin(middleOfWave * Math.PI * 2) * radius + width / 2;
+	const yPos = Math.cos(middleOfWave * Math.PI * 2) * radius + height / 2;
 
-const getTopOffset = (
-	radius: number,
-	width: number,
-	middleOfWave: number,
-	amplitude: number
-) => {
-	const timesBiggerThanWidth = width / radius;
-	const pos = interpolate(
-		middleOfWave,
-		[0, width],
-		[
-			-(Math.PI / 2) * timesBiggerThanWidth,
-			+(Math.PI / 2) * timesBiggerThanWidth,
-		]
-	);
-	const xPos = Math.sin(pos + Math.PI / 2) * radius;
-	const yPos = Math.cos(pos + Math.PI / 2) * radius;
-
-	const cp1OffsetX = Math.cos(pos + Math.PI / 2) * amplitude;
-	const cp1OffsetY = Math.sin(pos + Math.PI / 2) * amplitude;
-	console.log({pos});
-	const fromTop = radius - xPos;
-	const fromLeft = radius - yPos;
-	return {fromTop, fromLeft, cp1OffsetX, cp1OffsetY};
+	const cp1OffsetX = Math.sin(middleOfWave * Math.PI * 2) * amplitude;
+	const cp1OffsetY = Math.cos(middleOfWave * Math.PI * 2) * amplitude;
+	return {fromTop: yPos, fromLeft: xPos, cp1OffsetX, cp1OffsetY};
 };
 
 export type Point = {
@@ -59,47 +52,67 @@ export const svgPathToD = (svgPath: SvgPath) => {
 };
 
 export const makeSvgWave = ({
-	width,
 	height,
 	numberOfCurves,
 	amplitude,
 	radius,
+	width,
+	topOffset,
+	rotation,
 }: {
-	width: number;
 	height: number;
 	numberOfCurves: number;
 	amplitude: number;
 	radius: number;
+	width: number;
+	topOffset: number;
+	rotation: number;
 }): Statement[] => {
 	console.clear();
-	const waveWidth = width / numberOfCurves;
+	const firstPoint = getTopOffset({
+		radius,
+		middleOfWave: rotation,
+		amplitude,
+		width,
+		height,
+	});
+
 	const statements: Statement[] = [
 		{
 			type: 'M',
 			point: {
-				x: 0,
-				y:
-					height / 2 +
-					getTopOffset(radius, width, -0.5 * waveWidth, amplitude).fromTop,
+				x: firstPoint.fromLeft,
+				y: firstPoint.fromTop + topOffset,
 			},
 		},
 		...new Array(numberOfCurves).fill(true).map((curve, i): Statement => {
-			const middleOfWave = (i + 0.5) * waveWidth;
-			const {fromTop, cp1OffsetX, cp1OffsetY} = getTopOffset(
+			const {fromTop, fromLeft} = getTopOffset({
 				radius,
+				middleOfWave: (i + 1) / numberOfCurves + rotation,
+				amplitude,
 				width,
-				middleOfWave,
-				amplitude
-			);
-			console.log({cp1OffsetX, cp1OffsetY});
-			const to: Point = {x: (i + 1) * waveWidth, y: height / 2 + fromTop};
+				height,
+			});
+			const {
+				fromLeft: offsetX,
+				fromTop: offsetY,
+				cp1OffsetX,
+				cp1OffsetY,
+			} = getTopOffset({
+				radius,
+				middleOfWave: (i + 0.5) / numberOfCurves + rotation,
+				amplitude,
+				width,
+				height,
+			});
+			const to: Point = {x: fromLeft, y: fromTop + topOffset};
 			const cp1: Point = {
-				x: middleOfWave + cp1OffsetX,
-				y: height / 2 + fromTop + cp1OffsetY,
+				x: offsetX - cp1OffsetX,
+				y: offsetY - cp1OffsetY + topOffset,
 			};
 			const cp2: Point = {
-				x: middleOfWave - cp1OffsetX,
-				y: height / 2 + fromTop - cp1OffsetY,
+				x: offsetX + cp1OffsetX,
+				y: offsetY + cp1OffsetY + topOffset,
 			};
 			return {
 				type: 'C',
