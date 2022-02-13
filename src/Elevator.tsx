@@ -11,7 +11,7 @@ import {OpenTypeNumber} from './OpenTypeNumber';
 
 const charContainer: React.CSSProperties = {
 	width: 200,
-	height: FONT_SIZE * 1.1,
+	height: FONT_SIZE * 1.5,
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
@@ -24,7 +24,9 @@ const spacingBetween = 15;
 const totalWidth = (charContainer.width as number) * 2 + spacingBetween;
 const totalHeight = (charContainer.height as number) * rightNums.length;
 
-export const Elevator: React.FC = () => {
+export const Elevator: React.FC<{
+	countDownDelay?: number;
+}> = ({countDownDelay = 0}) => {
 	const font = useFont();
 	const frame = useCurrentFrame();
 	const {width, height} = useVideoConfig();
@@ -36,7 +38,10 @@ export const Elevator: React.FC = () => {
 	const topWhereGreatestIsCentered =
 		topWhereLowestIsCentered - totalHeight + (charContainer.height as number);
 
-	const animation = interpolate(frame, [0, 100], [0, 1]);
+	const animation = interpolate(frame - countDownDelay, [0, 60], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
 	const leftAnimation = interpolate(animation, [0, 0.1], [0, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',

@@ -15,6 +15,7 @@ import {VIDEO_FPS} from './math/fps';
 import {BigNum} from './Number';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
+import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
 import {Spin} from './Spin';
@@ -240,6 +241,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Elevator"
 				component={Elevator}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
+				durationInFrames={2400}
+			/>
+			<Composition
+				id="RocketShip"
+				component={RocketShip}
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
