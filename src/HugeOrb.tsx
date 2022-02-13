@@ -1,5 +1,5 @@
 import React from 'react';
-import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {useCurrentFrame, useVideoConfig} from 'remotion';
 import {css} from 'styled-components';
 import {Drop} from './Drop';
 
@@ -22,20 +22,6 @@ const transition = css`
 export const HugeOrb: React.FC = () => {
 	const {width, height, fps} = useVideoConfig();
 	const frame = useCurrentFrame();
-
-	const spr = spring({
-		fps,
-		frame,
-		config: {
-			damping: 400,
-			mass: 12,
-		},
-	});
-
-	const progress = interpolate(spr, [0, 1], [innerCircumference, 0], {
-		extrapolateLeft: 'clamp',
-		extrapolateRight: 'clamp',
-	});
 
 	return (
 		<>
