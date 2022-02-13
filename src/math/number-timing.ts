@@ -13,11 +13,11 @@ export const numberToDisplay = (frame: number) => {
 	}
 	const framesSinceWavesStart = frame - WAVES_START - WAVE_EVERY_FRAMES / 2;
 	const wavesPassed = Math.min(
-		NUMBER_OF_WAVES / 3,
+		NUMBER_OF_WAVES / 2,
 		Math.ceil(framesSinceWavesStart / WAVE_EVERY_FRAMES / 2)
 	);
 
-	return START_NUMBER - wavesPassed * 2;
+	return START_NUMBER - wavesPassed * 5;
 };
 
 export const getNumbersize = (frame: number) => {

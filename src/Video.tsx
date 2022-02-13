@@ -4,6 +4,7 @@ import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
+import {Elevator} from './Elevator';
 import {HugeOrb} from './HugeOrb';
 import {Lambda} from './Lambda/Lambda';
 import {Main} from './Main';
@@ -184,6 +185,8 @@ export const RemotionVideo: React.FC = () => {
 				defaultProps={{
 					num: 10,
 					scale: 2,
+					sideRotation: 0,
+					uprightRotation: 0,
 				}}
 			/>
 			<Composition
@@ -229,6 +232,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Wave"
 				component={ManyWaves}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
+				durationInFrames={2400}
+			/>
+			<Composition
+				id="Elevator"
+				component={Elevator}
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}

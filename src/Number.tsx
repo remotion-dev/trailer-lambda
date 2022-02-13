@@ -1,34 +1,22 @@
-import React, {useEffect, useMemo, useState} from 'react';
-import {AbsoluteFill, continueRender, delayRender, staticFile} from 'remotion';
+import React, {useMemo} from 'react';
+import {AbsoluteFill} from 'remotion';
+import {useFont} from './load-font';
+import {FONT_SIZE} from './math/font-size';
 import {OpenTypeNumber} from './OpenTypeNumber';
-import opentype = require('opentype.js');
-
-const loadFont = async () => {
-	const handle = delayRender();
-	const font = await opentype.load(staticFile('Assistant-ExtraBold.ttf'));
-	continueRender(handle);
-	return font;
-};
 
 export const BigNum: React.FC<{
 	number: string;
 }> = ({number}) => {
-	const [font, setFont] = useState<opentype.Font | null>(null);
-
-	useEffect(() => {
-		loadFont().then(setFont);
-	}, []);
+	const font = useFont();
 
 	const path = useMemo(() => {
 		if (!font) {
 			return null;
 		}
-		const [left, right] = String(number).split('');
-		const leftGlyph = font.charToGlyph(left);
-		const rightGlyph = font.charToGlyph(right);
+		const [leftGlyph, rightGlyph] = font.stringToGlyphs(String(number));
 		const kerning = font.getKerningValue(leftGlyph, rightGlyph);
-		const leftSvg = leftGlyph.getPath(undefined, undefined, 400);
-		const rightSvg = rightGlyph.getPath(undefined, undefined, 400);
+		const leftSvg = leftGlyph.getPath(undefined, undefined, FONT_SIZE);
+		const rightSvg = rightGlyph.getPath(undefined, undefined, FONT_SIZE);
 		const leftPath = leftSvg.toPathData(3);
 		const leftBox = leftSvg.getBoundingBox();
 		const rightPath = rightSvg.toPathData(3);
@@ -39,10 +27,11 @@ export const BigNum: React.FC<{
 			rightPath,
 			leftBox,
 			rightBox,
+			kerning,
 		};
 	}, [font, number]);
 
-	if (path === null) {
+	if (path === null || font === null) {
 		return null;
 	}
 
@@ -53,8 +42,11 @@ export const BigNum: React.FC<{
 				alignItems: 'center',
 			}}
 		>
-			<OpenTypeNumber box={path.leftBox} path={path.leftPath} />
-			<OpenTypeNumber box={path.rightBox} path={path.rightPath} />
+			<div style={{display: 'flex', flexDirection: 'row'}}>
+				<OpenTypeNumber font={font} str={number[0]} />
+				<div style={{width: 15}} />
+				<OpenTypeNumber font={font} str={number[1]} />
+			</div>
 		</AbsoluteFill>
 	);
 };
