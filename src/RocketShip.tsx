@@ -11,6 +11,7 @@ import {Elevator} from './Elevator';
 import {COUNTDOWN_DELAY} from './math/elevator';
 import {VIDEO_FPS} from './math/fps';
 import {RocketFumes} from './RocketFumes';
+import {Upwind} from './Upwind';
 
 const svgHoleSize = 906;
 const originalSvgWidth = 1729;
@@ -97,41 +98,45 @@ export const RocketShip: React.FC = () => {
 	const scale = interpolate(rocketEntryAnimation, [0, 1], [1, 0.5]);
 
 	return (
-		<AbsoluteFill
-			style={{
-				transform: `scale(${scale}) translateX(${xOffset}px) rotate(${rotation}rad)`,
-			}}
-		>
+		<AbsoluteFill>
+			<Upwind />
+
 			<AbsoluteFill
 				style={{
-					transform: `translateY(${YOffset}px)`,
+					transform: `scale(${scale}) translateX(${xOffset}px) rotate(${rotation}rad)`,
 				}}
 			>
-				<Rocket entry={rocketEntryAnimation} />
-			</AbsoluteFill>
-			<AbsoluteFill>
-				<div
+				<AbsoluteFill
 					style={{
-						height: remotionHolesize,
-						width: remotionHolesize,
-						display: 'flex',
-						overflow: 'hidden',
-						borderRadius: remotionHolesize / 2,
-						backgroundColor: 'white',
-						position: 'absolute',
-						left: width / 2 - remotionHolesize / 2,
-						top: height / 2 - remotionHolesize / 2,
+						transform: `translateY(${YOffset}px)`,
 					}}
 				>
-					<AbsoluteFill
+					<Rocket entry={rocketEntryAnimation} />
+				</AbsoluteFill>
+				<AbsoluteFill>
+					<div
 						style={{
-							marginLeft: -width / 2 + remotionHolesize / 2,
-							marginTop: -height / 2 + remotionHolesize / 2,
+							height: remotionHolesize,
+							width: remotionHolesize,
+							display: 'flex',
+							overflow: 'hidden',
+							borderRadius: remotionHolesize / 2,
+							backgroundColor: 'white',
+							position: 'absolute',
+							left: width / 2 - remotionHolesize / 2,
+							top: height / 2 - remotionHolesize / 2,
 						}}
 					>
-						<Elevator countDownDelay={COUNTDOWN_DELAY} />
-					</AbsoluteFill>
-				</div>
+						<AbsoluteFill
+							style={{
+								marginLeft: -width / 2 + remotionHolesize / 2,
+								marginTop: -height / 2 + remotionHolesize / 2,
+							}}
+						>
+							<Elevator countDownDelay={COUNTDOWN_DELAY} />
+						</AbsoluteFill>
+					</div>
+				</AbsoluteFill>
 			</AbsoluteFill>
 		</AbsoluteFill>
 	);

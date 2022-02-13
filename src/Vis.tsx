@@ -19,7 +19,7 @@ export const Vis: React.FC = () => {
 				<ManyWaves />
 				<AnimatedNumber />
 			</Series.Sequence>
-			<Series.Sequence durationInFrames={200}>
+			<Series.Sequence durationInFrames={300}>
 				<AbsoluteFill
 					style={{
 						backgroundColor: 'white',

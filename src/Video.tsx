@@ -23,6 +23,7 @@ import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
 import {Tunnel} from './Tunnel';
+import {Upwind} from './Upwind';
 import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 
@@ -262,6 +263,14 @@ export const RemotionVideo: React.FC = () => {
 				component={BigNum}
 				width={1920}
 				height={1080}
+			/>
+			<Composition
+				id="Upwind"
+				component={Upwind}
+				durationInFrames={150}
+				height={1080}
+				width={1920}
+				fps={24}
 			/>
 		</>
 	);
