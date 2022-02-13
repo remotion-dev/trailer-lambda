@@ -35,11 +35,11 @@ export const Wave: React.FC<{
 		amplitude,
 		radius,
 		width,
-		topOffset: topOffset + interpolate(progress, [0, 1], [0, 7000]),
+		topOffset,
 		rotation,
 	});
 	return (
-		<AbsoluteFill style={{}}>
+		<AbsoluteFill>
 			<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 				<path d={svgPathToD(path)} fill={color} strokeWidth={10} />
 			</svg>

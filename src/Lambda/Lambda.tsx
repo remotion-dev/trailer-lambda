@@ -2,11 +2,11 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
-	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import {Mask} from '../Mask';
+import {getLambdaHoleSize} from '../math/start-hug';
 
 const greekLetterOriginalWidth = 463;
 const greekLetterOriginalHeight = 738;
@@ -51,28 +51,10 @@ const layers = 15;
 
 export const Lambda: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {height, width, fps} = useVideoConfig();
-	const holeInTheMiddle = interpolate(
-		frame,
-		[0, 120],
-		[0, Math.sqrt(height ** 2 + width ** 2)],
-		{
-			extrapolateLeft: 'clamp',
-		}
-	);
-	const staticScale =
-		spring({
-			fps,
-			frame: frame - 70,
-			config: {
-				damping: 200,
-			},
-		}) *
-			1.5 +
-		interpolate(frame, [0, 140], [1, 2], {
-			extrapolateLeft: 'clamp',
-			extrapolateRight: 'clamp',
-		});
+	const {height, width} = useVideoConfig();
+
+	const holeInTheMiddle = getLambdaHoleSize(frame);
+	const staticScale = 1;
 	return (
 		<AbsoluteFill style={{}}>
 			<AbsoluteFill style={{transform: `scale(${staticScale})`}}>

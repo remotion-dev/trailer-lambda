@@ -1,4 +1,4 @@
-import {Composition} from 'remotion';
+import {Composition, Still} from 'remotion';
 import {ThreeDText} from './3DText/3DText';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
@@ -10,6 +10,8 @@ import {Main} from './Main';
 import {ManyOrbs} from './ManyOrbs';
 import {ManySpin} from './ManySpin';
 import {MasterComp} from './MasterComp';
+import {VIDEO_FPS} from './math/fps';
+import {BigNum} from './Number';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
 import {Rollercoaster} from './Rollercoaster';
@@ -19,6 +21,7 @@ import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
 import {Tunnel} from './Tunnel';
+import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 
 export const RemotionVideo: React.FC = () => {
@@ -28,7 +31,7 @@ export const RemotionVideo: React.FC = () => {
 				id="HelloWorld"
 				component={Main}
 				durationInFrames={150}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				defaultProps={{
@@ -40,7 +43,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Noise"
 				component={BackgroundNoise}
 				durationInFrames={150}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				defaultProps={{
@@ -52,7 +55,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Spin"
 				component={Spin}
 				durationInFrames={150}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				defaultProps={{
@@ -63,7 +66,7 @@ export const RemotionVideo: React.FC = () => {
 				id="ManySpin"
 				component={ManySpin}
 				durationInFrames={300}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				defaultProps={{
@@ -74,7 +77,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Rollercoaster"
 				component={Rollercoaster}
 				durationInFrames={900}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 			/>
@@ -82,7 +85,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Tunnel"
 				component={Tunnel}
 				durationInFrames={200}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 			/>
@@ -90,7 +93,7 @@ export const RemotionVideo: React.FC = () => {
 				id="TextStretch"
 				component={TextStretch}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={600}
 				height={470}
 			/>
@@ -98,7 +101,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Olympia"
 				component={Olympia}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1280}
 				height={720}
 				defaultProps={{
@@ -110,7 +113,7 @@ export const RemotionVideo: React.FC = () => {
 				id="HugeOrb"
 				component={HugeOrb}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1280}
 				height={720}
 			/>
@@ -118,7 +121,7 @@ export const RemotionVideo: React.FC = () => {
 				id="ManyOrbs"
 				component={ManyOrbs}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1280}
 				height={720}
 			/>
@@ -126,7 +129,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Texture"
 				component={Texture}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1280}
 				height={720}
 			/>
@@ -134,7 +137,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Dust"
 				component={Dust}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 			/>
@@ -142,7 +145,7 @@ export const RemotionVideo: React.FC = () => {
 				id="TextureAndDust"
 				component={TextureAndDust}
 				durationInFrames={180}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 			/>
@@ -150,7 +153,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Party"
 				component={Party}
 				durationInFrames={500}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1080}
 				height={1080}
 				defaultProps={{ticketName: 'Severin Wullschleger\nLaura Fiala'}}
@@ -159,7 +162,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Clocks"
 				component={Clocks}
 				durationInFrames={650}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1080}
 				height={1080}
 			/>
@@ -167,7 +170,7 @@ export const RemotionVideo: React.FC = () => {
 				id="Casette"
 				component={Model}
 				durationInFrames={100}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1080}
 				height={1080}
 			/>
@@ -175,7 +178,7 @@ export const RemotionVideo: React.FC = () => {
 				id="3D-Text"
 				component={ThreeDText}
 				durationInFrames={100}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1080}
 				height={1080}
 				defaultProps={{
@@ -187,7 +190,7 @@ export const RemotionVideo: React.FC = () => {
 				id="rounder"
 				component={Rounder}
 				durationInFrames={100}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				defaultProps={{
@@ -199,7 +202,7 @@ export const RemotionVideo: React.FC = () => {
 				id="lambda"
 				component={Lambda}
 				durationInFrames={100}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				defaultProps={{
@@ -210,7 +213,15 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Main"
 				component={MasterComp}
-				fps={30}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
+				durationInFrames={2400}
+			/>
+			<Composition
+				id="Vis"
+				component={Vis}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				durationInFrames={2400}
@@ -218,10 +229,19 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Wave"
 				component={ManyWaves}
-				fps={30}
+				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
 				durationInFrames={2400}
+			/>
+			<Still
+				defaultProps={{
+					number: '60',
+				}}
+				id="BigNum"
+				component={BigNum}
+				width={1920}
+				height={1080}
 			/>
 		</>
 	);
