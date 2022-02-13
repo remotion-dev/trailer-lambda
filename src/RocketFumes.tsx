@@ -24,7 +24,11 @@ export const RocketFumes: React.FC = () => {
 				const size = random('size' + i) * 100 + 200;
 				const xOffset = (random('xoffset' + i) - 0.5) * 400 + noiseX;
 				const yOffset = (random('yoffset' + i) - 0.5) * 800 + noiseY + 400;
-				const color = interpolateColors(i, [0, fumeCount], ['#fff', COLORS[0]]);
+				const color = interpolateColors(
+					i,
+					[-fumeCount, fumeCount * 2],
+					[COLORS[0], '#fff']
+				);
 
 				return (
 					<AbsoluteFill

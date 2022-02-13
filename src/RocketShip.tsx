@@ -6,6 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import SimplexNoise from 'simplex-noise';
 import {Elevator} from './Elevator';
 import {COUNTDOWN_DELAY} from './math/elevator';
 import {VIDEO_FPS} from './math/fps';
@@ -74,9 +75,18 @@ const Rocket: React.FC<{
 	);
 };
 
+const shake = new SimplexNoise('shake');
+const shakeX = new SimplexNoise('shakex');
+const rotate = new SimplexNoise('rotate');
+
 export const RocketShip: React.FC = () => {
 	const {height, width} = useVideoConfig();
 	const frame = useCurrentFrame();
+
+	const xOffset = shake.noise2D(0, frame / 30) * 30;
+	const YOffset = shakeX.noise2D(0, frame / 30) * 30;
+	const rotation = (rotate.noise2D(0, frame / 80) * Math.PI) / 10;
+
 	const rocketEntryAnimation = spring({
 		frame,
 		fps: VIDEO_FPS,
@@ -89,10 +99,14 @@ export const RocketShip: React.FC = () => {
 	return (
 		<AbsoluteFill
 			style={{
-				transform: `scale(${scale})`,
+				transform: `scale(${scale}) translateX(${xOffset}px) rotate(${rotation}rad)`,
 			}}
 		>
-			<AbsoluteFill>
+			<AbsoluteFill
+				style={{
+					transform: `translateY(${YOffset}px)`,
+				}}
+			>
 				<Rocket entry={rocketEntryAnimation} />
 			</AbsoluteFill>
 			<AbsoluteFill>
