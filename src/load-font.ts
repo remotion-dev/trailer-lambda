@@ -1,4 +1,4 @@
-import opentype from 'opentype.js';
+import opentype, {Font} from 'opentype.js';
 import {useEffect, useState} from 'react';
 import {continueRender, delayRender, staticFile} from 'remotion';
 
@@ -9,11 +9,17 @@ export const loadFont = async () => {
 	return font;
 };
 
+let globalFont: Font | null = null;
+
 export const useFont = () => {
-	const [font, setFont] = useState<opentype.Font | null>(null);
+	const [font, setFont] = useState<opentype.Font | null>(() => globalFont);
 
 	useEffect(() => {
-		loadFont().then(setFont);
+		if (globalFont) return;
+		loadFont().then((f) => {
+			globalFont = f;
+			return setFont(f);
+		});
 	}, []);
 	return font;
 };

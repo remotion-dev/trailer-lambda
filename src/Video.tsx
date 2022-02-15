@@ -20,6 +20,7 @@ import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
 import {Spin} from './Spin';
 import {StarryNumber} from './StarryNumber';
+import {StarryNumbers} from './StarryNumbers';
 import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
@@ -259,6 +260,14 @@ export const RemotionVideo: React.FC = () => {
 					from: '30',
 					to: '29',
 				}}
+			/>
+			<Composition
+				id="StarryNumbers"
+				component={StarryNumbers}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
+				durationInFrames={650}
 			/>
 			<Composition
 				id="RocketShip"

@@ -15,10 +15,10 @@ export const StarryNumber: React.FC<{
 	const {fps} = useVideoConfig();
 	const progress = spring({
 		fps,
-		frame: frame - 20,
+		frame,
 		config: {
 			damping: 200,
-			mass: 2,
+			mass: 1,
 		},
 	});
 
