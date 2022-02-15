@@ -18,11 +18,8 @@ export const StarryNumber: React.FC = () => {
 			return null;
 		}
 
-		const xxx = interpolateStarryNumber('R', '30', font, progress);
-		return {
-			viewBox: xxx.viewBox,
-			points: xxx.points,
-		};
+		const xxx = interpolateStarryNumber('40', '29', font, progress);
+		return xxx;
 	}, [font, progress]);
 
 	if (!path) return null;
@@ -31,20 +28,23 @@ export const StarryNumber: React.FC = () => {
 		<AbsoluteFill
 			style={{
 				backgroundColor: 'black',
+				justifyContent: 'center',
+				alignItems: 'center',
+				flexDirection: 'row',
 			}}
 		>
-			<svg viewBox={getViewBoxFromBoundingBox(path?.viewBox as BoundingBox)}>
-				{path?.points.map((dot, i) => {
-					return (
-						<circle
-							cx={dot.x}
-							cy={dot.y}
-							r={2}
-							fill={i === 10 ? 'blue' : 'red'}
-						/>
-					);
-				})}
-			</svg>
+			{path.map((xxx) => {
+				return (
+					<svg
+						style={{height: 400}}
+						viewBox={getViewBoxFromBoundingBox(xxx?.viewBox as BoundingBox)}
+					>
+						{xxx?.points.map((dot) => {
+							return <circle cx={dot.x} cy={dot.y} r={2} fill="white" />;
+						})}
+					</svg>
+				);
+			})}
 		</AbsoluteFill>
 	);
 };
