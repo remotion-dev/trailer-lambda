@@ -1,5 +1,5 @@
 import {BoundingBox, Font} from 'opentype.js';
-import {interpolate} from 'remotion';
+import {interpolate, random} from 'remotion';
 import {FONT_SIZE} from './math/font-size';
 
 import svgPathProperties = require('svg-path-properties');
@@ -29,6 +29,8 @@ export const getStarryNumber = (char: string, font: Font) => {
 	});
 };
 
+const randomness = 100;
+
 export const interpolateStarryNumber = (
 	char1: string,
 	char2: string,
@@ -40,17 +42,29 @@ export const interpolateStarryNumber = (
 
 	return starrs.map((starr, charIndex) => {
 		const points = starr.points.map((p, i): {x: number; y: number} => {
+			const randomXOffset = interpolate(
+				factor,
+				[0, 0.5, 1],
+				[0, randomness * random('factor' + i) - randomness / 2, 0]
+			);
+			const randomYOffset = interpolate(
+				factor,
+				[0, 0.5, 1],
+				[0, randomness * random('factory' + i) - randomness / 2, 0]
+			);
 			return {
-				x: interpolate(
-					factor,
-					[0, 1],
-					[starr.points[i].x, starrs2[charIndex].points[i].x]
-				),
-				y: interpolate(
-					factor,
-					[0, 1],
-					[starr.points[i].y, starrs2[charIndex].points[i].y]
-				),
+				x:
+					interpolate(
+						factor,
+						[0, 1],
+						[starr.points[i].x, starrs2[charIndex].points[i].x]
+					) + randomXOffset,
+				y:
+					interpolate(
+						factor,
+						[0, 1],
+						[starr.points[i].y, starrs2[charIndex].points[i].y]
+					) + randomYOffset,
 			};
 		});
 
