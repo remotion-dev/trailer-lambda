@@ -1,5 +1,6 @@
 import React from 'react';
 import {COLORS} from './colors';
+import {getViewBoxFromBoundingBox} from './get-viewbox-from-bounding-box';
 import {FONT_SIZE} from './math/font-size';
 
 export const OpenTypeNumber: React.FC<{
@@ -12,7 +13,7 @@ export const OpenTypeNumber: React.FC<{
 	const box = leftSvg.getBoundingBox();
 
 	const height = box.y2 - box.y1;
-	const viewBox = `${box.x1} ${box.y1} ${box.x2 - box.x1} ${box.y2 - box.y1}`;
+	const viewBox = getViewBoxFromBoundingBox(box);
 	return (
 		<svg viewBox={viewBox} style={{height}}>
 			<path d={path} fill={COLORS[0]} />
