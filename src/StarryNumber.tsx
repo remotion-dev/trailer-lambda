@@ -6,15 +6,19 @@ import {interpolateStarryNumber} from './get-starry-number';
 import {getViewBoxFromBoundingBox} from './get-viewbox-from-bounding-box';
 import {useFont} from './load-font';
 
-export const StarryNumber: React.FC = () => {
+export const StarryNumber: React.FC<{
+	from: string;
+	to: string;
+}> = ({from, to}) => {
 	const font = useFont();
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
 	const progress = spring({
 		fps,
-		frame: frame - 30,
+		frame: frame - 20,
 		config: {
 			damping: 200,
+			mass: 2,
 		},
 	});
 
@@ -23,9 +27,8 @@ export const StarryNumber: React.FC = () => {
 			return null;
 		}
 
-		const xxx = interpolateStarryNumber('40', '29', font, progress);
-		return xxx;
-	}, [font, progress]);
+		return interpolateStarryNumber(from, to, font, progress);
+	}, [font, from, progress, to]);
 
 	if (!path) return null;
 

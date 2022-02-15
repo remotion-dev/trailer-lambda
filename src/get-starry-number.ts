@@ -3,7 +3,7 @@ import {interpolate, random} from 'remotion';
 import {FONT_SIZE} from './math/font-size';
 
 import svgPathProperties = require('svg-path-properties');
-const points = 100;
+const amountOfPoints = 100;
 
 export const getStarryNumber = (char: string, font: Font) => {
 	const glyphs = font.stringToGlyphs(char);
@@ -17,19 +17,19 @@ export const getStarryNumber = (char: string, font: Font) => {
 			.getTotalLength();
 
 		return {
-			points: new Array(points)
+			points: new Array(amountOfPoints)
 				.fill(true)
 				.map((_, i) =>
 					svgPathProperties
 						.svgPathProperties(leftPath)
-						.getPointAtLength((i / points) * totalLength)
+						.getPointAtLength((i / amountOfPoints) * totalLength)
 				),
 			viewBox,
 		};
 	});
 };
 
-const randomness = 100;
+const randomness = 250;
 
 export const interpolateStarryNumber = (
 	char1: string,
@@ -42,10 +42,11 @@ export const interpolateStarryNumber = (
 
 	return starrs.map((starr, charIndex) => {
 		const points = starr.points.map((p, i): {x: number; y: number} => {
+			const indexToInterpolateTo = (i + amountOfPoints / 2) % amountOfPoints;
 			const randomXOffset = interpolate(
 				factor,
 				[0, 0.5, 1],
-				[0, randomness * random('factor' + i) - randomness / 2, 0]
+				[0, randomness * random('factorx' + i) - randomness / 2, 0]
 			);
 			const randomYOffset = interpolate(
 				factor,
@@ -57,13 +58,19 @@ export const interpolateStarryNumber = (
 					interpolate(
 						factor,
 						[0, 1],
-						[starr.points[i].x, starrs2[charIndex].points[i].x]
+						[
+							starr.points[i].x,
+							starrs2[charIndex].points[indexToInterpolateTo].x,
+						]
 					) + randomXOffset,
 				y:
 					interpolate(
 						factor,
 						[0, 1],
-						[starr.points[i].y, starrs2[charIndex].points[i].y]
+						[
+							starr.points[i].y,
+							starrs2[charIndex].points[indexToInterpolateTo].y,
+						]
 					) + randomYOffset,
 			};
 		});

@@ -254,7 +254,11 @@ export const RemotionVideo: React.FC = () => {
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
-				durationInFrames={100}
+				durationInFrames={65}
+				defaultProps={{
+					from: '30',
+					to: '29',
+				}}
 			/>
 			<Composition
 				id="RocketShip"
