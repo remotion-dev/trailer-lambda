@@ -5,6 +5,7 @@ import {Model} from './Casette';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {Elevator} from './Elevator';
+import {FlatCasette} from './FlatCasette';
 import {HugeOrb} from './HugeOrb';
 import {Lambda} from './Lambda/Lambda';
 import {Main} from './Main';
@@ -302,6 +303,12 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 				width={1920}
 				fps={VIDEO_FPS}
+			/>
+			<Still
+				id="FlatCasette"
+				component={FlatCasette}
+				height={946}
+				width={541}
 			/>
 		</>
 	);
