@@ -9,7 +9,7 @@ import {
 } from 'remotion';
 
 const vertical = 4;
-const horizontal = 20;
+const horizontal = 50;
 
 const Column: React.FC<{
 	column: number;
