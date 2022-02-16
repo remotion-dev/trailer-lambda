@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {SVGProps} from 'react';
 
-export const FlatCasette: React.FC = () => {
+export const FlatCasette: React.FC<SVGProps<SVGSVGElement>> = (props) => {
 	return (
 		<svg
-			width="541"
-			height="946"
 			viewBox="0 0 541 946"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
+			{...props}
 		>
 			<path
 				d="M76 12H376C460.5 12 529 80.5004 529 165V661C529 694.137 502.137 721 469 721H59C33.0426 721 12 699.957 12 674V76C12 40.6538 40.6538 12 76 12Z"
