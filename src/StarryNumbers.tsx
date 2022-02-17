@@ -1,28 +1,38 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, Series, useCurrentFrame} from 'remotion';
-import {SpaceDust} from './SpaceDust';
+import {
+	AbsoluteFill,
+	interpolate,
+	Series,
+	spring,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
 import {StarryNumber} from './StarryNumber';
 
 export const StarryNumbers: React.FC = () => {
 	const frame = useCurrentFrame();
-	const scale = interpolate(frame, [0, 500], [1, 1.5]);
+	const {fps} = useVideoConfig();
+	const scale =
+		spring({
+			fps,
+			frame,
+			config: {
+				damping: 200,
+			},
+		}) * interpolate(frame, [0, 500], [1, 1.5]);
 	return (
-		<AbsoluteFill
-			style={{
-				backgroundColor: 'black',
-			}}
-		>
-			<SpaceDust />
-			<AbsoluteFill style={{transform: `scale(${scale})`}}>
-				<Series>
-					<Series.Sequence durationInFrames={35}>
-						<StarryNumber from="30" to="25" />
-					</Series.Sequence>
-					<Series.Sequence durationInFrames={35}>
-						<StarryNumber from="25" to="20" />
-					</Series.Sequence>
-				</Series>
-			</AbsoluteFill>
+		<AbsoluteFill style={{transform: `scale(${scale})`}}>
+			<Series>
+				<Series.Sequence durationInFrames={35}>
+					<StarryNumber from="35" to="30" />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={35}>
+					<StarryNumber from="30" to="25" />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={35}>
+					<StarryNumber from="25" to="20" />
+				</Series.Sequence>
+			</Series>
 		</AbsoluteFill>
 	);
 };

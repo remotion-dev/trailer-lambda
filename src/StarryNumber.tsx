@@ -56,7 +56,7 @@ export const StarryNumber: React.FC<{
 							)}
 						>
 							{xxx?.points.map((dot) => {
-								return <circle cx={dot.x} cy={dot.y} r={2} fill="white" />;
+								return <circle cx={dot.x} cy={dot.y} r={3} fill="white" />;
 							})}
 						</svg>
 					</div>

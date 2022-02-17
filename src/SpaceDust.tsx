@@ -3,6 +3,7 @@ import {
 	AbsoluteFill,
 	interpolate,
 	random,
+	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
@@ -11,12 +12,13 @@ const count = 200;
 
 export const SpaceDust: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {height, width} = useVideoConfig();
+	const {height, width, fps} = useVideoConfig();
 
 	// Generate some random positions, speed factors and timings
 	const particles = useMemo(() => {
 		const temp = [];
 		for (let i = 0; i < count; i++) {
+			const entry = interpolate(random('entry' + i), [0, 1], [0, 40]);
 			const time = interpolate(random('time' + i), [0, 1], [0, 100]);
 			const factor = interpolate(random('factor' + i), [0, 1], [20, 120]);
 			const speed = interpolate(random('speed' + i), [0, 1], [0.01, 0.015]) / 2;
@@ -24,14 +26,14 @@ export const SpaceDust: React.FC = () => {
 			const x = interpolate(random('x' + i), [0, 1], [0, width]);
 			const y = interpolate(random('y' + i), [0, 1], [0, height]);
 
-			temp.push({time, factor, speed, x, y, starter});
+			temp.push({time, factor, speed, x, y, starter, entry});
 		}
 		return temp;
 	}, [height, width]);
 
 	const matrix = useMemo(() => {
 		return particles.map((particle) => {
-			const {factor, speed, x, y, starter} = particle;
+			const {factor, speed, x, y, starter, entry} = particle;
 
 			// Update the particle time
 			const t = frame * speed;
@@ -42,7 +44,7 @@ export const SpaceDust: React.FC = () => {
 
 			return {
 				rotation: s,
-				scale: s,
+				scale: s * spring({fps, frame: frame - entry}),
 				position: {
 					x:
 						x +
@@ -55,10 +57,10 @@ export const SpaceDust: React.FC = () => {
 				},
 			};
 		});
-	}, [frame, particles, width, height]);
+	}, [particles, frame, fps, width, height]);
 
 	return (
-		<AbsoluteFill style={{backgroundColor: 'black'}}>
+		<AbsoluteFill>
 			{matrix.map((ma) => {
 				return (
 					<div
@@ -71,6 +73,7 @@ export const SpaceDust: React.FC = () => {
 							borderRadius: 5,
 							transform: `scale(${ma.scale})`,
 							backgroundColor: 'white',
+							opacity: 0.6,
 						}}
 					/>
 				);

@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
@@ -11,6 +12,8 @@ import {Elevator} from './Elevator';
 import {COUNTDOWN_DELAY} from './math/elevator';
 import {VIDEO_FPS} from './math/fps';
 import {RocketFumes} from './RocketFumes';
+import {SpaceDust} from './SpaceDust';
+import {StarryNumbers} from './StarryNumbers';
 import {Upwind} from './Upwind';
 
 const svgHoleSize = 906;
@@ -111,8 +114,16 @@ export const RocketShip: React.FC = () => {
 
 	return (
 		<AbsoluteFill>
-			<Upwind />
+			<Sequence from={0} durationInFrames={120}>
+				<Upwind />
+			</Sequence>
 
+			<Sequence from={100}>
+				<SpaceDust />
+			</Sequence>
+			<Sequence from={140}>
+				<StarryNumbers />
+			</Sequence>
 			<AbsoluteFill
 				style={{
 					transform: `scale(${scale}) translateX(${xOffset}px) rotate(${rotation}rad)`,
@@ -139,7 +150,7 @@ export const RocketShip: React.FC = () => {
 							backgroundColor: 'white',
 							position: 'absolute',
 							left: width / 2 - remotionHolesize / 2,
-							top: height / 2 - remotionHolesize / 2,
+							top: height / 2 - remotionHolesize / 2 + outOffsetY,
 						}}
 					>
 						<AbsoluteFill

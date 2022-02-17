@@ -3,8 +3,7 @@ import {AbsoluteFill, Series} from 'remotion';
 import {AnimatedNumber} from './AnimatedNumber';
 import {Lambda} from './Lambda/Lambda';
 import {ManySpin} from './ManySpin';
-import {RocketShip} from './RocketShip';
-import {StarryNumbers} from './StarryNumbers';
+import {RocketToStarry} from './RocketToStarry';
 import {ManyWaves} from './Wave';
 
 export const Vis: React.FC = () => {
@@ -20,16 +19,8 @@ export const Vis: React.FC = () => {
 				<ManyWaves />
 				<AnimatedNumber />
 			</Series.Sequence>
-			<Series.Sequence durationInFrames={200}>
-				<AbsoluteFill
-					style={{
-						backgroundColor: 'white',
-					}}
-				/>
-				<RocketShip />
-			</Series.Sequence>
-			<Series.Sequence durationInFrames={400}>
-				<StarryNumbers />
+			<Series.Sequence durationInFrames={500}>
+				<RocketToStarry />
 			</Series.Sequence>
 			<Series.Sequence durationInFrames={100}>
 				<ManySpin />
