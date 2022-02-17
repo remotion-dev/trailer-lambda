@@ -5,6 +5,7 @@ import {Model} from './Casette';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {Elevator} from './Elevator';
+import {FlatCasette} from './FlatCasette';
 import {HugeOrb} from './HugeOrb';
 import {Lambda} from './Lambda/Lambda';
 import {Main} from './Main';
@@ -25,6 +26,7 @@ import {StarryNumbers} from './StarryNumbers';
 import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
+import {TimelineSplit} from './TimelineSplit';
 import {Tunnel} from './Tunnel';
 import {Upwind} from './Upwind';
 import {Vis} from './Vis';
@@ -293,7 +295,21 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={150}
 				height={1080}
 				width={1920}
-				fps={24}
+				fps={VIDEO_FPS}
+			/>
+			<Composition
+				id="TimelineSplit"
+				component={TimelineSplit}
+				durationInFrames={150}
+				height={1080}
+				width={1920}
+				fps={VIDEO_FPS}
+			/>
+			<Still
+				id="FlatCasette"
+				component={FlatCasette}
+				height={946}
+				width={541}
 			/>
 			<Composition
 				id="SpaceDust"
