@@ -11,8 +11,8 @@ import {
 import {COLORS} from './colors';
 import {FlatCasette} from './FlatCasette';
 
-export const PIECE_HEIGHT = 200;
-export const PIECE_WIDTH = 120;
+export const PIECE_HEIGHT = 300;
+export const PIECE_WIDTH = 180;
 export const BORDER_RADIUS = 8;
 export const ROWS = 1;
 export const COLUMNS = 6;
@@ -21,7 +21,9 @@ export const PIECE_RADIUS = 50;
 
 export const TimelineSplitItem: React.FC<{
 	index: number;
-}> = ({index}) => {
+	goBackTogether: number;
+	outRotation: number;
+}> = ({index, goBackTogether, outRotation}) => {
 	const frame = useCurrentFrame();
 	const {fps, height, width} = useVideoConfig();
 	const pos = spring({
@@ -54,8 +56,25 @@ export const TimelineSplitItem: React.FC<{
 	const explodedTop =
 		(height / ROWS) * row + (height / ROWS - PIECE_HEIGHT) / 2;
 
-	const left = interpolate(pos, [0, 1], [joinedLeft, explodedLeft]);
-	const top = interpolate(pos, [0, 1], [joinedTop, explodedTop]);
+	const joinedAgainLeft = width / 2 - 0.5 * PIECE_WIDTH;
+	const joinedAgainTop = height / 2 - PIECE_HEIGHT / 2;
+
+	const left = interpolate(
+		pos + goBackTogether,
+		[0, 1, 1.9],
+		[joinedLeft, explodedLeft, joinedAgainLeft],
+		{
+			extrapolateRight: 'clamp',
+		}
+	);
+	const top = interpolate(
+		pos + goBackTogether,
+		[0, 1, 1.9],
+		[joinedTop, explodedTop, joinedAgainTop],
+		{
+			extrapolateRight: 'clamp',
+		}
+	);
 
 	const boxShadowOpacity = interpolate(pos, [0, 1], [0, 0.1]);
 
@@ -71,7 +90,7 @@ export const TimelineSplitItem: React.FC<{
 		config: springConfig,
 	});
 
-	const flipAfter = measureSpring({config: springConfig, fps}) - 3;
+	const flipAfter = measureSpring({config: springConfig, fps}) - 2;
 
 	const flip = spring({
 		fps,
@@ -82,7 +101,11 @@ export const TimelineSplitItem: React.FC<{
 	});
 
 	return (
-		<AbsoluteFill>
+		<AbsoluteFill
+			style={{
+				perspective: 1000,
+			}}
+		>
 			<div
 				style={{
 					height: PIECE_HEIGHT,
@@ -122,7 +145,9 @@ export const TimelineSplitItem: React.FC<{
 					left,
 					top,
 					position: 'absolute',
-					transform: `rotateY(${interpolate(flip, [0, 1], [Math.PI, 0])}rad)`,
+					transform: `rotateY(${
+						interpolate(flip, [0, 1], [-Math.PI, 0]) + outRotation
+					}rad)`,
 					backfaceVisibility: 'hidden',
 				}}
 			>
@@ -130,6 +155,7 @@ export const TimelineSplitItem: React.FC<{
 					style={{
 						width: PIECE_WIDTH,
 					}}
+					label={`chunk${index}.mp4`}
 				/>
 			</div>
 		</AbsoluteFill>

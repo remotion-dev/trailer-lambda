@@ -1,6 +1,10 @@
 import React, {SVGProps} from 'react';
 
-export const FlatCasette: React.FC<SVGProps<SVGSVGElement>> = (props) => {
+export const FlatCasette: React.FC<
+	SVGProps<SVGSVGElement> & {
+		label: string;
+	}
+> = ({label, ...props}) => {
 	return (
 		<svg
 			viewBox="0 0 541 946"
@@ -26,7 +30,7 @@ export const FlatCasette: React.FC<SVGProps<SVGSVGElement>> = (props) => {
 				letterSpacing="0em"
 			>
 				<tspan x="270.0596" y="904.738" textAnchor="middle">
-					chunk1.mp4
+					{label}
 				</tspan>
 			</text>
 
