@@ -29,7 +29,7 @@ const Column: React.FC<{
 			{new Array(vertical).fill(true).map((_, i) => {
 				const shade =
 					defaultShade + random(`${i - addedCounter}${column}`) * 0.02;
-				const color = interpolateColors(shade, [0, 1], ['#fff', '#333']);
+				const color = interpolateColors(shade, [0, 1], ['#fff', '#000']);
 				return (
 					<div
 						style={{
@@ -46,8 +46,8 @@ const Column: React.FC<{
 
 export const Upwind: React.FC = () => {
 	const frame = useCurrentFrame();
-	const shade = interpolate(frame, [0, 200], [0, 1]);
-	const color = interpolateColors(shade, [0, 1], ['#fff', '#333']);
+	const shade = interpolate(frame, [0, 120], [0, 1]);
+	const color = interpolateColors(shade, [0, 1], ['#fff', '#000']);
 
 	return (
 		<AbsoluteFill

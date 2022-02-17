@@ -24,7 +24,8 @@ const actualSvgHeight = ratio * originalSvgHeight;
 
 const Rocket: React.FC<{
 	entry: number;
-}> = ({entry}) => {
+	rocketOutroAnimation: number;
+}> = ({entry, rocketOutroAnimation}) => {
 	const {width} = useVideoConfig();
 
 	const rocketTop = interpolate(entry, [0, 1], [actualSvgHeight, 0]);
@@ -35,7 +36,7 @@ const Rocket: React.FC<{
 				marginTop: -489 + rocketTop,
 			}}
 		>
-			<RocketFumes />
+			<RocketFumes estinguishProgress={rocketOutroAnimation} />
 			<svg
 				width={actualSvgWidth}
 				height={actualSvgHeight}
@@ -95,6 +96,17 @@ export const RocketShip: React.FC = () => {
 			damping: 200,
 		},
 	});
+
+	const rocketOutroAnimation = spring({
+		fps: VIDEO_FPS,
+		frame: frame - 140,
+		config: {
+			damping: 200,
+		},
+	});
+
+	const outOffsetY = interpolate(rocketOutroAnimation, [0, 1], [0, -2000]);
+
 	const scale = interpolate(rocketEntryAnimation, [0, 1], [1, 0.5]);
 
 	return (
@@ -108,10 +120,13 @@ export const RocketShip: React.FC = () => {
 			>
 				<AbsoluteFill
 					style={{
-						transform: `translateY(${YOffset}px)`,
+						transform: `translateY(${YOffset + outOffsetY}px)`,
 					}}
 				>
-					<Rocket entry={rocketEntryAnimation} />
+					<Rocket
+						rocketOutroAnimation={rocketOutroAnimation}
+						entry={rocketEntryAnimation}
+					/>
 				</AbsoluteFill>
 				<AbsoluteFill>
 					<div

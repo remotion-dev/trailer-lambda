@@ -11,7 +11,9 @@ import {COLORS} from './colors';
 
 const fumeCount = 150;
 
-export const RocketFumes: React.FC = () => {
+export const RocketFumes: React.FC<{
+	estinguishProgress: number;
+}> = ({estinguishProgress}) => {
 	const frame = useCurrentFrame();
 	const {width} = useVideoConfig();
 	return (
@@ -21,7 +23,8 @@ export const RocketFumes: React.FC = () => {
 					new SimplexNoise('noiseoffsetx' + i).noise2D(0, frame / 10) * 20;
 				const noiseY =
 					new SimplexNoise('noiseoffsety' + i).noise2D(0, frame / 10) * 100;
-				const size = random('size' + i) * 100 + 200;
+				const size =
+					(1 - estinguishProgress) * (random('size' + i) * 100 + 200);
 				const xOffset = (random('xoffset' + i) - 0.5) * 400 + noiseX;
 				const yOffset = (random('yoffset' + i) - 0.5) * 800 + noiseY + 400;
 				const color = interpolateColors(

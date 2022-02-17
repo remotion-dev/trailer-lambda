@@ -18,6 +18,7 @@ import {Party} from './Party';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
+import {SpaceDust} from './SpaceDust';
 import {Spin} from './Spin';
 import {StarryNumber} from './StarryNumber';
 import {StarryNumbers} from './StarryNumbers';
@@ -290,6 +291,14 @@ export const RemotionVideo: React.FC = () => {
 				id="Upwind"
 				component={Upwind}
 				durationInFrames={150}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="SpaceDust"
+				component={SpaceDust}
+				durationInFrames={1500}
 				height={1080}
 				width={1920}
 				fps={24}
