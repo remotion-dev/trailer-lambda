@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, Series, useCurrentFrame} from 'remotion';
+import {SpaceDust} from './SpaceDust';
 import {StarryNumber} from './StarryNumber';
 
 export const StarryNumbers: React.FC = () => {
@@ -11,6 +12,7 @@ export const StarryNumbers: React.FC = () => {
 				backgroundColor: 'black',
 			}}
 		>
+			<SpaceDust />
 			<AbsoluteFill style={{transform: `scale(${scale})`}}>
 				<Series>
 					<Series.Sequence durationInFrames={35}>

@@ -300,7 +300,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="TimelineSplit"
 				component={TimelineSplit}
-				durationInFrames={150}
+				durationInFrames={250}
 				height={1080}
 				width={1920}
 				fps={VIDEO_FPS}

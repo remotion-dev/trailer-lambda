@@ -7,45 +7,15 @@ import {
 } from 'remotion';
 import {Mask} from '../Mask';
 import {getLambdaHoleSize} from '../math/start-hug';
-
-const greekLetterOriginalWidth = 463;
-const greekLetterOriginalHeight = 738;
+import {
+	GreekLetter,
+	greekLetterOriginalHeight,
+	greekLetterOriginalWidth,
+} from './GreekLetter';
 
 const greekLetterWidth = 200;
-const greekLetterHeight = (200 / 463) * greekLetterOriginalHeight;
-
-const GreekLetter: React.FC<{
-	alternate: boolean;
-}> = ({alternate}) => {
-	return (
-		<svg
-			width={greekLetterWidth}
-			height={greekLetterHeight}
-			viewBox={`0 0 ${greekLetterOriginalWidth} ${greekLetterOriginalHeight}`}
-			fill="none"
-			style={{
-				transform: alternate ? undefined : `rotate(180deg)`,
-			}}
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M203 264L1.5 737.5H16L82.5 737L239.5 363.5L375.5 733H443.5H461.5L183 1L115 26L203 264Z"
-				fill="#0B84F3"
-				stroke="#0B84F3"
-			/>
-		</svg>
-	);
-};
-
-const lambdas = 200;
-
-const fibonacci = (max: number): number => {
-	let val = 0;
-	for (let i = 0; i < max; i++) {
-		val += i * 0.1;
-	}
-	return val;
-};
+const greekLetterHeight =
+	(greekLetterWidth / greekLetterOriginalWidth) * greekLetterOriginalHeight;
 
 const layers = 15;
 
@@ -89,7 +59,11 @@ export const Lambda: React.FC = () => {
 											transform: `scale(${scale}) translateX(${translateX}px) translateY(${translateY}px) rotate(${angle}rad)`,
 										}}
 									>
-										<GreekLetter alternate={alternate} />
+										<GreekLetter
+											width={greekLetterWidth}
+											height={greekLetterHeight}
+											alternate={alternate}
+										/>
 									</div>
 								);
 							})}

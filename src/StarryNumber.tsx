@@ -35,7 +35,6 @@ export const StarryNumber: React.FC<{
 	return (
 		<AbsoluteFill
 			style={{
-				backgroundColor: 'black',
 				justifyContent: 'center',
 				alignItems: 'center',
 				flexDirection: 'row',

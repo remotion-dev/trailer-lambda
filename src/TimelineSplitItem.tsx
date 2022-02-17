@@ -1,3 +1,4 @@
+import {transparentize} from 'polished';
 import React from 'react';
 import {
 	AbsoluteFill,
@@ -10,6 +11,15 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 import {FlatCasette} from './FlatCasette';
+import {
+	GreekLetter,
+	greekLetterOriginalHeight,
+	greekLetterOriginalWidth,
+} from './Lambda/GreekLetter';
+
+const greekLetterWidth = 36;
+const greekLetterHeight =
+	(greekLetterWidth / greekLetterOriginalWidth) * greekLetterOriginalHeight;
 
 export const PIECE_HEIGHT = 300;
 export const PIECE_WIDTH = 180;
@@ -18,6 +28,8 @@ export const ROWS = 1;
 export const COLUMNS = 6;
 export const PIECES = ROWS * COLUMNS;
 export const PIECE_RADIUS = 50;
+
+const LAMBDA_PILL_SIZE = 100;
 
 export const TimelineSplitItem: React.FC<{
 	index: number;
@@ -82,7 +94,14 @@ export const TimelineSplitItem: React.FC<{
 		damping: 200,
 	};
 
-	const fillAfter = 30 + index * 2;
+	const fillAfter = 80 + index * 2;
+	const lambdaScaleAfter = 20 + index * 2;
+
+	const lambdaScale = spring({
+		fps,
+		frame: frame - lambdaScaleAfter,
+		config: {},
+	});
 
 	const fill = spring({
 		fps,
@@ -156,6 +175,28 @@ export const TimelineSplitItem: React.FC<{
 						width: PIECE_WIDTH,
 					}}
 					label={`chunk${index}.mp4`}
+				/>
+			</div>
+			<div
+				style={{
+					left: left + PIECE_WIDTH / 2 - LAMBDA_PILL_SIZE / 2,
+					top: top + PIECE_HEIGHT / 2 - LAMBDA_PILL_SIZE / 2,
+					position: 'absolute',
+					width: LAMBDA_PILL_SIZE,
+					height: LAMBDA_PILL_SIZE,
+					borderRadius: LAMBDA_PILL_SIZE / 2,
+					boxShadow: '0 3px 10px ' + transparentize(0.8, COLORS[0]),
+					backgroundColor: 'white',
+					justifyContent: 'center',
+					alignItems: 'center',
+					display: 'flex',
+					transform: `scale(${lambdaScale - fill})`,
+				}}
+			>
+				<GreekLetter
+					alternate
+					width={greekLetterWidth}
+					height={greekLetterHeight}
 				/>
 			</div>
 		</AbsoluteFill>
