@@ -8,6 +8,7 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {StarryNumber} from './StarryNumber';
+import {ToReactStarry} from './ToReactStarry';
 
 export const StarryNumbers: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -24,13 +25,16 @@ export const StarryNumbers: React.FC = () => {
 		<AbsoluteFill style={{transform: `scale(${scale})`}}>
 			<Series>
 				<Series.Sequence durationInFrames={35}>
-					<StarryNumber from="35" to="30" />
+					<StarryNumber from="30" to="30" />
 				</Series.Sequence>
 				<Series.Sequence durationInFrames={35}>
 					<StarryNumber from="30" to="25" />
 				</Series.Sequence>
 				<Series.Sequence durationInFrames={35}>
 					<StarryNumber from="25" to="20" />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={120}>
+					<ToReactStarry />
 				</Series.Sequence>
 			</Series>
 		</AbsoluteFill>

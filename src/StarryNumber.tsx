@@ -40,28 +40,24 @@ export const StarryNumber: React.FC<{
 				flexDirection: 'row',
 			}}
 		>
-			{path.map((xxx) => {
-				return (
-					<div>
-						<svg
-							style={{
-								height: 400,
-								marginLeft: 20,
-								marginRight: 20,
-								transform: `scale(3)`,
-							}}
-							viewBox={extendViewbox(
-								getViewBoxFromBoundingBox(xxx?.viewBox as BoundingBox),
-								3
-							)}
-						>
-							{xxx?.points.map((dot) => {
-								return <circle cx={dot.x} cy={dot.y} r={3} fill="white" />;
-							})}
-						</svg>
-					</div>
-				);
-			})}
+			<div>
+				<svg
+					style={{
+						height: 400,
+						marginLeft: 20,
+						marginRight: 20,
+						transform: `scale(3)`,
+					}}
+					viewBox={extendViewbox(
+						getViewBoxFromBoundingBox(path?.viewBox as BoundingBox),
+						3
+					)}
+				>
+					{path?.points.map((dot) => {
+						return <circle cx={dot.x} cy={dot.y} r={3} fill="white" />;
+					})}
+				</svg>
+			</div>
 		</AbsoluteFill>
 	);
 };
