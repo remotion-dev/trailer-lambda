@@ -2,11 +2,11 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	interpolateColors,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
-import {COLORS} from '../colors';
 import {Circle} from './Circle';
 import {Stage} from './Stage';
 
@@ -19,13 +19,24 @@ const numbersAmount = 13;
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width, height} = useVideoConfig();
-	const distanceProgressed = interpolate(frame, [0, 5000], [0, 1]);
+	const distanceProgressed = interpolate(frame, [0, 6000], [0, 1]);
 	const numbersDistanceProgressed = interpolate(frame, [0, 200], [0, 1]);
-	const noiseX = noise.noise2D(0, frame / 80) * 0.06;
-	const noisey = noise.noise2D(frame / 80, 0) * 0.04;
+
+	const noiseStart = interpolate(frame, [90, 100], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+
+	const noiseX =
+		noise.noise2D(0, frame / 80) * 0.12 * noiseStart +
+		Math.sin(frame / 20) * 0.1 * noiseStart;
+	const noisey = noise.noise2D(frame / 80, 0) * 0.04 * noiseStart;
 	const focalPoint = [0.5 + noiseX, noisey + 0.6] as const;
 	const offX = interpolate(focalPoint[0], [0, 1], [-width / 1.8, width / 1.8]);
 	const offY = interpolate(focalPoint[1], [0, 1], [-height / 2, height / 2]);
+
+	const color1 = interpolateColors(frame, [90, 100], ['#888', '#000']);
+	const color2 = interpolateColors(frame, [90, 100], ['#888', '#222']);
 
 	return (
 		<AbsoluteFill
@@ -56,8 +67,7 @@ export const Tunnel: React.FC = () => {
 						<Circle
 							focalPoint={focalPoint}
 							scale={scale}
-							distance={relativeDistance}
-							background={idx % 2 ? COLORS[0] : '#fff'}
+							background={idx % 2 ? color1 : color2}
 						/>
 					</AbsoluteFill>
 				);
@@ -94,8 +104,6 @@ export const Tunnel: React.FC = () => {
 				);
 
 				const Y_DOWNSHIFT = interpolate(animProgress, [0, 1], [0, 0]);
-
-				const uprightRotation = interpolate(animProgress, [0.2, 1], [0, -0.3]);
 
 				return (
 					<AbsoluteFill

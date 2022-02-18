@@ -1,11 +1,9 @@
 import {interpolate, useVideoConfig} from 'remotion';
-import {COLORS} from '../colors';
 export const Circle: React.FC<{
 	scale: number;
-	distance: number;
 	focalPoint: readonly [number, number];
 	background: string;
-}> = ({scale, distance, background, focalPoint}) => {
+}> = ({scale, background, focalPoint}) => {
 	const {height, width} = useVideoConfig();
 
 	const centerX = interpolate(focalPoint[0], [0, 1], [0, width]);
@@ -14,7 +12,7 @@ export const Circle: React.FC<{
 	return (
 		<div
 			style={{
-				border: '4px solid ' + COLORS[0],
+				border: '0px solid ' + 'white',
 				borderRadius: '50%',
 				width: height,
 				height,

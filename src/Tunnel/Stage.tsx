@@ -1,5 +1,11 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
+import {
+	AbsoluteFill,
+	interpolate,
+	spring,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
 import {COLORS} from '../colors';
 import {getBezierControlPoints} from './point-on-bezier-curve';
 
@@ -7,11 +13,23 @@ export const Stage: React.FC<{
 	focalX: number;
 	focalY: number;
 }> = ({focalX, focalY}) => {
-	const {height, width} = useVideoConfig();
+	const {height, width, fps} = useVideoConfig();
+	const frame = useCurrentFrame();
+
 	const centerX = interpolate(focalX, [0, 1], [0, width]);
 	const centerY = interpolate(focalY, [0, 1], [0, height]);
 
-	const extend = width / 2;
+	const spr = spring({
+		fps,
+		frame: frame - 90,
+		config: {
+			damping: 200,
+		},
+	});
+
+	const extend = interpolate(spr, [0, 1], [0, width / 2], {
+		extrapolateRight: 'clamp',
+	});
 
 	const leftX = centerX - extend;
 	const leftY = height;
