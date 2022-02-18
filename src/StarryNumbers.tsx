@@ -33,7 +33,7 @@ export const StarryNumbers: React.FC = () => {
 				<Series.Sequence durationInFrames={35}>
 					<StarryNumber from="25" to="20" />
 				</Series.Sequence>
-				<Series.Sequence durationInFrames={120}>
+				<Series.Sequence durationInFrames={200}>
 					<ToReactStarry />
 				</Series.Sequence>
 			</Series>

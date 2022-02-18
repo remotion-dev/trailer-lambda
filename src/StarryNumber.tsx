@@ -27,8 +27,14 @@ export const StarryNumber: React.FC<{
 			return null;
 		}
 
-		return interpolateStarryNumber(from, to, font, progress);
-	}, [font, from, progress, to]);
+		return interpolateStarryNumber({
+			char1: from,
+			char2: to,
+			font,
+			factor: progress,
+			frame,
+		});
+	}, [font, from, progress, to, frame]);
 
 	if (!path) return null;
 
@@ -54,7 +60,14 @@ export const StarryNumber: React.FC<{
 					)}
 				>
 					{path?.points.map((dot) => {
-						return <circle cx={dot.x} cy={dot.y} r={3} fill="white" />;
+						return (
+							<circle
+								cx={dot.x}
+								cy={dot.y}
+								r={3}
+								fill={`rgba(255, 255, 255, ${dot.opacity})`}
+							/>
+						);
 					})}
 				</svg>
 			</div>
