@@ -5,9 +5,7 @@ import {RocketShip} from './RocketShip';
 export const RocketToStarry: React.FC = () => {
 	return (
 		<AbsoluteFill>
-			<AbsoluteFill>
-				<RocketShip />
-			</AbsoluteFill>
+			<RocketShip />
 		</AbsoluteFill>
 	);
 };

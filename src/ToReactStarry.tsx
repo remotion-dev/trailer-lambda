@@ -8,6 +8,8 @@ import {
 } from 'remotion';
 import {StarryNumber} from './StarryNumber';
 
+const circleSize = 70;
+
 export const ToReactStarry: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
@@ -23,10 +25,27 @@ export const ToReactStarry: React.FC = () => {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
+
+	const scaleOut =
+		spring({
+			fps,
+			frame: frame - 80,
+			config: {
+				damping: 200,
+			},
+		}) *
+			9 +
+		1;
+
+	const dotScale = interpolate(frame, [50, 65], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+
 	return (
 		<AbsoluteFill
 			style={{
-				transform: `scale(${scale})`,
+				transform: `scale(${scale * scaleOut})`,
 			}}
 		>
 			<StarryNumber from="20" to="react" />
@@ -37,6 +56,22 @@ export const ToReactStarry: React.FC = () => {
 			</AbsoluteFill>
 			<AbsoluteFill style={{transform: `rotate(${60 * rotationAnimation}deg)`}}>
 				<StarryNumber from="20" to="react" />
+			</AbsoluteFill>
+			<AbsoluteFill
+				style={{
+					justifyContent: 'center',
+					alignItems: 'center',
+					transform: `scale(${dotScale})`,
+				}}
+			>
+				<div
+					style={{
+						height: circleSize,
+						width: circleSize,
+						borderRadius: circleSize / 2,
+						backgroundColor: '#111',
+					}}
+				/>
 			</AbsoluteFill>
 		</AbsoluteFill>
 	);

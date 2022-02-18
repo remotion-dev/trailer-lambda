@@ -4,7 +4,8 @@ import {random, useVideoConfig} from 'remotion';
 export const Mask: React.FC<{
 	radius: number;
 	strokeWidth: number;
-}> = ({strokeWidth, radius}) => {
+	color: string;
+}> = ({strokeWidth, radius, color}) => {
 	const {height, width} = useVideoConfig();
 	const [id] = useState(() => random(null));
 
@@ -34,7 +35,7 @@ export const Mask: React.FC<{
 				y={0}
 				width={width}
 				height={height}
-				fill="white"
+				fill={color}
 			/>
 		</svg>
 	);

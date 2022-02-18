@@ -108,7 +108,7 @@ export const RocketShip: React.FC = () => {
 		},
 	});
 
-	const outOffsetY = interpolate(rocketOutroAnimation, [0, 1], [0, -2000]);
+	const outOffsetY = interpolate(rocketOutroAnimation, [0, 1], [0, -3000]);
 
 	const scale = interpolate(rocketEntryAnimation, [0, 1], [1, 0.5]);
 

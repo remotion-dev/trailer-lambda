@@ -30,7 +30,7 @@ export const getStarryNumber = (
 						radiusWithRandomOffset +
 						Math.cos((i / amountOfPoints) * Math.PI * 2 + frame / 10) *
 							radiusWithRandomOffset *
-							interpolate(frame, [60, 120], [0.6, 0.4], {
+							interpolate(frame, [40, 70], [0.6, 0.4], {
 								extrapolateRight: 'clamp',
 							}),
 					opacity: random(`opacity-${i}`),
