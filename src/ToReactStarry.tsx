@@ -7,6 +7,7 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {StarryNumber} from './StarryNumber';
+import {TunnelMask} from './TunnelMask';
 
 const circleSize = 70;
 
@@ -34,44 +35,56 @@ export const ToReactStarry: React.FC = () => {
 				damping: 200,
 			},
 		}) *
-			9 +
+			10 +
 		1;
 
-	const dotScale = interpolate(frame, [50, 65], [0, 1], {
-		extrapolateLeft: 'clamp',
-		extrapolateRight: 'clamp',
-	});
+	const initialHoleSize =
+		spring({
+			fps,
+			frame: frame - 60,
+			config: {
+				damping: 300,
+			},
+		}) * 100;
+
+	const holeSize =
+		spring({
+			fps,
+			frame: frame - 80,
+			config: {
+				damping: 200,
+			},
+		}) *
+			(1920 - initialHoleSize) +
+		initialHoleSize;
 
 	return (
-		<AbsoluteFill
-			style={{
-				transform: `scale(${scale * scaleOut})`,
-			}}
-		>
-			<StarryNumber from="20" to="react" />
+		<AbsoluteFill>
 			<AbsoluteFill
-				style={{transform: `rotate(${120 * rotationAnimation}deg)`}}
+				style={{
+					transform: `scale(${scale * scaleOut})`,
+				}}
 			>
 				<StarryNumber from="20" to="react" />
+				<AbsoluteFill
+					style={{transform: `rotate(${120 * rotationAnimation}deg)`}}
+				>
+					<StarryNumber from="20" to="react" />
+				</AbsoluteFill>
+				<AbsoluteFill
+					style={{transform: `rotate(${60 * rotationAnimation}deg)`}}
+				>
+					<StarryNumber from="20" to="react" />
+				</AbsoluteFill>
 			</AbsoluteFill>
-			<AbsoluteFill style={{transform: `rotate(${60 * rotationAnimation}deg)`}}>
-				<StarryNumber from="20" to="react" />
-			</AbsoluteFill>
+
 			<AbsoluteFill
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `scale(${dotScale})`,
 				}}
 			>
-				<div
-					style={{
-						height: circleSize,
-						width: circleSize,
-						borderRadius: circleSize / 2,
-						backgroundColor: '#111',
-					}}
-				/>
+				<TunnelMask holeSize={holeSize} />
 			</AbsoluteFill>
 		</AbsoluteFill>
 	);

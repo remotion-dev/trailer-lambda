@@ -28,6 +28,7 @@ import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
 import {TimelineSplit} from './TimelineSplit';
 import {Tunnel} from './Tunnel';
+import {TunnelMask} from './TunnelMask';
 import {Upwind} from './Upwind';
 import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
@@ -314,6 +315,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="SpaceDust"
 				component={SpaceDust}
+				durationInFrames={1500}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="TunnelMask"
+				component={TunnelMask}
 				durationInFrames={1500}
 				height={1080}
 				width={1920}

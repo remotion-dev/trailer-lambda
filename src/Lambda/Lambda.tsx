@@ -28,7 +28,7 @@ export const Lambda: React.FC = () => {
 	return (
 		<AbsoluteFill style={{}}>
 			<AbsoluteFill style={{transform: `scale(${staticScale})`}}>
-				<Mask radius={holeInTheMiddle / 4} strokeWidth={0} />
+				<Mask color="white" radius={holeInTheMiddle / 4} strokeWidth={0} />
 				{new Array(layers).fill(1).map((_, layer) => {
 					const alternate = layer % 2 === 0;
 					const staticRotation = interpolate(
