@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
@@ -58,23 +59,25 @@ export const ToReactStarry: React.FC = () => {
 
 	return (
 		<AbsoluteFill>
-			<AbsoluteFill
-				style={{
-					transform: `scale(${scale * scaleOut})`,
-				}}
-			>
-				<StarryNumber from="20" to="react" />
+			<Sequence from={0} durationInFrames={90}>
 				<AbsoluteFill
-					style={{transform: `rotate(${120 * rotationAnimation}deg)`}}
+					style={{
+						transform: `scale(${scale * scaleOut})`,
+					}}
 				>
 					<StarryNumber from="20" to="react" />
+					<AbsoluteFill
+						style={{transform: `rotate(${120 * rotationAnimation}deg)`}}
+					>
+						<StarryNumber from="20" to="react" />
+					</AbsoluteFill>
+					<AbsoluteFill
+						style={{transform: `rotate(${60 * rotationAnimation}deg)`}}
+					>
+						<StarryNumber from="20" to="react" />
+					</AbsoluteFill>
 				</AbsoluteFill>
-				<AbsoluteFill
-					style={{transform: `rotate(${60 * rotationAnimation}deg)`}}
-				>
-					<StarryNumber from="20" to="react" />
-				</AbsoluteFill>
-			</AbsoluteFill>
+			</Sequence>
 
 			<AbsoluteFill
 				style={{

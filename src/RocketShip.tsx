@@ -118,52 +118,54 @@ export const RocketShip: React.FC = () => {
 				<Upwind />
 			</Sequence>
 
-			<Sequence from={100}>
+			<Sequence from={100} durationInFrames={400}>
 				<SpaceDust />
 			</Sequence>
 			<Sequence from={140}>
 				<StarryNumbers />
 			</Sequence>
-			<AbsoluteFill
-				style={{
-					transform: `scale(${scale}) translateX(${xOffset}px) rotate(${rotation}rad)`,
-				}}
-			>
+			<Sequence from={0} durationInFrames={148}>
 				<AbsoluteFill
 					style={{
-						transform: `translateY(${YOffset + outOffsetY}px)`,
+						transform: `scale(${scale}) translateX(${xOffset}px) rotate(${rotation}rad)`,
 					}}
 				>
-					<Rocket
-						rocketOutroAnimation={rocketOutroAnimation}
-						entry={rocketEntryAnimation}
-					/>
-				</AbsoluteFill>
-				<AbsoluteFill>
-					<div
+					<AbsoluteFill
 						style={{
-							height: remotionHolesize,
-							width: remotionHolesize,
-							display: 'flex',
-							overflow: 'hidden',
-							borderRadius: remotionHolesize / 2,
-							backgroundColor: 'white',
-							position: 'absolute',
-							left: width / 2 - remotionHolesize / 2,
-							top: height / 2 - remotionHolesize / 2 + outOffsetY,
+							transform: `translateY(${YOffset + outOffsetY}px)`,
 						}}
 					>
-						<AbsoluteFill
+						<Rocket
+							rocketOutroAnimation={rocketOutroAnimation}
+							entry={rocketEntryAnimation}
+						/>
+					</AbsoluteFill>
+					<AbsoluteFill>
+						<div
 							style={{
-								marginLeft: -width / 2 + remotionHolesize / 2,
-								marginTop: -height / 2 + remotionHolesize / 2,
+								height: remotionHolesize,
+								width: remotionHolesize,
+								display: 'flex',
+								overflow: 'hidden',
+								borderRadius: remotionHolesize / 2,
+								backgroundColor: 'white',
+								position: 'absolute',
+								left: width / 2 - remotionHolesize / 2,
+								top: height / 2 - remotionHolesize / 2 + outOffsetY,
 							}}
 						>
-							<Elevator countDownDelay={COUNTDOWN_DELAY} />
-						</AbsoluteFill>
-					</div>
+							<AbsoluteFill
+								style={{
+									marginLeft: -width / 2 + remotionHolesize / 2,
+									marginTop: -height / 2 + remotionHolesize / 2,
+								}}
+							>
+								<Elevator countDownDelay={COUNTDOWN_DELAY} />
+							</AbsoluteFill>
+						</div>
+					</AbsoluteFill>
 				</AbsoluteFill>
-			</AbsoluteFill>
+			</Sequence>
 		</AbsoluteFill>
 	);
 };
