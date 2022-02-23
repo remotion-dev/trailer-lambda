@@ -37,9 +37,9 @@ export const ThisVideo: React.FC = () => {
 	return (
 		<AbsoluteFill
 			style={{
-				backgroundColor: 'white',
 				justifyContent: 'center',
 				alignItems: 'center',
+				zIndex: 1,
 			}}
 		>
 			<AbsoluteFill
@@ -58,6 +58,7 @@ export const ThisVideo: React.FC = () => {
 						display: 'flex',
 						overflow: 'hidden',
 						position: 'relative',
+						backgroundColor: 'white',
 					}}
 				>
 					<div

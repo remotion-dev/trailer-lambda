@@ -6,6 +6,7 @@ import {Dust} from './Dust';
 import {Elevator} from './Elevator';
 import {FlatCasette} from './FlatCasette';
 import {HugeOrb} from './HugeOrb';
+import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
 import {Main} from './Main';
 import {ManyOrbs} from './ManyOrbs';
@@ -15,6 +16,7 @@ import {VIDEO_FPS} from './math/fps';
 import {BigNum} from './Number';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
+import {Pitch} from './Pitch';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
@@ -248,6 +250,14 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={2400}
 			/>
 			<Composition
+				id="IsSlow"
+				component={IsSlow}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
+				durationInFrames={200}
+			/>
+			<Composition
 				id="StarryNumber"
 				component={StarryNumber}
 				fps={VIDEO_FPS}
@@ -318,6 +328,14 @@ export const RemotionVideo: React.FC = () => {
 				id="TunnelMask"
 				component={TunnelMask}
 				durationInFrames={1500}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="Pitch"
+				component={Pitch}
+				durationInFrames={300}
 				height={1080}
 				width={1920}
 				fps={24}
