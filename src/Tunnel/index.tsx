@@ -3,6 +3,7 @@ import {
 	AbsoluteFill,
 	interpolate,
 	interpolateColors,
+	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
@@ -16,14 +17,23 @@ const noise = new SimplexNoise('tunnel');
 const amount = 1000;
 
 const numbersAmount = 10;
+const TOTAL_DISTANCE = 6000;
+const ANIMATION_DONE_AFTER = 300;
+
+const DONE_AFTER_DISTANCE = ANIMATION_DONE_AFTER / TOTAL_DISTANCE;
 
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {width, height} = useVideoConfig();
-	const distanceProgressed = interpolate(frame, [0, 6000], [0, 1]);
-	const numbersDistanceProgressed = interpolate(frame, [100, 300], [0, 1], {
-		extrapolateLeft: 'extend',
-	});
+	const {width, height, fps} = useVideoConfig();
+	const distanceProgressed = interpolate(frame, [0, TOTAL_DISTANCE], [0, 1]);
+	const numbersDistanceProgressed = interpolate(
+		frame,
+		[100, ANIMATION_DONE_AFTER],
+		[0, 1],
+		{
+			extrapolateLeft: 'extend',
+		}
+	);
 
 	const noiseStart = interpolate(frame, [90, 100], [0, 1], {
 		extrapolateLeft: 'clamp',
@@ -33,8 +43,28 @@ export const Tunnel: React.FC = () => {
 	const noiseX =
 		noise.noise2D(0, frame / 80) * 0.12 * noiseStart +
 		Math.sin(frame / 20) * 0.1 * noiseStart;
-	const noisey = noise.noise2D(frame / 80, 0) * 0.04 * noiseStart;
-	const focalPoint = [0.5 + noiseX, noisey + 0.6] as const;
+	const noiseY = noise.noise2D(frame / 80, 0) * 0.04 * noiseStart;
+	const originalFocalPoint = [0.5 + noiseX, 0.6 + noiseY] as const;
+
+	const centerProgress = spring({
+		fps,
+		frame: frame - ANIMATION_DONE_AFTER + 100,
+		config: {
+			damping: 200,
+			mass: 5,
+		},
+	});
+
+	const focalPoint = [
+		interpolate(centerProgress, [0, 1], [originalFocalPoint[0], 0.5], {
+			extrapolateLeft: 'clamp',
+			extrapolateRight: 'clamp',
+		}),
+		interpolate(centerProgress, [0, 1], [originalFocalPoint[1], 0.5], {
+			extrapolateLeft: 'clamp',
+			extrapolateRight: 'clamp',
+		}),
+	] as const;
 	const offX = interpolate(focalPoint[0], [0, 1], [-width / 1.8, width / 1.8]);
 	const offY = interpolate(focalPoint[1], [0, 1], [-height / 2, height / 2]);
 
@@ -65,12 +95,17 @@ export const Tunnel: React.FC = () => {
 					return null;
 				}
 
+				const fadedColor1 =
+					distance > DONE_AFTER_DISTANCE + 0.005 ? '#fff' : color1;
+				const fadedColor2 =
+					distance > DONE_AFTER_DISTANCE + 0.005 ? '#fff' : color2;
+
 				return (
-					<AbsoluteFill style={{}}>
+					<AbsoluteFill>
 						<Circle
 							focalPoint={focalPoint}
 							scale={scale}
-							background={idx % 2 ? color1 : color2}
+							background={idx % 2 ? fadedColor1 : fadedColor2}
 						/>
 					</AbsoluteFill>
 				);
@@ -98,12 +133,15 @@ export const Tunnel: React.FC = () => {
 					return null;
 				}
 
-				const maxScale = isFinalNumber ? 3 : Infinity;
-				const _scale =
-					isFinalNumber && relativeDistance < 0
-						? maxScale
-						: Math.min(maxScale, Math.tan(Math.PI / 2 - relativeDistance));
-				const scale = _scale;
+				const scale = isFinalNumber
+					? spring({
+							fps,
+							frame: frame - ANIMATION_DONE_AFTER + 10,
+							config: {
+								damping: 200,
+							},
+					  }) * 3
+					: Math.tan(Math.PI / 2 - relativeDistance);
 
 				if (scale < 0) {
 					return null;
