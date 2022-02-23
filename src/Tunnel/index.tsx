@@ -3,6 +3,7 @@ import {
 	AbsoluteFill,
 	interpolate,
 	interpolateColors,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
@@ -22,13 +23,15 @@ const ANIMATION_DONE_AFTER = 300;
 
 const DONE_AFTER_DISTANCE = ANIMATION_DONE_AFTER / TOTAL_DISTANCE;
 
+const ANIMATION_START = 90;
+
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width, height, fps} = useVideoConfig();
 	const distanceProgressed = interpolate(frame, [0, TOTAL_DISTANCE], [0, 1]);
 	const numbersDistanceProgressed = interpolate(
 		frame,
-		[100, ANIMATION_DONE_AFTER],
+		[120, ANIMATION_DONE_AFTER],
 		[0, 1],
 		{
 			extrapolateLeft: 'extend',
@@ -68,8 +71,16 @@ export const Tunnel: React.FC = () => {
 	const offX = interpolate(focalPoint[0], [0, 1], [-width / 1.8, width / 1.8]);
 	const offY = interpolate(focalPoint[1], [0, 1], [-height / 2, height / 2]);
 
-	const color1 = interpolateColors(frame, [90, 100], ['#888', '#000']);
-	const color2 = interpolateColors(frame, [90, 100], ['#888', '#222']);
+	const color1 = interpolateColors(
+		frame,
+		[ANIMATION_START, 100],
+		['#888', '#000']
+	);
+	const color2 = interpolateColors(
+		frame,
+		[ANIMATION_START, 100],
+		['#888', '#222']
+	);
 
 	return (
 		<AbsoluteFill
@@ -111,7 +122,9 @@ export const Tunnel: React.FC = () => {
 				);
 			})}
 
-			<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
+			<Sequence from={ANIMATION_START}>
+				<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
+			</Sequence>
 			{new Array(numbersAmount).fill(true).map((_, num) => {
 				const displayNumber = num + 10;
 

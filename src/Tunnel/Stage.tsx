@@ -21,7 +21,7 @@ export const Stage: React.FC<{
 
 	const spr = spring({
 		fps,
-		frame: frame - 90,
+		frame,
 		config: {
 			damping: 200,
 		},
