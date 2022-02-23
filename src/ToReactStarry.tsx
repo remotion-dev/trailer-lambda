@@ -9,8 +9,6 @@ import {
 import {StarryNumber} from './StarryNumber';
 import {TunnelMask} from './TunnelMask';
 
-const circleSize = 70;
-
 export const ToReactStarry: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();

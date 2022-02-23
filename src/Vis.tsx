@@ -19,7 +19,7 @@ export const Vis: React.FC = () => {
 				<ManyWaves />
 				<AnimatedNumber />
 			</Series.Sequence>
-			<Series.Sequence durationInFrames={500}>
+			<Series.Sequence durationInFrames={800}>
 				<RocketToStarry />
 			</Series.Sequence>
 			<Series.Sequence durationInFrames={100}>

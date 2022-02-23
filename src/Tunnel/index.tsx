@@ -9,18 +9,21 @@ import {
 import SimplexNoise from 'simplex-noise';
 import {Circle} from './Circle';
 import {Stage} from './Stage';
+import {TunnelNumber} from './TunnelNumber';
 
 const noise = new SimplexNoise('tunnel');
 
 const amount = 1000;
 
-const numbersAmount = 13;
+const numbersAmount = 12;
 
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width, height} = useVideoConfig();
 	const distanceProgressed = interpolate(frame, [0, 6000], [0, 1]);
-	const numbersDistanceProgressed = interpolate(frame, [0, 200], [0, 1]);
+	const numbersDistanceProgressed = interpolate(frame, [100, 300], [0, 1], {
+		extrapolateLeft: 'extend',
+	});
 
 	const noiseStart = interpolate(frame, [90, 100], [0, 1], {
 		extrapolateLeft: 'clamp',
@@ -111,9 +114,11 @@ export const Tunnel: React.FC = () => {
 						style={{
 							transform: `translateX(${offX}px) translateY(${
 								offY + Y_DOWNSHIFT
-							}px)`,
+							}px) scale(${scale})`,
 						}}
-					/>
+					>
+						<TunnelNumber number={String(num + 8)} />
+					</AbsoluteFill>
 				);
 			})}
 		</AbsoluteFill>

@@ -1,5 +1,4 @@
 import {Composition, Still} from 'remotion';
-import {ThreeDText} from './3DText/3DText';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {Clocks} from './Clocks';
@@ -93,7 +92,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Tunnel"
 				component={Tunnel}
-				durationInFrames={200}
+				durationInFrames={400}
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
@@ -184,20 +183,6 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 			/>
 			<Composition
-				id="3D-Text"
-				component={ThreeDText}
-				durationInFrames={100}
-				fps={VIDEO_FPS}
-				width={1080}
-				height={1080}
-				defaultProps={{
-					num: 10,
-					scale: 2,
-					sideRotation: 0,
-					uprightRotation: 0,
-				}}
-			/>
-			<Composition
 				id="rounder"
 				component={Rounder}
 				durationInFrames={100}
@@ -235,7 +220,7 @@ export const RemotionVideo: React.FC = () => {
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
-				durationInFrames={800}
+				durationInFrames={1100}
 			/>
 			<Composition
 				id="Wave"
