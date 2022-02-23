@@ -19,9 +19,11 @@ export const ThisVideo: React.FC = () => {
 		frame,
 		config: {
 			damping: 200,
+			mass: 3,
 		},
 	});
-	const SQUARE_HEIGHT = height * 0.75 * progress;
+	const MAXIMISED_SQUARE_HEIGHT = height * 0.75;
+	const SQUARE_HEIGHT = MAXIMISED_SQUARE_HEIGHT * progress;
 
 	return (
 		<AbsoluteFill
@@ -46,18 +48,30 @@ export const ThisVideo: React.FC = () => {
 						alignItems: 'center',
 						display: 'flex',
 						overflow: 'hidden',
+						position: 'relative',
 					}}
 				>
-					<h1
+					<div
 						style={{
-							color: COLORS[0],
-							fontFamily: 'SF Pro',
-							fontSize: 200,
-							fontWeight: 800,
+							height: MAXIMISED_SQUARE_HEIGHT,
+							width: MAXIMISED_SQUARE_HEIGHT * aspectRatio,
+							position: 'absolute',
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 					>
-						This video
-					</h1>
+						<h1
+							style={{
+								color: COLORS[0],
+								fontFamily: 'SF Pro',
+								fontSize: 200,
+								fontWeight: 800,
+							}}
+						>
+							This video
+						</h1>
+					</div>
 				</div>
 			</AbsoluteFill>
 			<AbsoluteFill
