@@ -23,6 +23,20 @@ export const ensureFont = () => {
 	}
 };
 
+export const ensureFiraCode = () => {
+	if (typeof window !== 'undefined' && 'FontFace' in window) {
+		const font = new FontFace(
+			'Fira',
+			'url(' + staticFile('/FiraCode-SemiBold.woff') + ") format('woff')"
+		);
+		const handle = delayRender();
+		font.load().then(() => {
+			document.fonts.add(font);
+			continueRender(handle);
+		});
+	}
+};
+
 let globalFont: Font | null = null;
 
 export const useFont = () => {

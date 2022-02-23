@@ -5,7 +5,7 @@ import {Vis} from './Vis';
 export const MasterComp: React.FC = () => {
 	return (
 		<AbsoluteFill>
-			<Loop durationInFrames={400}>
+			<Loop durationInFrames={30 * 30}>
 				<Vis />
 			</Loop>
 		</AbsoluteFill>

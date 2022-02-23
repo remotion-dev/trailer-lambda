@@ -1,4 +1,4 @@
-import {BoundingBox, Font} from 'opentype.js';
+import {BoundingBox, Font, Path} from 'opentype.js';
 import {interpolate, random} from 'remotion';
 import {FONT_SIZE} from './math/font-size';
 
@@ -8,6 +8,35 @@ const amountOfPoints = 200;
 type ViewBox = Pick<BoundingBox, 'x1' | 'x2' | 'y1' | 'y2'>;
 
 const radius = FONT_SIZE;
+
+const cache: Record<string, PathProperties> = {};
+
+type PathProperties = {
+	path: Path;
+	totalLength: number;
+	properties: ReturnType<typeof svgPathProperties.svgPathProperties>;
+	viewBox: BoundingBox;
+};
+
+const getPath = (font: Font, char: string) => {
+	if (cache[char]) {
+		return cache[char];
+	}
+	const path = font.getPath(char, 0, 0, FONT_SIZE);
+	const leftPath = path.toPathData(3);
+	const viewBox = path.getBoundingBox();
+
+	const properties = svgPathProperties.svgPathProperties(leftPath);
+
+	const pathProperties: PathProperties = {
+		path,
+		totalLength: properties.getTotalLength(),
+		properties,
+		viewBox,
+	};
+	cache[char] = pathProperties;
+	return pathProperties;
+};
 
 export const getStarryNumber = (
 	char: string,
@@ -44,22 +73,16 @@ export const getStarryNumber = (
 			},
 		};
 	}
-	const svg = font.getPath(char, 0, 0, FONT_SIZE);
-	const leftPath = svg.toPathData(3);
-	const viewBox = svg.getBoundingBox();
-
-	const totalLength = svgPathProperties
-		.svgPathProperties(leftPath)
-		.getTotalLength();
+	const svg = getPath(font, char);
 
 	return {
 		points: new Array(amountOfPoints).fill(true).map((_, i) => ({
-			...svgPathProperties
-				.svgPathProperties(leftPath)
-				.getPointAtLength((i / amountOfPoints) * totalLength),
+			...svg.properties.getPointAtLength(
+				(i / amountOfPoints) * svg.totalLength
+			),
 			opacity: 1,
 		})),
-		viewBox,
+		viewBox: svg.viewBox,
 	};
 };
 

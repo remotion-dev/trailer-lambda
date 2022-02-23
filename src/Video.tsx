@@ -25,6 +25,7 @@ import {StarryNumbers} from './StarryNumbers';
 import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {TextureAndDust} from './TextureAndDust';
+import {ThisVideo} from './ThisVideo';
 import {TimelineSplit} from './TimelineSplit';
 import {Tunnel} from './Tunnel';
 import {TunnelMask} from './TunnelMask';
@@ -124,6 +125,14 @@ export const RemotionVideo: React.FC = () => {
 				fps={VIDEO_FPS}
 				width={1280}
 				height={720}
+			/>
+			<Composition
+				id="ThisVideo"
+				component={ThisVideo}
+				durationInFrames={90}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
 			/>
 			<Composition
 				id="ManyOrbs"
