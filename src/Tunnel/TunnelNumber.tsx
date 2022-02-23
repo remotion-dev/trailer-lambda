@@ -34,7 +34,7 @@ export const TunnelNumber: React.FC<{
 				style={{
 					fontSize: 100,
 					color: 'white',
-					textShadow: `${textShadowOffsetX}px ${textShadowOffsetY}px black`,
+					textShadow: `${textShadowOffsetX}px ${textShadowOffsetY}px #000`,
 					transform: `rotateY(${rotation}rad)`,
 					fontFamily: 'Assistant',
 				}}

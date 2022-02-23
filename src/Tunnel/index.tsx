@@ -47,7 +47,7 @@ export const Tunnel: React.FC = () => {
 				backgroundColor: '#fff',
 			}}
 		>
-			{new Array(amount).fill(true).map((fill, idx) => {
+			{new Array(amount).fill(true).map((_, idx) => {
 				const i = amount - idx - 1;
 				const distance = interpolate(i, [0, amount - 1], [1, 0]);
 				const distanceFromTravelled = distance - distanceProgressed;
@@ -78,6 +78,10 @@ export const Tunnel: React.FC = () => {
 
 			<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
 			{new Array(numbersAmount).fill(true).map((_, num) => {
+				const displayNumber = num + 10;
+
+				const isFinalNumber = displayNumber === 10;
+
 				const i = numbersAmount - num - 1;
 				const distance = interpolate(i, [0, numbersAmount - 1], [0, 1]);
 				const distanceFromTravelled = distance - numbersDistanceProgressed;
@@ -87,14 +91,19 @@ export const Tunnel: React.FC = () => {
 					[0, Math.PI / 2]
 				);
 
-				if (relativeDistance < 0) {
+				if (relativeDistance < 0 && !isFinalNumber) {
 					return null;
 				}
 				if (relativeDistance > Math.PI / 2) {
 					return null;
 				}
 
-				const scale = Math.tan(Math.PI / 2 - relativeDistance);
+				const maxScale = isFinalNumber ? 3 : Infinity;
+				const _scale =
+					isFinalNumber && relativeDistance < 0
+						? maxScale
+						: Math.min(maxScale, Math.tan(Math.PI / 2 - relativeDistance));
+				const scale = _scale;
 
 				if (scale < 0) {
 					return null;
@@ -117,7 +126,10 @@ export const Tunnel: React.FC = () => {
 							}px) scale(${scale})`,
 						}}
 					>
-						<TunnelNumber focalPoint={focalPoint} number={String(num + 10)} />
+						<TunnelNumber
+							focalPoint={focalPoint}
+							number={String(displayNumber)}
+						/>
 					</AbsoluteFill>
 				);
 			})}
