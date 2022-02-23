@@ -15,7 +15,7 @@ const noise = new SimplexNoise('tunnel');
 
 const amount = 1000;
 
-const numbersAmount = 12;
+const numbersAmount = 10;
 
 export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -117,7 +117,7 @@ export const Tunnel: React.FC = () => {
 							}px) scale(${scale})`,
 						}}
 					>
-						<TunnelNumber number={String(num + 8)} />
+						<TunnelNumber focalPoint={focalPoint} number={String(num + 10)} />
 					</AbsoluteFill>
 				);
 			})}
