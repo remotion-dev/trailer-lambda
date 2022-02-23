@@ -1,21 +1,16 @@
 import React from 'react';
 import {AbsoluteFill, interpolate} from 'remotion';
+import {COLORS} from '../colors';
 import {ensureFont} from '../load-font';
 
 ensureFont();
 
 export const TunnelNumber: React.FC<{
 	number: string;
+	isFinalNumber: boolean;
 	focalPoint: readonly [number, number];
-}> = ({number, focalPoint}) => {
-	const _textShadowOffsetX = interpolate(focalPoint[0], [0, 1], [-4, 4]);
-	const _textShadowOffsetY = interpolate(focalPoint[1], [0, 1], [-4, 4]);
-	const textShadowOffsetX =
-		_textShadowOffsetX + Math.sign(_textShadowOffsetX) * 1;
-	const textShadowOffsetY =
-		interpolate(focalPoint[1], [0, 1], [-8, 8]) +
-		Math.sign(_textShadowOffsetY) * 1;
-
+	scale: number;
+}> = ({number, focalPoint, scale, isFinalNumber}) => {
 	const rotation = interpolate(
 		focalPoint[0],
 		[0, 1],
@@ -33,8 +28,8 @@ export const TunnelNumber: React.FC<{
 			<div
 				style={{
 					fontSize: 100,
-					color: 'white',
-					textShadow: `${textShadowOffsetX}px ${textShadowOffsetY}px #000`,
+					color: isFinalNumber ? COLORS[0] : 'white',
+					textShadow: `0 0 ${interpolate(scale, [0, 10], [0, 1])}px #eee`,
 					transform: `rotateY(${rotation}rad)`,
 					fontFamily: 'Assistant',
 				}}

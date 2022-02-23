@@ -44,7 +44,7 @@ export const Tunnel: React.FC = () => {
 		noise.noise2D(0, frame / 80) * 0.12 * noiseStart +
 		Math.sin(frame / 20) * 0.1 * noiseStart;
 	const noiseY = noise.noise2D(frame / 80, 0) * 0.04 * noiseStart;
-	const originalFocalPoint = [0.5 + noiseX, 0.6 + noiseY] as const;
+	const originalFocalPoint = [0.5 + noiseX, 0.7 + noiseY] as const;
 
 	const centerProgress = spring({
 		fps,
@@ -147,26 +147,18 @@ export const Tunnel: React.FC = () => {
 					return null;
 				}
 
-				const animProgress = interpolate(
-					relativeDistance,
-					[0, Math.PI / 2],
-					[0, 1]
-				);
-
-				const Y_DOWNSHIFT = interpolate(animProgress, [0, 1], [0, 0]);
-
 				return (
 					<AbsoluteFill
 						key={num}
 						style={{
-							transform: `translateX(${offX}px) translateY(${
-								offY + Y_DOWNSHIFT
-							}px) scale(${scale})`,
+							transform: `translateX(${offX}px) translateY(${offY}px) scale(${scale})`,
 						}}
 					>
 						<TunnelNumber
+							scale={scale}
 							focalPoint={focalPoint}
 							number={String(displayNumber)}
+							isFinalNumber={displayNumber === 10}
 						/>
 					</AbsoluteFill>
 				);
