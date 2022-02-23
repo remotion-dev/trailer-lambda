@@ -4,7 +4,6 @@ import {COLORS} from './colors';
 import {ensureFiraCode} from './load-font';
 
 const aspectRatio = 16 / 9;
-const BAR_HEIGHT = 300;
 const BAR_WIDTH = 50;
 const STROKE_WIDTH = 12;
 
@@ -24,6 +23,16 @@ export const ThisVideo: React.FC = () => {
 	});
 	const MAXIMISED_SQUARE_HEIGHT = height * 0.75;
 	const SQUARE_HEIGHT = MAXIMISED_SQUARE_HEIGHT * progress;
+
+	const videoProgress = spring({
+		fps,
+		frame: frame - 10,
+		config: {
+			damping: 250,
+		},
+	});
+
+	const BAR_HEIGHT = 300 * videoProgress;
 
 	return (
 		<AbsoluteFill
@@ -85,9 +94,10 @@ export const ThisVideo: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					color: COLORS[0],
-					fontSize: 50,
+					fontSize: 50 * videoProgress,
 					fontFamily: 'Fira',
-					transform: `scale(${progress})`,
+					transform: `scale(${videoProgress})`,
+					overflow: 'hidden',
 				}}
 			>
 				1920px
@@ -97,14 +107,19 @@ export const ThisVideo: React.FC = () => {
 					backgroundColor: 'white',
 					height: BAR_WIDTH,
 					width: BAR_HEIGHT,
-					top: height / 2 - BAR_WIDTH / 2 - STROKE_WIDTH / 2,
-					left: width / 2 - (SQUARE_HEIGHT / 2) * aspectRatio - BAR_HEIGHT / 2,
+					top: height / 2 - BAR_WIDTH / 2,
+					left:
+						width / 2 -
+						(SQUARE_HEIGHT / 2) * aspectRatio -
+						BAR_HEIGHT / 2 +
+						STROKE_WIDTH / 2,
 					justifyContent: 'center',
 					alignItems: 'center',
 					color: COLORS[0],
-					fontSize: 50,
+					fontSize: 50 * videoProgress,
 					fontFamily: 'Fira',
-					transform: `rotate(-90deg) scale(${progress})`,
+					transform: `scale(${videoProgress}) rotate(-90deg)`,
+					overflow: 'hidden',
 				}}
 			>
 				1080px
