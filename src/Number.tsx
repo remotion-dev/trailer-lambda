@@ -1,8 +1,8 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill} from 'remotion';
+import {COLORS} from './colors';
 import {useFont} from './load-font';
 import {FONT_SIZE} from './math/font-size';
-import {OpenTypeNumber} from './OpenTypeNumber';
 
 export const BigNum: React.FC<{
 	number: string;
@@ -13,22 +13,13 @@ export const BigNum: React.FC<{
 		if (!font) {
 			return null;
 		}
-		const [leftGlyph, rightGlyph] = font.stringToGlyphs(String(number));
-		const kerning = font.getKerningValue(leftGlyph, rightGlyph);
-		const leftSvg = leftGlyph.getPath(undefined, undefined, FONT_SIZE);
-		const rightSvg = rightGlyph.getPath(undefined, undefined, FONT_SIZE);
-		const leftPath = leftSvg.toPathData(3);
-		const leftBox = leftSvg.getBoundingBox();
-		const rightPath = rightSvg.toPathData(3);
-		const rightBox = rightSvg.getBoundingBox();
-
-		return {
-			leftPath,
-			rightPath,
-			leftBox,
-			rightBox,
-			kerning,
-		};
+		const glyphs = font.stringToGlyphs(String(number));
+		return glyphs.map((glyph) => {
+			const leftSvg = glyph.getPath(undefined, undefined, FONT_SIZE);
+			const leftBox = leftSvg.getBoundingBox();
+			const leftPath = leftSvg.toPathData(3);
+			return {leftSvg, leftBox, leftPath};
+		});
 	}, [font, number]);
 
 	if (path === null || font === null) {
@@ -42,10 +33,14 @@ export const BigNum: React.FC<{
 				alignItems: 'center',
 			}}
 		>
-			<div style={{display: 'flex', flexDirection: 'row'}}>
-				<OpenTypeNumber font={font} str={number[0]} />
-				<div style={{width: 15}} />
-				<OpenTypeNumber font={font} str={number[1]} />
+			<div
+				style={{
+					fontSize: FONT_SIZE * 0.975,
+					color: COLORS[0],
+					fontFamily: 'Assistant',
+				}}
+			>
+				{String(number)}
 			</div>
 		</AbsoluteFill>
 	);

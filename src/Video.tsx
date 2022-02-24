@@ -13,6 +13,7 @@ import {ManyOrbs} from './ManyOrbs';
 import {ManySpin} from './ManySpin';
 import {MasterComp} from './MasterComp';
 import {VIDEO_FPS} from './math/fps';
+import {NormallyTakes} from './NormallyTakes';
 import {BigNum} from './Number';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
@@ -335,6 +336,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Pitch"
 				component={Pitch}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="NormallyTakes"
+				component={NormallyTakes}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

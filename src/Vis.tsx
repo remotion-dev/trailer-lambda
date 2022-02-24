@@ -8,29 +8,35 @@ import {ManyWaves} from './Wave';
 
 export const Vis: React.FC = () => {
 	return (
-		<Series>
-			<Series.Sequence durationInFrames={132}>
-				<AbsoluteFill
-					style={{
-						backgroundColor: 'white',
-					}}
-				/>
-				<Lambda />
-				<ManyWaves />
-				<AnimatedNumber />
-			</Series.Sequence>
-			<Series.Sequence durationInFrames={800}>
-				<RocketToStarry />
-			</Series.Sequence>
-			<Series.Sequence durationInFrames={100}>
-				<ManySpin />
-			</Series.Sequence>
-			<Series.Sequence durationInFrames={100}>
-				<ManySpin />
-			</Series.Sequence>
-			<Series.Sequence durationInFrames={100}>
-				<ManySpin />
-			</Series.Sequence>
-		</Series>
+		<AbsoluteFill
+			style={{
+				backgroundColor: 'black',
+			}}
+		>
+			<Series>
+				<Series.Sequence durationInFrames={132}>
+					<AbsoluteFill
+						style={{
+							backgroundColor: 'white',
+						}}
+					/>
+					<Lambda />
+					<ManyWaves />
+					<AnimatedNumber />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={800}>
+					<RocketToStarry />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={100}>
+					<ManySpin />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={100}>
+					<ManySpin />
+				</Series.Sequence>
+				<Series.Sequence durationInFrames={100}>
+					<ManySpin />
+				</Series.Sequence>
+			</Series>
+		</AbsoluteFill>
 	);
 };
