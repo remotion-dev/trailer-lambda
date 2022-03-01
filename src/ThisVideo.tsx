@@ -11,7 +11,8 @@ ensureFiraCode();
 
 export const ThisVideo: React.FC<{
 	showSpecs: boolean;
-}> = ({showSpecs}) => {
+	frameNum: number;
+}> = ({showSpecs, frameNum}) => {
 	const frame = useCurrentFrame();
 	const {width, height, fps} = useVideoConfig();
 
@@ -83,6 +84,21 @@ export const ThisVideo: React.FC<{
 						>
 							This video
 						</h1>
+						<AbsoluteFill style={{}}>
+							<div
+								style={{
+									color: COLORS[0],
+									fontFamily: 'Fira',
+									fontSize: 50,
+									fontWeight: 800,
+									textAlign: 'right',
+									marginRight: 30,
+									marginTop: 30,
+								}}
+							>
+								{String(frameNum).padStart(4, '0')}
+							</div>
+						</AbsoluteFill>
 					</div>
 				</div>
 			</AbsoluteFill>

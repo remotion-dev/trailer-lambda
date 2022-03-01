@@ -8,7 +8,7 @@ import {
 } from 'remotion';
 import {ThisVideo} from './ThisVideo';
 
-const num = 5;
+const num = 4;
 
 export const ThisVideoMultiplied: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -29,12 +29,12 @@ export const ThisVideoMultiplied: React.FC = () => {
 				return (
 					<AbsoluteFill
 						style={{
-							transform: `translateX(${spread * offset}px) translateY(${
+							transform: `translateX(${spread * -offset}px) translateY(${
 								spread * offset
 							}px)`,
 						}}
 					>
-						<ThisVideo showSpecs={showSpecs} />
+						<ThisVideo showSpecs={showSpecs} frameNum={frame + (num - i)} />
 					</AbsoluteFill>
 				);
 			})}
