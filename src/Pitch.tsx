@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Sequence} from 'remotion';
 import {IsSlow} from './IsSlow';
-import {ThisVideo} from './ThisVideo';
+import {ThisVideoMultiplied} from './ThisVideoMultiplied';
 
 export const Pitch: React.FC = () => {
 	return (
@@ -10,7 +10,7 @@ export const Pitch: React.FC = () => {
 				<IsSlow />
 			</Sequence>
 			<Sequence from={50}>
-				<ThisVideo />
+				<ThisVideoMultiplied />
 			</Sequence>
 		</AbsoluteFill>
 	);

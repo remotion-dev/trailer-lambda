@@ -9,7 +9,9 @@ const STROKE_WIDTH = 12;
 
 ensureFiraCode();
 
-export const ThisVideo: React.FC = () => {
+export const ThisVideo: React.FC<{
+	showSpecs: boolean;
+}> = ({showSpecs}) => {
 	const frame = useCurrentFrame();
 	const {width, height, fps} = useVideoConfig();
 
@@ -84,47 +86,51 @@ export const ThisVideo: React.FC = () => {
 					</div>
 				</div>
 			</AbsoluteFill>
-			<AbsoluteFill
-				style={{
-					backgroundColor: 'white',
-					height: BAR_WIDTH,
-					width: BAR_HEIGHT,
-					top:
-						height / 2 + SQUARE_HEIGHT / 2 - BAR_WIDTH / 2 - STROKE_WIDTH / 2,
-					left: width / 2 - BAR_HEIGHT / 2,
-					justifyContent: 'center',
-					alignItems: 'center',
-					color: COLORS[0],
-					fontSize: 50 * videoProgress,
-					fontFamily: 'Fira',
-					transform: `scale(${videoProgress})`,
-					overflow: 'hidden',
-				}}
-			>
-				1920px
-			</AbsoluteFill>
-			<AbsoluteFill
-				style={{
-					backgroundColor: 'white',
-					height: BAR_WIDTH,
-					width: BAR_HEIGHT,
-					top: height / 2 - BAR_WIDTH / 2,
-					left:
-						width / 2 -
-						(SQUARE_HEIGHT / 2) * aspectRatio -
-						BAR_HEIGHT / 2 +
-						STROKE_WIDTH / 2,
-					justifyContent: 'center',
-					alignItems: 'center',
-					color: COLORS[0],
-					fontSize: 50 * videoProgress,
-					fontFamily: 'Fira',
-					transform: `scale(${videoProgress}) rotate(-90deg)`,
-					overflow: 'hidden',
-				}}
-			>
-				1080px
-			</AbsoluteFill>
+			{showSpecs ? (
+				<AbsoluteFill
+					style={{
+						backgroundColor: 'white',
+						height: BAR_WIDTH,
+						width: BAR_HEIGHT,
+						top:
+							height / 2 + SQUARE_HEIGHT / 2 - BAR_WIDTH / 2 - STROKE_WIDTH / 2,
+						left: width / 2 - BAR_HEIGHT / 2,
+						justifyContent: 'center',
+						alignItems: 'center',
+						color: COLORS[0],
+						fontSize: 50 * videoProgress,
+						fontFamily: 'Fira',
+						transform: `scale(${videoProgress})`,
+						overflow: 'hidden',
+					}}
+				>
+					1920px
+				</AbsoluteFill>
+			) : null}
+			{showSpecs ? (
+				<AbsoluteFill
+					style={{
+						backgroundColor: 'white',
+						height: BAR_WIDTH,
+						width: BAR_HEIGHT,
+						top: height / 2 - BAR_WIDTH / 2,
+						left:
+							width / 2 -
+							(SQUARE_HEIGHT / 2) * aspectRatio -
+							BAR_HEIGHT / 2 +
+							STROKE_WIDTH / 2,
+						justifyContent: 'center',
+						alignItems: 'center',
+						color: COLORS[0],
+						fontSize: 50 * videoProgress,
+						fontFamily: 'Fira',
+						transform: `scale(${videoProgress}) rotate(-90deg)`,
+						overflow: 'hidden',
+					}}
+				>
+					1080px
+				</AbsoluteFill>
+			) : null}
 		</AbsoluteFill>
 	);
 };
