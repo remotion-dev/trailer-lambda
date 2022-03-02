@@ -37,6 +37,14 @@ export const ThisVideo: React.FC<{
 
 	const BAR_HEIGHT = 300 * videoProgress;
 
+	const moveUp = spring({
+		fps,
+		frame: frame - 60,
+		config: {
+			damping: 200,
+		},
+	});
+
 	return (
 		<AbsoluteFill
 			style={{
@@ -74,17 +82,53 @@ export const ThisVideo: React.FC<{
 							alignItems: 'center',
 						}}
 					>
-						<h1
-							style={{
-								color: COLORS[0],
-								fontFamily: 'SF Pro',
-								fontSize: 200,
-								fontWeight: 800,
-							}}
-						>
-							This video
-						</h1>
-						<AbsoluteFill style={{}}>
+						{showSpecs ? (
+							<AbsoluteFill
+								style={{
+									justifyContent: 'center',
+									alignItems: 'center',
+									transform: `translateY(${
+										moveUp * -MAXIMISED_SQUARE_HEIGHT
+									}px)`,
+								}}
+							>
+								<h1
+									style={{
+										color: COLORS[0],
+										fontFamily: 'SF Pro',
+										fontSize: 200,
+										fontWeight: 800,
+									}}
+								>
+									This video
+								</h1>
+							</AbsoluteFill>
+						) : null}
+						{showSpecs ? (
+							<AbsoluteFill
+								style={{
+									justifyContent: 'center',
+									alignItems: 'center',
+									transform: `translateY(${
+										(1 - moveUp) * MAXIMISED_SQUARE_HEIGHT
+									}px)`,
+								}}
+							>
+								<h1
+									style={{
+										color: COLORS[0],
+										fontFamily: 'SF Pro',
+										fontSize: 200,
+										fontWeight: 800,
+										textAlign: 'center',
+									}}
+								>
+									has 2400 frames
+								</h1>
+							</AbsoluteFill>
+						) : null}
+
+						<AbsoluteFill>
 							<div
 								style={{
 									color: COLORS[0],

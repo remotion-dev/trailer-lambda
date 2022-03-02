@@ -136,6 +136,10 @@ export const RemotionVideo: React.FC = () => {
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
+				defaultProps={{
+					frameNum: 0,
+					showSpecs: true,
+				}}
 			/>
 			<Composition
 				id="ManyOrbs"
