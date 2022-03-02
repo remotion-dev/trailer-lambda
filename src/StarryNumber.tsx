@@ -18,7 +18,7 @@ export const StarryNumber: React.FC<{
 		frame,
 		config: {
 			damping: 200,
-			mass: 1,
+			mass: 0.7,
 		},
 	});
 

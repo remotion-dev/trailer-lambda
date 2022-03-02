@@ -1,20 +1,33 @@
 import React from 'react';
-import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {
+	AbsoluteFill,
+	interpolate,
+	measureSpring,
+	spring,
+	SpringConfig,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
 import {COLORS} from './colors';
 import {BigNum} from './Number';
 
 export const NormallyTakes: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps, width, height} = useVideoConfig();
+	const sprConfig: Partial<SpringConfig> = {
+		damping: 200,
+	};
+	const dur = measureSpring({config: sprConfig, fps});
 	const prog = spring({
 		fps,
 		frame,
-		config: {
-			damping: 200,
-		},
+		config: sprConfig,
+	});
+	const linearProgress = interpolate(frame, [0, dur - 1], [0, 1], {
+		extrapolateRight: 'clamp',
 	});
 
-	const r = 375;
+	const r = 450;
 	const circum = r * Math.PI * 2;
 	const strokeDashArray = `${circum}`;
 
@@ -37,7 +50,7 @@ export const NormallyTakes: React.FC = () => {
 						alignItems: 'center',
 					}}
 				>
-					<BigNum number={String(Math.round(prog * 60))} />
+					<BigNum number={String(Math.round(linearProgress * 60))} />
 				</AbsoluteFill>
 				<AbsoluteFill
 					style={{
@@ -65,50 +78,6 @@ export const NormallyTakes: React.FC = () => {
 						/>
 					</svg>
 				</AbsoluteFill>
-			</AbsoluteFill>
-
-			<AbsoluteFill
-				style={{
-					top: 140,
-				}}
-			>
-				<h1
-					style={{
-						fontFamily: 'SF Pro',
-						fontSize: 120,
-						color: COLORS[0],
-						marginBottom: 0,
-						marginTop: 0,
-						fontWeight: 900,
-						lineHeight: 1,
-						textAlign: 'center',
-					}}
-				>
-					Normally takes
-				</h1>
-			</AbsoluteFill>
-			<AbsoluteFill
-				style={{
-					bottom: 140,
-					top: undefined,
-				}}
-			>
-				<h1
-					style={{
-						fontFamily: 'SF Pro',
-						fontSize: 120,
-						color: COLORS[0],
-						fontWeight: 900,
-						lineHeight: 1,
-						textAlign: 'center',
-						position: 'absolute',
-						bottom: 0,
-						marginBottom: 0,
-						width: '100%',
-					}}
-				>
-					seconds to render
-				</h1>
 			</AbsoluteFill>
 		</AbsoluteFill>
 	);

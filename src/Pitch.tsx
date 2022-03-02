@@ -6,7 +6,7 @@ import {ThisVideoMultiplied} from './ThisVideoMultiplied';
 export const Pitch: React.FC = () => {
 	return (
 		<AbsoluteFill>
-			<Sequence from={0}>
+			<Sequence from={0} durationInFrames={70}>
 				<IsSlow />
 			</Sequence>
 			<Sequence from={50}>

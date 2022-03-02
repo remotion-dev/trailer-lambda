@@ -12,7 +12,7 @@ const num = 4;
 
 export const ThisVideoMultiplied: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {fps} = useVideoConfig();
+	const {fps, height} = useVideoConfig();
 	const spread = spring({
 		fps,
 		frame: frame - 50,
@@ -25,12 +25,20 @@ export const ThisVideoMultiplied: React.FC = () => {
 		<AbsoluteFill>
 			{new Array(num).fill(true).map((t, i) => {
 				const offset = interpolate(i, [0, num - 1], [-100, 100]);
+
+				const moveOut = spring({
+					fps,
+					frame: frame - 120 - (num - i * 2),
+					config: {
+						damping: 200,
+					},
+				});
 				const showSpecs = i === num - 1;
 				return (
 					<AbsoluteFill
 						style={{
 							transform: `translateX(${spread * -offset}px) translateY(${
-								spread * offset
+								spread * offset + moveOut * height
 							}px)`,
 						}}
 					>

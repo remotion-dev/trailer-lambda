@@ -102,7 +102,7 @@ export const RocketShip: React.FC = () => {
 
 	const rocketOutroAnimation = spring({
 		fps: VIDEO_FPS,
-		frame: frame - 140,
+		frame: frame - 80,
 		config: {
 			damping: 200,
 		},
@@ -121,7 +121,7 @@ export const RocketShip: React.FC = () => {
 			<Sequence from={100} durationInFrames={400}>
 				<SpaceDust />
 			</Sequence>
-			<Sequence from={140}>
+			<Sequence from={80}>
 				<StarryNumbers />
 			</Sequence>
 			<Sequence from={0} durationInFrames={148}>

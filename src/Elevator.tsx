@@ -38,7 +38,7 @@ export const Elevator: React.FC<{
 	const topWhereGreatestIsCentered =
 		topWhereLowestIsCentered - totalHeight + (charContainer.height as number);
 
-	const animation = interpolate(frame - countDownDelay, [0, 120], [0, 1], {
+	const animation = interpolate(frame - countDownDelay, [0, 60], [0, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});

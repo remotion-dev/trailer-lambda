@@ -32,7 +32,6 @@ export const IsSlow: React.FC = () => {
 	return (
 		<AbsoluteFill
 			style={{
-				backgroundColor: 'white',
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}
