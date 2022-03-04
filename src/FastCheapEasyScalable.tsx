@@ -78,6 +78,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					display: 'flex',
+					overflow: 'hidden',
 				}}
 			>
 				<Fast />
@@ -122,7 +123,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 					overflow: 'hidden',
 				}}
 			>
-				<Easy />
+				<Easy width={width4} />
 			</div>
 		</AbsoluteFill>
 	);

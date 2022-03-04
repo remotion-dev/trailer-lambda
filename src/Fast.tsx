@@ -1,12 +1,12 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
-import {BackgroundNoise} from './BackgroundNoise';
 import {COLORS} from './colors';
+import {FastNoise} from './FastNoise';
 
 export const Fast: React.FC = () => {
 	return (
 		<AbsoluteFill>
-			<BackgroundNoise />
+			<FastNoise />
 			<AbsoluteFill
 				style={{
 					justifyContent: 'center',

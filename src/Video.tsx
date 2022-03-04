@@ -3,6 +3,7 @@ import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
+import {EasyNoise} from './EasyNoise';
 import {Elevator} from './Elevator';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {FlatCasette} from './FlatCasette';
@@ -370,6 +371,18 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 				width={1920}
 				fps={24}
+			/>
+			<Composition
+				id="EasyNoise"
+				component={EasyNoise}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+				defaultProps={{
+					height: 1080,
+					width: 1920,
+				}}
 			/>
 		</>
 	);

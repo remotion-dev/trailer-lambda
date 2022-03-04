@@ -1,12 +1,15 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
-import {BackgroundNoise} from './BackgroundNoise';
+import {AbsoluteFill, useVideoConfig} from 'remotion';
 import {COLORS} from './colors';
+import {EasyNoise} from './EasyNoise';
 
-export const Easy: React.FC = () => {
+export const Easy: React.FC<{
+	width: number;
+}> = ({width}) => {
+	const {height} = useVideoConfig();
 	return (
 		<AbsoluteFill>
-			<BackgroundNoise />
+			<EasyNoise width={width} height={height} />
 			<AbsoluteFill
 				style={{
 					justifyContent: 'center',
