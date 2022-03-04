@@ -4,6 +4,7 @@ import {Model} from './Casette';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {Elevator} from './Elevator';
+import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {FlatCasette} from './FlatCasette';
 import {HugeOrb} from './HugeOrb';
 import {IsSlow} from './IsSlow';
@@ -35,6 +36,7 @@ import {TunnelMask} from './TunnelMask';
 import {Upwind} from './Upwind';
 import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
+import {WayTooSlow} from './WayTooSlow';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -348,6 +350,22 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="NormallyTakes"
 				component={NormallyTakes}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="WayTooSlow"
+				component={WayTooSlow}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="FastCheapEasyScalable"
+				component={FastCheapEasyScalable}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

@@ -1,6 +1,13 @@
+import {transparentize} from 'polished';
 import React, {useEffect, useRef} from 'react';
-import {interpolateColors, useCurrentFrame, useVideoConfig} from 'remotion';
+import {
+	AbsoluteFill,
+	interpolateColors,
+	useCurrentFrame,
+	useVideoConfig,
+} from 'remotion';
 import SimplexNoise from 'simplex-noise';
+import {COLORS} from './colors';
 
 const simplex = new SimplexNoise('simplex');
 
@@ -9,7 +16,6 @@ const POINTS_Y = 30;
 
 const PADDING = 400;
 
-const Y_OFFSET = 100;
 const X_OFFSET = 50;
 
 export const BackgroundNoise: React.FC = () => {
@@ -26,18 +32,20 @@ export const BackgroundNoise: React.FC = () => {
 		for (let x = 0; x < POINTS_X; x++) {
 			for (let y = 0; y < POINTS_Y; y++) {
 				const r = simplex.noise3D(frame / 30, x, y);
-				const baseX = (x / POINTS_X) * (width + PADDING) - frame;
+				const baseX = (x / POINTS_X) * (width + PADDING);
 				const baseY =
-					(y / POINTS_Y) * (height + X_OFFSET + PADDING) - PADDING / 2 + frame;
+					(y / POINTS_Y) * (height + X_OFFSET + PADDING) -
+					PADDING / 2 -
+					frame * 10;
 				context.beginPath();
-				context.moveTo(baseX - Y_OFFSET, baseY);
+				context.moveTo(baseX, baseY);
 				context.lineTo(baseX, baseY - X_OFFSET);
 				context.lineWidth = 30;
 				context.lineCap = 'round';
 				context.strokeStyle = `${interpolateColors(
 					r,
 					[-1, 4],
-					['white', interpolateColors(x, [0, POINTS_X], ['#4290f5', 'orange'])]
+					[transparentize(1, COLORS[0]), transparentize(0.5, COLORS[0])]
 				)}`;
 				context.stroke();
 			}
@@ -45,13 +53,13 @@ export const BackgroundNoise: React.FC = () => {
 	}, [frame, height, width]);
 
 	return (
-		<div>
+		<AbsoluteFill>
 			<canvas
 				ref={canvas}
 				width={width}
 				height={height}
-				style={{width, height, backgroundColor: 'whitesmoke'}}
+				style={{width, height, backgroundColor: 'white'}}
 			/>
-		</div>
+		</AbsoluteFill>
 	);
 };
