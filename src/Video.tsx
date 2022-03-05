@@ -39,6 +39,7 @@ import {Upwind} from './Upwind';
 import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 import {WayTooSlow} from './WayTooSlow';
+import {WriteInReact} from './WriteInReact';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -396,6 +397,14 @@ export const RemotionVideo: React.FC = () => {
 					height: 1080,
 					width: 1920,
 				}}
+			/>
+			<Composition
+				id="WriteInReact"
+				component={WriteInReact}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
 			/>
 		</>
 	);

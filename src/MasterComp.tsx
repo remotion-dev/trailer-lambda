@@ -3,6 +3,7 @@ import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {NormallyTakes} from './NormallyTakes';
 import {Pitch} from './Pitch';
+import {ProductLineUp} from './ProductLineUp';
 import {TimelineSplit} from './TimelineSplit';
 import {Vis} from './Vis';
 import {WayTooSlow} from './WayTooSlow';
@@ -58,6 +59,9 @@ export const MasterComp: React.FC = () => {
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={180}>
 						<FastCheapEasyScalable />
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={180}>
+						<ProductLineUp />
 					</Series.Sequence>
 				</Series>
 			</Sequence>
