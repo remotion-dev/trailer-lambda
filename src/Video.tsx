@@ -3,6 +3,7 @@ import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {CheapNoise} from './CheapNoise';
 import {Clocks} from './Clocks';
+import {Cursor} from './Cursor';
 import {Dust} from './Dust';
 import {EasyNoise} from './EasyNoise';
 import {Elevator} from './Elevator';
@@ -401,6 +402,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="WriteInReact"
 				component={WriteInReact}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="Cursor"
+				component={Cursor}
 				durationInFrames={300}
 				height={1080}
 				width={1920}
