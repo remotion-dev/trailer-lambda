@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-	AbsoluteFill,
-	Audio,
-	interpolate,
-	Sequence,
-	Series,
-	staticFile,
-} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
+import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {NormallyTakes} from './NormallyTakes';
 import {Pitch} from './Pitch';
 import {TimelineSplit} from './TimelineSplit';
@@ -22,7 +16,7 @@ export const MasterComp: React.FC = () => {
 				backgroundColor: 'white',
 			}}
 		>
-			<Audio
+			{/* <Audio
 				src={staticFile('music.mp3')}
 				startFrom={45 * 30 - 390}
 				volume={(f) =>
@@ -43,7 +37,7 @@ export const MasterComp: React.FC = () => {
 						}
 					)
 				}
-			/>
+			/> */}
 			<Audio src={staticFile('voiceover-first.m4a')} startFrom={50} />
 			<Sequence from={VOICEOVER_START}>
 				<Audio src={staticFile('voiceover-second.m4a')} startFrom={50} />
@@ -61,6 +55,9 @@ export const MasterComp: React.FC = () => {
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={200}>
 						<TimelineSplit />
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={180}>
+						<FastCheapEasyScalable />
 					</Series.Sequence>
 				</Series>
 			</Sequence>

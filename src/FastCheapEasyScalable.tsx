@@ -17,7 +17,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 
 	const prog1 = spring({
 		fps,
-		frame,
+		frame: frame - 30,
 		config: {
 			damping: 200,
 		},
@@ -25,7 +25,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 
 	const prog2 = spring({
 		fps,
-		frame: frame - 20,
+		frame: frame - 60,
 		config: {
 			damping: 200,
 		},
@@ -33,7 +33,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 
 	const prog3 = spring({
 		fps,
-		frame: frame - 40,
+		frame: frame - 90,
 		config: {
 			damping: 200,
 		},
@@ -109,7 +109,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 					overflow: 'hidden',
 				}}
 			>
-				<Cheap />
+				<Cheap width={width3} />
 			</div>
 			<div
 				style={{

@@ -1,6 +1,7 @@
 import {Composition, Still} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
+import {CheapNoise} from './CheapNoise';
 import {Clocks} from './Clocks';
 import {Dust} from './Dust';
 import {EasyNoise} from './EasyNoise';
@@ -375,6 +376,18 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="EasyNoise"
 				component={EasyNoise}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+				defaultProps={{
+					height: 1080,
+					width: 1920,
+				}}
+			/>
+			<Composition
+				id="CheapNoise"
+				component={CheapNoise}
 				durationInFrames={300}
 				height={1080}
 				width={1920}
