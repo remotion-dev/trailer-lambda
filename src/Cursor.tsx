@@ -2,22 +2,15 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
-	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 
-export const Cursor: React.FC = () => {
+export const Cursor: React.FC<{
+	driver: number;
+}> = ({driver}) => {
 	const {fps, width} = useVideoConfig();
 	const frame = useCurrentFrame();
-
-	const moveForward = spring({
-		fps,
-		frame,
-		config: {
-			damping: 200,
-		},
-	});
 
 	return (
 		<AbsoluteFill>
@@ -39,7 +32,7 @@ export const Cursor: React.FC = () => {
 			<AbsoluteFill
 				style={{
 					position: 'absolute',
-					left: interpolate(moveForward, [0, 1], [0, width - 100]),
+					left: interpolate(driver, [0, 1], [0, width - 100]),
 				}}
 			>
 				<svg
