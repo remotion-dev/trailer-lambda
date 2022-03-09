@@ -22,6 +22,7 @@ import {BigNum} from './Number';
 import {Olympia} from './Olympia/Master';
 import {Party} from './Party';
 import {Pitch} from './Pitch';
+import {PlayerExample} from './PlayerExample';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
@@ -413,6 +414,14 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={300}
 				height={1080}
 				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="PlayerExample"
+				component={PlayerExample}
+				durationInFrames={300}
+				height={720}
+				width={1280}
 				fps={24}
 			/>
 		</>
