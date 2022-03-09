@@ -9,7 +9,15 @@ import {
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
 import {COLORS} from './colors';
+import {
+	GreekLetter,
+	greekLetterOriginalHeight,
+	greekLetterOriginalWidth,
+} from './Lambda/GreekLetter';
 import {point} from './point';
+const greekLetterWidth = 200;
+const greekLetterHeight =
+	(greekLetterWidth / greekLetterOriginalWidth) * greekLetterOriginalHeight;
 
 export const Spin: React.FC<{
 	seed: string;
@@ -111,7 +119,11 @@ export const Spin: React.FC<{
 					transform: `rotate(${rotation + Math.PI / 2}rad)`,
 				}}
 			>
-				λ
+				<GreekLetter
+					alternate
+					width={greekLetterWidth}
+					height={greekLetterHeight}
+				/>
 			</div>
 		</AbsoluteFill>
 	);
