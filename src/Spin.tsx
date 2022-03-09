@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef} from 'react';
+import React, {useMemo} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -14,15 +14,14 @@ import {
 	greekLetterOriginalHeight,
 	greekLetterOriginalWidth,
 } from './Lambda/GreekLetter';
-import {point} from './point';
-const greekLetterWidth = 200;
+const greekLetterWidth = 55;
 const greekLetterHeight =
 	(greekLetterWidth / greekLetterOriginalWidth) * greekLetterOriginalHeight;
 
 export const Spin: React.FC<{
 	seed: string;
 }> = ({seed}) => {
-	const ROCKET_SIZE = interpolate(random(seed), [0, 1], [40, 200]);
+	const ROCKET_SIZE = 150;
 	const noiseUpward = useMemo(() => {
 		return new SimplexNoise('upward-' + seed);
 	}, [seed]);
@@ -32,14 +31,13 @@ export const Spin: React.FC<{
 	}, [seed]);
 
 	const frame = useCurrentFrame();
-	const canvasEl = useRef<HTMLCanvasElement>(null);
-	const {width, height, durationInFrames} = useVideoConfig();
+	const {width, height} = useVideoConfig();
 
 	const positions = useMemo(() => {
 		let xNoise = 0;
-		return new Array(frame + 1).fill(1).map((_, i) => {
+		return new Array(Math.max(2, frame + 1)).fill(1).map((_, i) => {
 			xNoise += noiseX.noise2D(i / 50, 0) * 20;
-			const upward = interpolate(i, [0, 100], [height, -height / 2]);
+			const upward = interpolate(i, [0, 50], [height, -height / 2]);
 			const upwardNoise = noiseUpward.noise2D(i / 50, 0) * 50;
 			const randomXStart = random(String(seed)) * width;
 			return {
@@ -48,30 +46,6 @@ export const Spin: React.FC<{
 			};
 		});
 	}, [frame, height, noiseUpward, noiseX, seed, width]);
-
-	useEffect(() => {
-		if (!canvasEl.current) {
-			return;
-		}
-		const canvas = canvasEl.current.getContext(
-			'2d'
-		) as CanvasRenderingContext2D;
-		canvas.clearRect(0, 0, width, height);
-
-		positions.forEach((pos, i) => {
-			point({
-				x: pos.x,
-				y: pos.y,
-				canvas,
-				size: 5,
-				color: interpolateColors(
-					i,
-					[frame - 40, frame],
-					['rgba(255, 255, 255, 0)', '#4290f5']
-				),
-			});
-		});
-	}, [durationInFrames, frame, height, positions, width]);
 
 	const dy = useMemo(() => {
 		if (positions.length < 2) {
@@ -95,12 +69,22 @@ export const Spin: React.FC<{
 
 	return (
 		<AbsoluteFill>
-			<canvas
-				ref={canvasEl}
-				width={width}
-				height={height}
-				style={{width, height}}
-			/>
+			<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+				{positions.map((p, i) => {
+					return (
+						<circle
+							r={10}
+							cx={p.x}
+							cy={p.y}
+							fill={interpolateColors(
+								i,
+								[frame - 40, frame],
+								['rgba(255, 255, 255, 0)', '#4290f5']
+							)}
+						/>
+					);
+				})}
+			</svg>
 			<div
 				style={{
 					position: 'absolute',
@@ -117,6 +101,10 @@ export const Spin: React.FC<{
 					color: COLORS[0],
 					fontFamily: 'SF Pro Display',
 					transform: `rotate(${rotation + Math.PI / 2}rad)`,
+					backgroundColor: 'white',
+					boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+					borderRadius: ROCKET_SIZE / 2,
+					zIndex: 2,
 				}}
 			>
 				<GreekLetter

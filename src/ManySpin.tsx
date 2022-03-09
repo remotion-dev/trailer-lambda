@@ -10,11 +10,11 @@ export const ManySpin: React.FC = () => {
 					backgroundColor: 'white',
 				}}
 			/>
-			{new Array(15).fill(1).map((_, i) => {
+			{new Array(30).fill(1).map((_, i) => {
 				return (
 					<Sequence
 						key={String(i)}
-						from={parseInt(String(random(i) * 300), 10)}
+						from={parseInt(String(random(i) * 100), 10)}
 					>
 						<Spin seed={String(i)} />;
 					</Sequence>
