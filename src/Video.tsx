@@ -9,6 +9,7 @@ import {EasyNoise} from './EasyNoise';
 import {Elevator} from './Elevator';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {FlatCasette} from './FlatCasette';
+import {Free} from './Free';
 import {HugeOrb} from './HugeOrb';
 import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
@@ -419,6 +420,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="PlayerExample"
 				component={PlayerExample}
+				durationInFrames={300}
+				height={720}
+				width={1280}
+				fps={24}
+			/>
+			<Composition
+				id="Free"
+				component={Free}
 				durationInFrames={300}
 				height={720}
 				width={1280}
