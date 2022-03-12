@@ -8,20 +8,29 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 
-export const Free: React.FC = () => {
+export const Paid: React.FC<{
+	start: number;
+}> = ({start}) => {
 	const frame = useCurrentFrame();
-	const {fps, height} = useVideoConfig();
+	const {fps} = useVideoConfig();
 	const progress = spring({
 		fps,
-		frame,
+		frame: frame - start,
 		config: {
 			damping: 200,
 		},
 	});
 
 	const scale = interpolate(progress, [0, 1], [1, 0.8]);
-	const translateY = interpolate(progress, [0, 1], [0, -100]);
-	const secondTranslateY = interpolate(progress, [0, 1], [height, 150]);
+
+	const up = (delay: number) =>
+		spring({
+			fps,
+			frame: frame - delay - start,
+			config: {
+				damping: 200,
+			},
+		});
 
 	return (
 		<AbsoluteFill
@@ -34,7 +43,7 @@ export const Free: React.FC = () => {
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `scale(${scale}) translateY(${translateY}px)`,
+					transform: `scale(${scale}) translateY(${-100}px)`,
 				}}
 			>
 				<div
@@ -45,21 +54,58 @@ export const Free: React.FC = () => {
 						fontFamily: 'SF Pro',
 						fontSize: 200,
 						fontWeight: 'bold',
-						paddingLeft: 80,
-						paddingRight: 80,
+						paddingLeft: 50,
+						paddingRight: 50,
 						paddingTop: 20,
 						paddingBottom: 20,
 						borderRadius: 70,
+						letterSpacing: '0.1em',
+						overflow: 'hidden',
 					}}
 				>
-					Free
+					<span
+						style={{
+							display: 'inline-block',
+							transform: `translateY(${interpolate(
+								up(10),
+								[0, 1],
+								[300, 0]
+							)}px)`,
+						}}
+					>
+						$
+					</span>
+					<span
+						style={{
+							display: 'inline-block',
+							transform: `translateY(${interpolate(
+								up(4),
+								[0, 1],
+								[250, 0]
+							)}px)`,
+						}}
+					>
+						$
+					</span>
+					<span
+						style={{
+							display: 'inline-block',
+							transform: `translateY(${interpolate(
+								up(12),
+								[0, 1],
+								[400, 0]
+							)}px)`,
+						}}
+					>
+						$
+					</span>
 				</div>
 			</AbsoluteFill>
 			<AbsoluteFill
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `translateY(${secondTranslateY}px)`,
+					transform: `translateY(${180}px)`,
 				}}
 			>
 				<div
@@ -69,9 +115,10 @@ export const Free: React.FC = () => {
 						fontFamily: 'SF Pro',
 						fontSize: 80,
 						fontWeight: 'bold',
+						textAlign: 'center',
 					}}
 				>
-					for individuals
+					Company licensing <br /> available
 				</div>
 			</AbsoluteFill>
 		</AbsoluteFill>

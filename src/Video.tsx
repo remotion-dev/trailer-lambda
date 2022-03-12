@@ -21,9 +21,11 @@ import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
 import {BigNum} from './Number';
 import {Olympia} from './Olympia/Master';
+import {Paid} from './Paid';
 import {Party} from './Party';
 import {Pitch} from './Pitch';
 import {PlayerExample} from './PlayerExample';
+import {Pricing} from './Pricing';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
@@ -428,6 +430,22 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Free"
 				component={Free}
+				durationInFrames={300}
+				height={720}
+				width={1280}
+				fps={24}
+			/>
+			<Composition
+				id="Paid"
+				component={Paid}
+				durationInFrames={300}
+				height={720}
+				width={1280}
+				fps={24}
+			/>
+			<Composition
+				id="Pricing"
+				component={Pricing}
 				durationInFrames={300}
 				height={720}
 				width={1280}
