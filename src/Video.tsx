@@ -42,6 +42,7 @@ import {TimelineSplit} from './TimelineSplit';
 import {Tunnel} from './Tunnel';
 import {TunnelMask} from './TunnelMask';
 import {Upwind} from './Upwind';
+import {VideoApps} from './VideoApps';
 import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 import {WayTooSlow} from './WayTooSlow';
@@ -460,6 +461,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="ProductLineUp"
 				component={ProductLineUp}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="VideoApps"
+				component={VideoApps}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

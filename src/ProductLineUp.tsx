@@ -9,6 +9,7 @@ import {
 } from 'remotion';
 import {ManySpin} from './ManySpin';
 import {PlayerExample} from './PlayerExample';
+import {VideoApps} from './VideoApps';
 import {WriteInReact} from './WriteInReact';
 
 export const ProductLineUp: React.FC = () => {
@@ -50,18 +51,18 @@ export const ProductLineUp: React.FC = () => {
 	);
 	const left3 = interpolate(prog2, [0, 1], [width, (width / 3) * 2]);
 
+	const disappearSpring = (delay: number) => {
+		return spring({
+			fps,
+			frame: frame - 200 - delay,
+			config: {
+				damping: 200,
+			},
+		});
+	};
+
 	const disappearY = (delay: number) =>
-		interpolate(
-			spring({
-				fps,
-				frame: frame - 200 - delay,
-				config: {
-					damping: 200,
-				},
-			}),
-			[0, 1],
-			[0, (height / 5) * 3]
-		);
+		interpolate(disappearSpring(delay), [0, 1], [0, (height / 5) * 3]);
 
 	return (
 		<AbsoluteFill
@@ -115,6 +116,19 @@ export const ProductLineUp: React.FC = () => {
 					<ManySpin flipProgress={null} /* width={width3} */ />
 				</Sequence>
 			</div>
+			<AbsoluteFill
+				style={{
+					transform: `translateY(${interpolate(
+						disappearSpring(8),
+						[0, 1],
+						[-height, 0]
+					)}px)`,
+				}}
+			>
+				<Sequence from={200}>
+					<VideoApps />
+				</Sequence>
+			</AbsoluteFill>
 		</AbsoluteFill>
 	);
 };
