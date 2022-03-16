@@ -20,7 +20,7 @@ export const Free: React.FC = () => {
 	});
 
 	const scale = interpolate(progress, [0, 1], [1, 0.8]);
-	const translateY = interpolate(progress, [0, 1], [0, -100]);
+	const translateY = interpolate(progress, [0, 1], [0, -180]);
 	const secondTranslateY = interpolate(progress, [0, 1], [height, 150]);
 
 	return (
@@ -43,7 +43,7 @@ export const Free: React.FC = () => {
 						color: COLORS[0],
 						display: 'inline-block',
 						fontFamily: 'SF Pro',
-						fontSize: 200,
+						fontSize: 300,
 						fontWeight: 'bold',
 						paddingLeft: 80,
 						paddingRight: 80,
@@ -67,7 +67,7 @@ export const Free: React.FC = () => {
 						color: COLORS[0],
 						display: 'inline-block',
 						fontFamily: 'SF Pro',
-						fontSize: 80,
+						fontSize: 120,
 						fontWeight: 'bold',
 					}}
 				>

@@ -69,7 +69,7 @@ export const MasterComp: React.FC = () => {
 			<Sequence durationInFrames={100} from={300}>
 				<WayTooSlow />
 			</Sequence>
-			<Sequence durationInFrames={100} from={2100}>
+			<Sequence durationInFrames={200} from={2100}>
 				<Pricing />
 			</Sequence>
 		</AbsoluteFill>

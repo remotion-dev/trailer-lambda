@@ -30,6 +30,7 @@ import {ProductLineUp} from './ProductLineUp';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
+import {SourceAvailable} from './SourceAvailable';
 import {SpaceDust} from './SpaceDust';
 import {Spin} from './Spin';
 import {StarryNumber} from './StarryNumber';
@@ -94,7 +95,7 @@ export const RemotionVideo: React.FC = () => {
 				width={1920}
 				height={1080}
 				defaultProps={{
-					seed: '0',
+					flipProgress: 0,
 				}}
 			/>
 			<Composition
@@ -438,24 +439,24 @@ export const RemotionVideo: React.FC = () => {
 				id="Free"
 				component={Free}
 				durationInFrames={300}
-				height={720}
-				width={1280}
+				height={1080}
+				width={1920}
 				fps={24}
 			/>
 			<Composition
 				id="Paid"
 				component={Paid}
 				durationInFrames={300}
-				height={720}
-				width={1280}
+				height={1080}
+				width={1920}
 				fps={24}
 			/>
 			<Composition
 				id="Pricing"
 				component={Pricing}
 				durationInFrames={300}
-				height={720}
-				width={1280}
+				height={1080}
+				width={1920}
 				fps={24}
 			/>
 			<Composition
@@ -469,6 +470,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="VideoApps"
 				component={VideoApps}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="SourceAvailable"
+				component={SourceAvailable}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

@@ -43,7 +43,7 @@ export const Paid: React.FC<{
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `scale(${scale}) translateY(${-100}px)`,
+					transform: `scale(${scale}) translateY(${-220}px)`,
 				}}
 			>
 				<div
@@ -52,7 +52,7 @@ export const Paid: React.FC<{
 						color: COLORS[0],
 						display: 'inline-block',
 						fontFamily: 'SF Pro',
-						fontSize: 200,
+						fontSize: 300,
 						fontWeight: 'bold',
 						paddingLeft: 50,
 						paddingRight: 50,
@@ -69,7 +69,7 @@ export const Paid: React.FC<{
 							transform: `translateY(${interpolate(
 								up(10),
 								[0, 1],
-								[300, 0]
+								[450, 0]
 							)}px)`,
 						}}
 					>
@@ -81,7 +81,7 @@ export const Paid: React.FC<{
 							transform: `translateY(${interpolate(
 								up(4),
 								[0, 1],
-								[250, 0]
+								[400, 0]
 							)}px)`,
 						}}
 					>
@@ -93,7 +93,7 @@ export const Paid: React.FC<{
 							transform: `translateY(${interpolate(
 								up(12),
 								[0, 1],
-								[400, 0]
+								[500, 0]
 							)}px)`,
 						}}
 					>
@@ -113,7 +113,7 @@ export const Paid: React.FC<{
 						color: COLORS[0],
 						display: 'inline-block',
 						fontFamily: 'SF Pro',
-						fontSize: 80,
+						fontSize: 120,
 						fontWeight: 'bold',
 						textAlign: 'center',
 					}}

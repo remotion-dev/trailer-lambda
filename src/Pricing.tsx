@@ -10,8 +10,8 @@ import {COLORS} from './colors';
 import {Free} from './Free';
 import {Paid} from './Paid';
 
-const LINE_X_RADIUS = 100;
-const LINE_Y_RADIUS = 300;
+const LINE_X_RADIUS = 150;
+const LINE_Y_RADIUS = 500;
 
 export const Pricing: React.FC = () => {
 	const {fps, width, height} = useVideoConfig();
@@ -35,10 +35,10 @@ export const Pricing: React.FC = () => {
 		},
 	});
 
-	const x = Math.sin((progress * Math.PI) / 2) * 700;
-	const y = Math.cos((progress * Math.PI) / 2) * 700;
-	const x2 = Math.sin((progress * Math.PI) / 2 + Math.PI) * 700;
-	const y2 = Math.cos((progress * Math.PI) / 2 + Math.PI) * 700;
+	const x = Math.sin((progress * Math.PI) / 2) * 1000;
+	const y = Math.cos((progress * Math.PI) / 2) * 1000;
+	const x2 = Math.sin((progress * Math.PI) / 2 + Math.PI) * 1000;
+	const y2 = Math.cos((progress * Math.PI) / 2 + Math.PI) * 1000;
 
 	const lineX =
 		Math.sin((progress * Math.PI) / 2 + Math.PI / 4) *
@@ -93,7 +93,7 @@ export const Pricing: React.FC = () => {
 					<path
 						d={`M ${lineX} ${lineY} L ${line2X} ${line2Y}`}
 						stroke={COLORS[0]}
-						strokeWidth={1}
+						strokeWidth={5}
 					/>
 				</svg>
 			</AbsoluteFill>
