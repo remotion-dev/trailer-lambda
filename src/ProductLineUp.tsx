@@ -13,7 +13,7 @@ import {WriteInReact} from './WriteInReact';
 
 export const ProductLineUp: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {fps, width} = useVideoConfig();
+	const {fps, height, width} = useVideoConfig();
 
 	const prog1 = spring({
 		fps,
@@ -50,6 +50,19 @@ export const ProductLineUp: React.FC = () => {
 	);
 	const left3 = interpolate(prog2, [0, 1], [width, (width / 3) * 2]);
 
+	const disappearY = (delay: number) =>
+		interpolate(
+			spring({
+				fps,
+				frame: frame - 200 - delay,
+				config: {
+					damping: 200,
+				},
+			}),
+			[0, 1],
+			[0, (height / 5) * 3]
+		);
+
 	return (
 		<AbsoluteFill
 			style={{
@@ -65,6 +78,7 @@ export const ProductLineUp: React.FC = () => {
 					alignItems: 'center',
 					display: 'flex',
 					overflow: 'hidden',
+					transform: `translateY(${disappearY(0)}px)`,
 				}}
 			>
 				<WriteInReact flipProgress={prog1} width={width1} />
@@ -79,6 +93,7 @@ export const ProductLineUp: React.FC = () => {
 					alignItems: 'center',
 					display: 'flex',
 					overflow: 'hidden',
+					transform: `translateY(${disappearY(4)}px)`,
 				}}
 			>
 				<PlayerExample flipProgress={prog2} delay={70} width={width2} />
@@ -93,6 +108,7 @@ export const ProductLineUp: React.FC = () => {
 					alignItems: 'center',
 					display: 'flex',
 					overflow: 'hidden',
+					transform: `translateY(${disappearY(8)}px)`,
 				}}
 			>
 				<Sequence from={120}>
