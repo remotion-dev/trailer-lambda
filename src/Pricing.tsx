@@ -11,7 +11,6 @@ import {Free} from './Free';
 import {Paid} from './Paid';
 
 const LINE_X_RADIUS = 150;
-const LINE_Y_RADIUS = 500;
 
 export const Pricing: React.FC = () => {
 	const {fps, width, height} = useVideoConfig();
@@ -34,6 +33,22 @@ export const Pricing: React.FC = () => {
 			damping: 200,
 		},
 	});
+
+	const lineExplode = spring({
+		fps,
+		frame: frame - 80,
+		config: {
+			damping: 200,
+		},
+	});
+
+	const LINE_Y_RADIUS = interpolate(lineExplode, [0, 1], [500, height]);
+
+	const currentStrokeWidth = interpolate(
+		lineExplode,
+		[0, 1],
+		[5, width + LINE_X_RADIUS]
+	);
 
 	const x = Math.sin((progress * Math.PI) / 2) * 1000;
 	const y = Math.cos((progress * Math.PI) / 2) * 1000;
@@ -91,9 +106,13 @@ export const Pricing: React.FC = () => {
 			<AbsoluteFill>
 				<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 					<path
-						d={`M ${lineX} ${lineY} L ${line2X} ${line2Y}`}
-						stroke={COLORS[0]}
-						strokeWidth={5}
+						d={`
+						M ${lineX - currentStrokeWidth / 2} ${lineY}
+						L ${line2X - currentStrokeWidth / 2} ${line2Y}
+						L ${line2X + currentStrokeWidth / 2} ${line2Y}
+						L ${lineX + currentStrokeWidth / 2} ${lineY}
+						`}
+						fill={COLORS[0]}
 					/>
 				</svg>
 			</AbsoluteFill>
