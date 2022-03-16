@@ -5,6 +5,7 @@ import {interpolate, useCurrentFrame} from 'remotion';
 export const Casette: React.FC = (props) => {
 	const frame = useCurrentFrame();
 	const group = useRef();
+	// @ts-expect-error drei
 	const {nodes, materials} = useGLTF(
 		'https://jonnyburger.s3.eu-central-1.amazonaws.com/casette-full-labeled-v4.glb'
 	);

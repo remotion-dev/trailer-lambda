@@ -4,6 +4,7 @@ import {interpolate, spring} from 'remotion';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
 import {COLORS} from '../colors';
+// @ts-expect-error bold
 import JSONfont from './Bold.json';
 
 extend({TextGeometry});
@@ -68,11 +69,17 @@ export const TextMesh: React.FC<{
 				i * letterSpacing -
 				totalWidth / 2;
 			const y = -size / 2;
+			// @ts-expect-error ignore
 			surfaceRefs[i].current.position.x = pos;
+			// @ts-expect-error ignore
 			surfaceRefs[i].current.position.y = y;
+			// @ts-expect-error ignore
 			surfaceRefs[i].current.position.z = z() + 0.01;
+			// @ts-expect-error ignore
 			characterRefs[i].current.position.x = pos;
+			// @ts-expect-error ignore
 			characterRefs[i].current.position.y = y;
+			// @ts-expect-error ignore
 			characterRefs[i].current.position.z = -height + z(i);
 		}
 	});

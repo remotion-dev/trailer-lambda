@@ -20,12 +20,13 @@ import {MasterComp} from './MasterComp';
 import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
 import {BigNum} from './Number';
-import {Olympia} from './Olympia/Master';
+import {Olympia} from './Olympia/Olympia';
 import {Paid} from './Paid';
 import {Party} from './Party';
 import {Pitch} from './Pitch';
 import {PlayerExample} from './PlayerExample';
 import {Pricing} from './Pricing';
+import {ProductLineUp} from './ProductLineUp';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
@@ -423,9 +424,14 @@ export const RemotionVideo: React.FC = () => {
 				id="PlayerExample"
 				component={PlayerExample}
 				durationInFrames={300}
-				height={720}
-				width={1280}
+				height={1080}
+				width={1920}
 				fps={24}
+				defaultProps={{
+					delay: 0,
+					width: null,
+					flipProgress: null,
+				}}
 			/>
 			<Composition
 				id="Free"
@@ -449,6 +455,14 @@ export const RemotionVideo: React.FC = () => {
 				durationInFrames={300}
 				height={720}
 				width={1280}
+				fps={24}
+			/>
+			<Composition
+				id="ProductLineUp"
+				component={ProductLineUp}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
 				fps={24}
 			/>
 		</>

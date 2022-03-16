@@ -4,8 +4,14 @@ import {COLORS} from './colors';
 
 export const AnimatedReactLogo: React.FC<{
 	driver: number;
-}> = ({driver}) => {
-	const {height, width} = useVideoConfig();
+	width: number | null;
+}> = ({driver, width: originalWidth}) => {
+	const {height, width: compWidth} = useVideoConfig();
+	const width = originalWidth ?? compWidth;
+	const rx = width * 0.2;
+	const ry = (rx / 400) * 140;
+	const strokeWidth = width * 0.025;
+
 	return (
 		<>
 			{new Array(3).fill(true).map((ell, i) => {
@@ -22,11 +28,11 @@ export const AnimatedReactLogo: React.FC<{
 							<ellipse
 								cx={width / 2}
 								cy={height / 2}
-								rx={400}
-								ry={140}
+								rx={rx}
+								ry={ry}
 								stroke={COLORS[0]}
 								fill="transparent"
-								strokeWidth={40}
+								strokeWidth={strokeWidth}
 							/>
 						</svg>
 					</AbsoluteFill>

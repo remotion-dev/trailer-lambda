@@ -6,7 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {COLOR, CONTROLS_START, PADDING, PLAY_START, Theme} from './const';
+import {COLOR, CONTROLS_START, PLAY_START} from './const';
 
 const Play: React.FC = () => {
 	return (
@@ -20,35 +20,12 @@ const Play: React.FC = () => {
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 448 512"
 			style={{
-				height: 38,
+				height: 40,
 			}}
 		>
 			<path
 				fill="currentColor"
 				d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
-			/>
-		</svg>
-	);
-};
-
-const Pause: React.FC = () => {
-	return (
-		<svg
-			aria-hidden="true"
-			focusable="false"
-			data-prefix="fas"
-			data-icon="pause"
-			className="svg-inline--fa fa-pause fa-w-14"
-			role="img"
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 448 512"
-			style={{
-				height: 38,
-			}}
-		>
-			<path
-				fill="currentColor"
-				d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"
 			/>
 		</svg>
 	);
@@ -112,7 +89,7 @@ const Time: React.FC = () => {
 			style={{
 				fontFamily: 'SF Pro Display',
 				fontWeight: 500,
-				fontSize: 22,
+				fontSize: 26,
 			}}
 		>
 			0:{String(seconds).padStart(2, '0')} / 0:59
@@ -121,30 +98,33 @@ const Time: React.FC = () => {
 };
 
 export const Controls: React.FC<{
-	theme: Theme;
-}> = ({theme}) => {
-	const {fps} = useVideoConfig();
+	width: number | null;
+	delay: number;
+	padding: number;
+	height: number;
+}> = ({width: originalWidth, height, delay, padding}) => {
+	const {fps, width: compWidth, height: compHeight} = useVideoConfig();
+	const width = originalWidth ?? compWidth;
 	const frame = useCurrentFrame();
 	const prog = spring({
 		fps,
-		frame: frame - CONTROLS_START,
+		frame: frame - CONTROLS_START - delay,
 		config: {
 			damping: 200,
 		},
 	});
-	const playing = frame < PLAY_START;
 
 	return (
 		<AbsoluteFill
 			style={{
 				top: 'auto',
 				right: 'auto',
-				bottom: PADDING,
-				left: PADDING,
-				padding: 30,
-				paddingLeft: 40,
-				paddingRight: 40,
-				width: 1280 - PADDING * 2,
+				bottom: padding,
+				left: padding,
+				padding: 45,
+				paddingLeft: 50,
+				paddingRight: 50,
+				width: width - padding * 2,
 				height: 'auto',
 				alignItems: 'center',
 				flexDirection: 'row',
@@ -156,14 +136,14 @@ export const Controls: React.FC<{
 					display: 'flex',
 					flexDirection: 'row',
 					width: '100%',
-					marginBottom: 0,
+					marginBottom: (compHeight - height) / 2,
 					alignItems: 'center',
 					transform: `translateY(${interpolate(prog, [0, 1], [200, 0])}px)`,
 					color: COLOR,
 				}}
 			>
-				{playing ? <Play /> : <Pause />}
-				<div style={{width: 40}} />
+				<Play />
+				<div style={{width: 30}} />
 				<Volume />
 				<div style={{width: 20}} />
 				<Time />

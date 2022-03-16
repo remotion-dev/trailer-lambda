@@ -1,24 +1,20 @@
 import React from 'react';
-import {
-	AbsoluteFill,
-	interpolate,
-	useCurrentFrame,
-	useVideoConfig,
-} from 'remotion';
+import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
+import {COLORS} from './colors';
 
 export const Cursor: React.FC<{
 	driver: number;
-}> = ({driver}) => {
-	const {fps, width} = useVideoConfig();
-	const frame = useCurrentFrame();
+	width: number;
+}> = ({driver, width: originalWidth}) => {
+	const {width: compWidth} = useVideoConfig();
+	const width = originalWidth ?? compWidth;
 
 	return (
 		<AbsoluteFill>
 			<AbsoluteFill>
 				<div
 					style={{
-						background:
-							'linear-gradient(rgb(54, 151, 225), rgb(52, 138, 199) 60%)',
+						background: COLORS[0],
 						height: 200,
 						width: 'calc(100% - 100px)',
 						left: 50,

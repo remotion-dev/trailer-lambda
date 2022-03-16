@@ -7,20 +7,14 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {
-	COLOR,
-	CONTROLS_START,
-	FOREGROUND,
-	PADDING,
-	PLAY_START,
-	Theme,
-} from './const';
+import {COLOR, CONTROLS_START, FOREGROUND, PLAY_START, Theme} from './const';
 
 export const TimeBar: React.FC<{
 	theme: Theme;
 }> = ({theme}) => {
-	const {fps} = useVideoConfig();
+	const {fps, width} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const PADDING = width * 0.1;
 	const prog = spring({
 		fps,
 		frame: frame - CONTROLS_START - 3,

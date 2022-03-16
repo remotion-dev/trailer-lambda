@@ -2,13 +2,14 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {Cheap} from './Cheap';
-import {Fast} from './Fast';
-import {Scalable} from './Scalable';
+import {ManySpin} from './ManySpin';
+import {PlayerExample} from './PlayerExample';
+import {WriteInReact} from './WriteInReact';
 
 export const ProductLineUp: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -16,7 +17,7 @@ export const ProductLineUp: React.FC = () => {
 
 	const prog1 = spring({
 		fps,
-		frame: frame - 30,
+		frame: frame - 60,
 		config: {
 			damping: 200,
 		},
@@ -24,7 +25,7 @@ export const ProductLineUp: React.FC = () => {
 
 	const prog2 = spring({
 		fps,
-		frame: frame - 60,
+		frame: frame - 120,
 		config: {
 			damping: 200,
 		},
@@ -50,7 +51,11 @@ export const ProductLineUp: React.FC = () => {
 	const left3 = interpolate(prog2, [0, 1], [width, (width / 3) * 2]);
 
 	return (
-		<AbsoluteFill>
+		<AbsoluteFill
+			style={{
+				backgroundColor: 'white',
+			}}
+		>
 			<div
 				style={{
 					width: width1,
@@ -62,7 +67,7 @@ export const ProductLineUp: React.FC = () => {
 					overflow: 'hidden',
 				}}
 			>
-				<Fast />
+				<WriteInReact flipProgress={prog1} width={width1} />
 			</div>
 			<div
 				style={{
@@ -76,7 +81,7 @@ export const ProductLineUp: React.FC = () => {
 					overflow: 'hidden',
 				}}
 			>
-				<Scalable />
+				<PlayerExample flipProgress={prog2} delay={70} width={width2} />
 			</div>
 			<div
 				style={{
@@ -90,7 +95,9 @@ export const ProductLineUp: React.FC = () => {
 					overflow: 'hidden',
 				}}
 			>
-				<Cheap width={width3} />
+				<Sequence from={120}>
+					<ManySpin flipProgress={null} /* width={width3} */ />
+				</Sequence>
 			</div>
 		</AbsoluteFill>
 	);
