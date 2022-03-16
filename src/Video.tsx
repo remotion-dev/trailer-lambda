@@ -4,6 +4,7 @@ import {Model} from './Casette';
 import {CheapNoise} from './CheapNoise';
 import {Clocks} from './Clocks';
 import {Cursor} from './Cursor';
+import {Curtain} from './Curtain';
 import {Dust} from './Dust';
 import {EasyNoise} from './EasyNoise';
 import {Elevator} from './Elevator';
@@ -478,6 +479,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="SourceAvailable"
 				component={SourceAvailable}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="Curtain"
+				component={Curtain}
 				durationInFrames={300}
 				height={1080}
 				width={1920}
