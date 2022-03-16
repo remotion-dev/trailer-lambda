@@ -27,6 +27,7 @@ import {Party} from './Party';
 import {Pitch} from './Pitch';
 import {PlayerExample} from './PlayerExample';
 import {Pricing} from './Pricing';
+import {PricingToSourceAvailable} from './PricingToSourceAvailable';
 import {ProductLineUp} from './ProductLineUp';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
@@ -487,6 +488,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Curtain"
 				component={Curtain}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="PricingToSource"
+				component={PricingToSourceAvailable}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

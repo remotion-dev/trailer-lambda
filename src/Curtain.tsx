@@ -8,7 +8,7 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 
-export const Curtain: React.FC = () => {
+export const Curtain: React.FC = ({children}) => {
 	const {fps, width} = useVideoConfig();
 	const frame = useCurrentFrame();
 	const progress = spring({
@@ -23,26 +23,29 @@ export const Curtain: React.FC = () => {
 	const translateX2 = interpolate(progress, [0, 1], [0, width / 2]);
 
 	return (
-		<AbsoluteFill
-			style={{
-				display: 'flex',
-				flexDirection: 'row',
-			}}
-		>
-			<div
+		<AbsoluteFill>
+			<AbsoluteFill
 				style={{
-					flex: 1,
-					backgroundColor: COLORS[0],
-					transform: `translateX(${translateX1}px)`,
+					display: 'flex',
+					flexDirection: 'row',
 				}}
-			/>
-			<div
-				style={{
-					flex: 1,
-					backgroundColor: COLORS[0],
-					transform: `translateX(${translateX2}px)`,
-				}}
-			/>
+			>
+				<div
+					style={{
+						flex: 1,
+						backgroundColor: COLORS[0],
+						transform: `translateX(${translateX1}px)`,
+					}}
+				/>
+				<div
+					style={{
+						flex: 1,
+						backgroundColor: COLORS[0],
+						transform: `translateX(${translateX2}px)`,
+					}}
+				/>
+			</AbsoluteFill>
+			{children}
 		</AbsoluteFill>
 	);
 };
