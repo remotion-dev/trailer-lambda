@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
-import {NormallyTakes} from './NormallyTakes';
+import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {Pitch} from './Pitch';
 import {PricingToSourceAvailable} from './PricingToSourceAvailable';
 import {ProductLineUp} from './ProductLineUp';
@@ -17,8 +17,8 @@ export const MasterComp: React.FC = () => {
 			}}
 		>
 			<Audio src={staticFile('voiceover-full.mp3')} />
-			<Sequence durationInFrames={50} from={175}>
-				<NormallyTakes />
+			<Sequence durationInFrames={200} from={175}>
+				<NormallyTakesMultiplied />
 			</Sequence>
 			<Sequence from={0} durationInFrames={200}>
 				<Pitch />

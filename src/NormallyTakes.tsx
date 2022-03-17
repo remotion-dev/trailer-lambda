@@ -25,7 +25,7 @@ export const NormallyTakes: React.FC = () => {
 	});
 	const pressIn = spring({
 		fps,
-		frame: frame - dur + 7,
+		frame: frame - dur + 3,
 		config: {
 			mass: 0.6,
 		},
@@ -65,12 +65,29 @@ export const NormallyTakes: React.FC = () => {
 	];
 
 	return (
-		<AbsoluteFill
-			style={{
-				backgroundColor: 'white',
-			}}
-		>
+		<AbsoluteFill>
 			<AbsoluteFill>
+				<AbsoluteFill>
+					<svg
+						width={width}
+						height={height}
+						style={{
+							transform: `rotate(-90deg)`,
+						}}
+					>
+						<circle
+							cx={width / 2}
+							cy={height / 2}
+							r={r}
+							stroke={COLORS[0]}
+							fill="white"
+							strokeWidth={60}
+							strokeDasharray={strokeDashArray}
+							strokeDashoffset={dashOffset}
+							strokeLinecap="round"
+						/>
+					</svg>
+				</AbsoluteFill>
 				<AbsoluteFill
 					style={{
 						justifyContent: 'center',
@@ -112,27 +129,6 @@ export const NormallyTakes: React.FC = () => {
 								strokeLinecap="round"
 							/>
 						) : null}
-					</svg>
-				</AbsoluteFill>
-				<AbsoluteFill>
-					<svg
-						width={width}
-						height={height}
-						style={{
-							transform: `rotate(-90deg)`,
-						}}
-					>
-						<circle
-							cx={width / 2}
-							cy={height / 2}
-							r={r}
-							stroke={COLORS[0]}
-							fill="none"
-							strokeWidth={60}
-							strokeDasharray={strokeDashArray}
-							strokeDashoffset={dashOffset}
-							strokeLinecap="round"
-						/>
 					</svg>
 				</AbsoluteFill>
 			</AbsoluteFill>

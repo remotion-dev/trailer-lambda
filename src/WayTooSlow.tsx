@@ -40,7 +40,7 @@ export const WayTooSlow: React.FC = () => {
 				<h1
 					style={{
 						fontFamily: 'SF Pro',
-						fontSize: 250,
+						fontSize: 280,
 						color: COLORS[0],
 						marginTop: 0,
 						fontStyle: 'italic',
@@ -48,6 +48,7 @@ export const WayTooSlow: React.FC = () => {
 						fontWeight: 900,
 						lineHeight: 1,
 						textAlign: 'center',
+						WebkitTextStroke: '10px white',
 					}}
 				>
 					<span
