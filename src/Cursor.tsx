@@ -4,7 +4,7 @@ import {COLORS} from './colors';
 
 export const Cursor: React.FC<{
 	driver: number;
-	width: number;
+	width: number | null;
 }> = ({driver, width: originalWidth}) => {
 	const {width: compWidth} = useVideoConfig();
 	const width = originalWidth ?? compWidth;

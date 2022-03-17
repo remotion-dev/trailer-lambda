@@ -423,6 +423,10 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 				width={1920}
 				fps={24}
+				defaultProps={{
+					driver: 0,
+					width: null,
+				}}
 			/>
 			<Composition
 				id="PlayerExample"
