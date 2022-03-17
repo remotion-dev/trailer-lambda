@@ -7,7 +7,7 @@ export const PricingToSourceAvailable: React.FC = () => {
 	return (
 		<AbsoluteFill>
 			<Series>
-				<Series.Sequence durationInFrames={97}>
+				<Series.Sequence durationInFrames={117}>
 					<Pricing />
 				</Series.Sequence>
 				<Series.Sequence durationInFrames={100}>

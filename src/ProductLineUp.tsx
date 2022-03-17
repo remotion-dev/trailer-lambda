@@ -12,6 +12,8 @@ import {PlayerExample} from './PlayerExample';
 import {VideoApps} from './VideoApps';
 import {WriteInReact} from './WriteInReact';
 
+const TRANSITION_START = 300;
+
 export const ProductLineUp: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps, height, width} = useVideoConfig();
@@ -54,7 +56,7 @@ export const ProductLineUp: React.FC = () => {
 	const disappearSpring = (delay: number) => {
 		return spring({
 			fps,
-			frame: frame - 200 - delay,
+			frame: frame - TRANSITION_START - delay,
 			config: {
 				damping: 200,
 			},
@@ -70,65 +72,68 @@ export const ProductLineUp: React.FC = () => {
 				backgroundColor: 'white',
 			}}
 		>
-			<div
-				style={{
-					width: width1,
-					position: 'absolute',
-					height: '100%',
-					justifyContent: 'center',
-					alignItems: 'center',
-					display: 'flex',
-					overflow: 'hidden',
-					transform: `translateY(${disappearY(0)}px)`,
-				}}
-			>
-				<WriteInReact flipProgress={prog1} width={width1} />
-			</div>
-			<div
-				style={{
-					width: width2,
-					left: left2,
-					position: 'absolute',
-					height: '100%',
-					justifyContent: 'center',
-					alignItems: 'center',
-					display: 'flex',
-					overflow: 'hidden',
-					transform: `translateY(${disappearY(4)}px)`,
-				}}
-			>
-				<PlayerExample flipProgress={prog2} delay={70} width={width2} />
-			</div>
-			<div
-				style={{
-					width: width3,
-					left: left3,
-					position: 'absolute',
-					height: '100%',
-					justifyContent: 'center',
-					alignItems: 'center',
-					display: 'flex',
-					overflow: 'hidden',
-					transform: `translateY(${disappearY(8)}px)`,
-				}}
-			>
-				<Sequence from={120}>
-					<ManySpin flipProgress={null} /* width={width3} */ />
-				</Sequence>
-			</div>
-			<AbsoluteFill
-				style={{
-					transform: `translateY(${interpolate(
-						disappearSpring(8),
-						[0, 1],
-						[-height, 0]
-					)}px)`,
-				}}
-			>
-				<Sequence from={200}>
+			<Sequence from={0} durationInFrames={TRANSITION_START + 10}>
+				<div
+					style={{
+						width: width1,
+						position: 'absolute',
+						height: '100%',
+						justifyContent: 'center',
+						alignItems: 'center',
+						display: 'flex',
+						overflow: 'hidden',
+						transform: `translateY(${disappearY(0)}px)`,
+					}}
+				>
+					<WriteInReact flipProgress={prog1} width={width1} />
+				</div>
+				<div
+					style={{
+						width: width2,
+						left: left2,
+						position: 'absolute',
+						height: '100%',
+						justifyContent: 'center',
+						alignItems: 'center',
+						display: 'flex',
+						overflow: 'hidden',
+						transform: `translateY(${disappearY(4)}px)`,
+					}}
+				>
+					<PlayerExample flipProgress={prog2} delay={70} width={width2} />
+				</div>
+				<div
+					style={{
+						width: width3,
+						left: left3,
+						position: 'absolute',
+						height: '100%',
+						justifyContent: 'center',
+						alignItems: 'center',
+						display: 'flex',
+						overflow: 'hidden',
+						transform: `translateY(${disappearY(8)}px)`,
+					}}
+				>
+					<Sequence from={120}>
+						<ManySpin flipProgress={null} /* width={width3} */ />
+					</Sequence>
+				</div>
+			</Sequence>
+
+			<Sequence from={TRANSITION_START}>
+				<AbsoluteFill
+					style={{
+						transform: `translateY(${interpolate(
+							disappearSpring(8),
+							[0, 1],
+							[-height, 0]
+						)}px)`,
+					}}
+				>
 					<VideoApps />
-				</Sequence>
-			</AbsoluteFill>
+				</AbsoluteFill>
+			</Sequence>
 		</AbsoluteFill>
 	);
 };

@@ -63,7 +63,7 @@ export const Light: React.FC<{
 					backfaceVisibility: 'hidden',
 				}}
 			>
-				<svg width={width} height={height} viewBox="0 0 width height">
+				<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 					<path
 						stroke={COLOR}
 						strokeWidth={10}

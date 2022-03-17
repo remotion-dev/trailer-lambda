@@ -123,7 +123,9 @@ export const ThisVideo: React.FC<{
 										textAlign: 'center',
 									}}
 								>
-									has 2400 frames
+									2400
+									<br />
+									frames
 								</h1>
 							</AbsoluteFill>
 						) : null}
