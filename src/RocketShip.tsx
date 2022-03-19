@@ -118,7 +118,7 @@ export const RocketShip: React.FC = () => {
 				<Upwind />
 			</Sequence>
 
-			<Sequence from={100} durationInFrames={400}>
+			<Sequence from={80} durationInFrames={400}>
 				<SpaceDust />
 			</Sequence>
 			<Sequence from={80}>

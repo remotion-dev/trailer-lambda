@@ -46,7 +46,7 @@ const Column: React.FC<{
 
 export const Upwind: React.FC = () => {
 	const frame = useCurrentFrame();
-	const shade = interpolate(frame, [0, 120], [0, 1]);
+	const shade = interpolate(frame, [0, 80], [0, 1]);
 	const color = interpolateColors(shade, [0, 1], ['#fff', '#000']);
 
 	return (
