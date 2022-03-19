@@ -20,6 +20,7 @@ import {ManySpin} from './ManySpin';
 import {MasterComp} from './MasterComp';
 import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
+import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {BigNum} from './Number';
 import {Olympia} from './Olympia/Olympia';
 import {Paid} from './Paid';
@@ -369,6 +370,14 @@ export const RemotionVideo: React.FC = () => {
 				fps={24}
 			/>
 			<Composition
+				id="NormallyTakesMultiplied"
+				component={NormallyTakesMultiplied}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
 				id="WayTooSlow"
 				component={WayTooSlow}
 				durationInFrames={300}
@@ -419,12 +428,12 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Cursor"
 				component={Cursor}
-				durationInFrames={300}
+				durationInFrames={500}
 				height={1080}
 				width={1920}
 				fps={24}
 				defaultProps={{
-					driver: 0,
+					driver: 1,
 					width: null,
 				}}
 			/>

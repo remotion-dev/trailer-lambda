@@ -6,13 +6,14 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import {COLORS} from './colors';
 import {NormallyTakes} from './NormallyTakes';
 
 const num = 4;
 
 export const NormallyTakesMultiplied: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {fps, height} = useVideoConfig();
+	const {fps} = useVideoConfig();
 	const spread = spring({
 		fps,
 		frame: frame - 50,
@@ -24,24 +25,42 @@ export const NormallyTakesMultiplied: React.FC = () => {
 	return (
 		<AbsoluteFill>
 			{new Array(num).fill(true).map((t, i) => {
-				const offset = interpolate(i, [0, num - 1], [-100, 100]);
+				const offset = interpolate(i, [0, num - 1], [-700, 700]);
+				const scale = interpolate(spread, [0, 1], [1, 0.4]);
 
-				const moveOut = spring({
-					fps,
-					frame: frame - 120 - (num - i * 2),
-					config: {
-						damping: 200,
-					},
-				});
 				return (
 					<AbsoluteFill
 						style={{
-							transform: `translateX(${spread * -offset}px) translateY(${
-								spread * offset + moveOut * height
-							}px)`,
+							transform: `translateX(${spread * offset}px) scale(${scale})`,
 						}}
 					>
 						<NormallyTakes />
+					</AbsoluteFill>
+				);
+			})}
+			{new Array(num - 1).fill(true).map((t, i) => {
+				const offset = interpolate(i, [0, num - 2], [-470, 470]);
+				const scale = interpolate(spread, [0.8, 1], [0, 1], {
+					extrapolateLeft: 'clamp',
+				});
+
+				return (
+					<AbsoluteFill
+						style={{
+							justifyContent: 'center',
+							alignItems: 'center',
+							transform: `translateX(${spread * offset}px) scale(${scale})`,
+						}}
+					>
+						<h1
+							style={{
+								fontSize: 100,
+								fontFamily: 'SF Pro',
+								color: COLORS[0],
+							}}
+						>
+							+
+						</h1>
 					</AbsoluteFill>
 				);
 			})}
