@@ -24,7 +24,7 @@ export const Wave: React.FC<{
 		},
 	});
 
-	const amplitude = interpolate(progress, [0, 1], [0, 100]);
+	const amplitude = interpolate(progress, [0, 1], [0, 0]);
 	const radius = interpolate(progress, [0, 1], [0, 7000]);
 
 	const rotation = interpolate(progress, [0, 1], [0, Math.PI * 0.05]);

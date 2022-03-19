@@ -48,7 +48,6 @@ export const WayTooSlow: React.FC = () => {
 						fontWeight: 900,
 						lineHeight: 1,
 						textAlign: 'center',
-						WebkitTextStroke: '10px white',
 					}}
 				>
 					<span

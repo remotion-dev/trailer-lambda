@@ -22,6 +22,23 @@ export const NormallyTakesMultiplied: React.FC = () => {
 		},
 	});
 
+	const disappear =
+		1 -
+		interpolate(
+			spring({
+				fps,
+				frame: frame - 120,
+				config: {
+					mass: 0.4,
+				},
+			}),
+			[0, 0.9],
+			[0, 1],
+			{
+				extrapolateRight: 'clamp',
+			}
+		);
+
 	return (
 		<AbsoluteFill>
 			{new Array(num).fill(true).map((t, i) => {
@@ -31,7 +48,9 @@ export const NormallyTakesMultiplied: React.FC = () => {
 				return (
 					<AbsoluteFill
 						style={{
-							transform: `translateX(${spread * offset}px) scale(${scale})`,
+							transform: `translateX(${spread * offset}px) scale(${
+								scale * disappear
+							})`,
 						}}
 					>
 						<NormallyTakes />
@@ -49,7 +68,9 @@ export const NormallyTakesMultiplied: React.FC = () => {
 						style={{
 							justifyContent: 'center',
 							alignItems: 'center',
-							transform: `translateX(${spread * offset}px) scale(${scale})`,
+							transform: `translateX(${spread * offset}px) scale(${
+								scale * disappear
+							})`,
 						}}
 					>
 						<h1
