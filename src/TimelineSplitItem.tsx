@@ -197,6 +197,7 @@ export const TimelineSplitItem: React.FC<{
 					alternate
 					width={greekLetterWidth}
 					height={greekLetterHeight}
+					color="black"
 				/>
 			</div>
 		</AbsoluteFill>

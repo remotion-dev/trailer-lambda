@@ -5,7 +5,8 @@ export const GreekLetter: React.FC<{
 	alternate: boolean;
 	width: number;
 	height: number;
-}> = ({alternate, height, width}) => {
+	color: string;
+}> = ({alternate, height, width, color}) => {
 	return (
 		<svg
 			width={width}
@@ -19,8 +20,8 @@ export const GreekLetter: React.FC<{
 		>
 			<path
 				d="M203 264L1.5 737.5H16L82.5 737L239.5 363.5L375.5 733H443.5H461.5L183 1L115 26L203 264Z"
-				fill="#0B84F3"
-				stroke="#0B84F3"
+				fill={color}
+				stroke={color}
 			/>
 		</svg>
 	);

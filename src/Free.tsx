@@ -64,7 +64,7 @@ export const Free: React.FC = () => {
 			>
 				<div
 					style={{
-						color: COLORS[0],
+						color: 'black',
 						display: 'inline-block',
 						fontFamily: 'SF Pro',
 						fontSize: 120,

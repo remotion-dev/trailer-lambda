@@ -111,6 +111,7 @@ export const Spin: React.FC<{
 					alternate
 					width={greekLetterWidth}
 					height={greekLetterHeight}
+					color={COLORS[0]}
 				/>
 			</div>
 		</AbsoluteFill>

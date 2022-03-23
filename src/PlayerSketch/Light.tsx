@@ -2,15 +2,18 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import {AnimatedReactLogo} from '../AnimatedReactLogo';
 import {COLORS} from '../colors';
+import {ColorSwitcher, getColorFromFrame} from '../ColorSwitcher';
 import {Controls} from './Controls';
 
 const REACT_LOGO_SCALE = 0.5;
+const REACT_LOGO_START = 110;
 
 export const Light: React.FC<{
 	width: number | null;
@@ -53,6 +56,13 @@ export const Light: React.FC<{
 			mass: 6,
 		},
 	});
+
+	const colorPicker = interpolate(frame, [REACT_LOGO_START, 120], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+
+	const color = getColorFromFrame(frame - REACT_LOGO_START, fps);
 
 	return (
 		<AbsoluteFill
@@ -97,7 +107,7 @@ export const Light: React.FC<{
 					<AnimatedReactLogo
 						driver={reactAnimation}
 						width={width * REACT_LOGO_SCALE}
-						fill={COLORS[0]}
+						fill={color}
 					/>
 				</AbsoluteFill>
 				<Controls
@@ -106,6 +116,16 @@ export const Light: React.FC<{
 					delay={delay}
 					width={width}
 				/>
+				<AbsoluteFill
+					style={{
+						transform: `scale(0.4) translateY(850px)`,
+						opacity: colorPicker,
+					}}
+				>
+					<Sequence from={REACT_LOGO_START}>
+						<ColorSwitcher />
+					</Sequence>
+				</AbsoluteFill>
 			</AbsoluteFill>
 			<AbsoluteFill
 				style={{

@@ -101,7 +101,7 @@ export const Pricing: React.FC = () => {
 					)}) translateX(${x}px)  translateY(${y}px)`,
 				}}
 			>
-				<Paid start={55} />
+				<Paid start={45} />
 			</AbsoluteFill>
 			<AbsoluteFill>
 				<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>

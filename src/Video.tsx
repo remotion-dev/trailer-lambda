@@ -3,6 +3,7 @@ import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {CheapNoise} from './CheapNoise';
 import {Clocks} from './Clocks';
+import {ColorSwitcher} from './ColorSwitcher';
 import {Cursor} from './Cursor';
 import {Curtain} from './Curtain';
 import {Dust} from './Dust';
@@ -531,6 +532,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="WhatWillYouBuild"
 				component={WhatWillYouBuild}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="ColorSwitcher"
+				component={ColorSwitcher}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

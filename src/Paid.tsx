@@ -13,13 +13,6 @@ export const Paid: React.FC<{
 }> = ({start}) => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
-	const progress = spring({
-		fps,
-		frame: frame - start,
-		config: {
-			damping: 200,
-		},
-	});
 
 	const up = (delay: number) =>
 		spring({
@@ -109,7 +102,7 @@ export const Paid: React.FC<{
 			>
 				<div
 					style={{
-						color: COLORS[0],
+						color: 'black',
 						display: 'inline-block',
 						fontFamily: 'SF Pro',
 						fontSize: 120,
