@@ -15,7 +15,7 @@ export const VideoApps: React.FC = () => {
 
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
-	const delay = 30;
+	const delay = 45;
 	const sprconfig: Partial<SpringConfig> = {
 		damping: 200,
 	};

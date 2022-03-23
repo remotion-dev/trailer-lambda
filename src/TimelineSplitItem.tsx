@@ -40,7 +40,7 @@ export const TimelineSplitItem: React.FC<{
 	const {fps, height, width} = useVideoConfig();
 	const pos = spring({
 		fps,
-		frame,
+		frame: frame - 20,
 		config: {
 			damping: 200,
 		},
@@ -94,8 +94,8 @@ export const TimelineSplitItem: React.FC<{
 		damping: 200,
 	};
 
-	const fillAfter = 80 + index * 2;
-	const lambdaScaleAfter = 20 + index * 2;
+	const fillAfter = 130 + index * 2;
+	const lambdaScaleAfter = 90 + index * 2;
 
 	const lambdaScale = spring({
 		fps,

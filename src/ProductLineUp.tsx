@@ -12,7 +12,7 @@ import {PlayerExample} from './PlayerExample';
 import {VideoApps} from './VideoApps';
 import {WriteInReact} from './WriteInReact';
 
-const TRANSITION_START = 300;
+const TRANSITION_START = 330;
 
 export const ProductLineUp: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -20,7 +20,7 @@ export const ProductLineUp: React.FC = () => {
 
 	const prog1 = spring({
 		fps,
-		frame: frame - 60,
+		frame: frame - 90,
 		config: {
 			damping: 200,
 		},
@@ -28,7 +28,7 @@ export const ProductLineUp: React.FC = () => {
 
 	const prog2 = spring({
 		fps,
-		frame: frame - 120,
+		frame: frame - 200,
 		config: {
 			damping: 200,
 		},
@@ -72,7 +72,7 @@ export const ProductLineUp: React.FC = () => {
 				backgroundColor: 'white',
 			}}
 		>
-			<Sequence from={0} durationInFrames={TRANSITION_START + 10}>
+			<Sequence from={0} durationInFrames={TRANSITION_START + 40}>
 				<div
 					style={{
 						width: width1,
@@ -115,7 +115,7 @@ export const ProductLineUp: React.FC = () => {
 						transform: `translateY(${disappearY(8)}px)`,
 					}}
 				>
-					<Sequence from={120}>
+					<Sequence from={200}>
 						<ManySpin flipProgress={null} /* width={width3} */ />
 					</Sequence>
 				</div>

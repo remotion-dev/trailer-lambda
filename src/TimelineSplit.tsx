@@ -15,7 +15,7 @@ export const TimelineSplit: React.FC = () => {
 
 	const goBackTogether = spring({
 		fps,
-		frame: frame - 150,
+		frame: frame - 200,
 		config: {
 			damping: 200,
 		},

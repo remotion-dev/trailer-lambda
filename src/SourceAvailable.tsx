@@ -43,7 +43,7 @@ export const SourceAvailable: React.FC = () => {
 						style={{
 							marginRight: 30,
 						}}
-						fill={COLORS[0]}
+						fill="black"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 496 512"
 					>
@@ -72,9 +72,9 @@ export const SourceAvailable: React.FC = () => {
 						style={{
 							fontFamily: 'SF Pro',
 							fontSize: 40,
-							color: COLORS[0],
+							color: 'black',
 							marginLeft: 30,
-							border: '4px solid ' + COLORS[0],
+							border: '4px solid ' + 'black',
 							padding: '6px 20px',
 							borderRadius: 12,
 							marginTop: 10,
@@ -86,7 +86,7 @@ export const SourceAvailable: React.FC = () => {
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 576 512"
-							fill={COLORS[0]}
+							fill="black"
 							height={30}
 							style={{
 								marginRight: 10,

@@ -8,6 +8,7 @@ import {Curtain} from './Curtain';
 import {Dust} from './Dust';
 import {EasyNoise} from './EasyNoise';
 import {Elevator} from './Elevator';
+import {EndCard} from './EndCard';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {FlatCasette} from './FlatCasette';
 import {Free} from './Free';
@@ -55,6 +56,15 @@ import {WriteInReact} from './WriteInReact';
 export const RemotionVideo: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="Main"
+				component={MasterComp}
+				fps={VIDEO_FPS}
+				width={1920}
+				height={1080}
+				durationInFrames={2400}
+			/>
+
 			<Composition
 				id="HelloWorld"
 				component={Main}
@@ -237,14 +247,6 @@ export const RemotionVideo: React.FC = () => {
 					num: 10,
 					scale: 2,
 				}}
-			/>
-			<Composition
-				id="Main"
-				component={MasterComp}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
-				durationInFrames={2400}
 			/>
 			<Composition
 				id="Vis"
@@ -509,6 +511,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="PricingToSource"
 				component={PricingToSourceAvailable}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="EndCard"
+				component={EndCard}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

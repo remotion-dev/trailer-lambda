@@ -24,6 +24,8 @@ export const Curtain: React.FC = ({children}) => {
 
 	return (
 		<AbsoluteFill>
+			{children}
+
 			<AbsoluteFill
 				style={{
 					display: 'flex',
@@ -45,7 +47,6 @@ export const Curtain: React.FC = ({children}) => {
 					}}
 				/>
 			</AbsoluteFill>
-			{children}
 		</AbsoluteFill>
 	);
 };
