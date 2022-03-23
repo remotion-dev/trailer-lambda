@@ -9,12 +9,7 @@ export const PlayerExample: React.FC<{
 }> = ({delay, width, flipProgress}) => {
 	return (
 		<AbsoluteFill>
-			<Light
-				flipProgress={flipProgress}
-				delay={delay}
-				width={width}
-				theme="light"
-			/>
+			<Light flipProgress={flipProgress} delay={delay} width={width} />
 		</AbsoluteFill>
 	);
 };

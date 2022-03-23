@@ -21,8 +21,6 @@ export const Paid: React.FC<{
 		},
 	});
 
-	const scale = interpolate(progress, [0, 1], [1, 0.8]);
-
 	const up = (delay: number) =>
 		spring({
 			fps,
@@ -43,7 +41,7 @@ export const Paid: React.FC<{
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `scale(${scale}) translateY(${-220}px)`,
+					transform: ` translateY(${-220}px)`,
 				}}
 			>
 				<div
@@ -61,6 +59,7 @@ export const Paid: React.FC<{
 						borderRadius: 70,
 						letterSpacing: '0.1em',
 						overflow: 'hidden',
+						transform: `scale(0.8)`,
 					}}
 				>
 					<span

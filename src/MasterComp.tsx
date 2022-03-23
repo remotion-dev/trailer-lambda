@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
+import {EndCard} from './EndCard';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {Pitch} from './Pitch';
@@ -42,9 +43,11 @@ export const MasterComp: React.FC = () => {
 					</Series.Sequence>
 				</Series>
 			</Sequence>
-
 			<Sequence durationInFrames={200} from={1960}>
 				<PricingToSourceAvailable />
+			</Sequence>
+			<Sequence from={2160}>
+				<EndCard />
 			</Sequence>
 		</AbsoluteFill>
 	);

@@ -9,6 +9,7 @@ import {
 import {COLORS} from './colors';
 import {Docs} from './Docs';
 import {IsOpenSource} from './NpmInitVideo';
+import {WhatWillYouBuild} from './WhatWillYouBuild';
 
 const Card: React.FC<{
 	strokeWidth: number;
@@ -48,7 +49,7 @@ export const EndCard: React.FC = () => {
 
 	const prog1 = spring({
 		fps,
-		frame: frame - 15,
+		frame: frame - 20,
 		config: {
 			mass: 5,
 			damping: 200,
@@ -106,7 +107,9 @@ export const EndCard: React.FC = () => {
 						display: 'flex',
 					}}
 				>
-					<Card strokeWidth={10} color={COLORS[0]} />
+					<Card strokeWidth={10} color={COLORS[0]}>
+						<WhatWillYouBuild />
+					</Card>
 				</div>
 				<div
 					style={{

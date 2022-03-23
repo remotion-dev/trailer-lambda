@@ -6,7 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {COLOR, CONTROLS_START, PLAY_START} from './const';
+import {CONTROLS_START, PLAY_START} from './const';
 
 const Play: React.FC = () => {
 	return (
@@ -139,7 +139,6 @@ export const Controls: React.FC<{
 					marginBottom: (compHeight - height) / 2,
 					alignItems: 'center',
 					transform: `translateY(${interpolate(prog, [0, 1], [200, 0])}px)`,
-					color: COLOR,
 				}}
 			>
 				<Play />

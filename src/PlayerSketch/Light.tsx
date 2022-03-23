@@ -6,16 +6,17 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import {AnimatedReactLogo} from '../AnimatedReactLogo';
 import {COLORS} from '../colors';
-import {BACKGROUND, COLOR, Theme} from './const';
 import {Controls} from './Controls';
 
+const REACT_LOGO_SCALE = 0.5;
+
 export const Light: React.FC<{
-	theme: Theme;
 	width: number | null;
 	delay: number;
 	flipProgress: number | null;
-}> = ({theme, width: originalWidth, delay, flipProgress}) => {
+}> = ({width: originalWidth, delay, flipProgress}) => {
 	const frame = useCurrentFrame();
 	const {fps, width: compWidth} = useVideoConfig();
 	const width = originalWidth ?? compWidth;
@@ -44,10 +45,19 @@ export const Light: React.FC<{
 
 	const circumference = 2 * (width - PADDING * 2) + 2 * (height - PADDING * 2);
 
+	const reactAnimation = spring({
+		fps,
+		frame: frame - 90,
+		config: {
+			damping: 200,
+			mass: 6,
+		},
+	});
+
 	return (
 		<AbsoluteFill
 			style={{
-				backgroundColor: BACKGROUND(theme),
+				backgroundColor: 'white',
 				perspective: 700,
 			}}
 		>
@@ -65,20 +75,31 @@ export const Light: React.FC<{
 			>
 				<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 					<path
-						stroke={COLOR}
+						stroke="#000"
 						strokeWidth={10}
-						fill="none"
+						fill="transparent"
 						d={`
-					M ${PADDING} ${PADDING}
+					M ${PADDING - 5} ${PADDING}
 					L ${width - PADDING} ${PADDING}
 					L ${width - PADDING} ${height - PADDING}
 					L ${PADDING} ${height - PADDING}
-					z
+					L ${PADDING} ${PADDING}
 					`}
 						strokeDasharray={`${circumference} ${circumference}`}
 						strokeDashoffset={(1 - progress) * circumference}
 					/>
 				</svg>
+				<AbsoluteFill
+					style={{
+						transform: `translateX(${(width * (1 - REACT_LOGO_SCALE)) / 2}px)`,
+					}}
+				>
+					<AnimatedReactLogo
+						driver={reactAnimation}
+						width={width * REACT_LOGO_SCALE}
+						fill={COLORS[0]}
+					/>
+				</AbsoluteFill>
 				<Controls
 					height={height}
 					padding={PADDING}

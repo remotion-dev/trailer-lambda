@@ -1,11 +1,11 @@
 import React from 'react';
 import {AbsoluteFill, useVideoConfig} from 'remotion';
-import {COLORS} from './colors';
 
 export const AnimatedReactLogo: React.FC<{
 	driver: number;
 	width: number | null;
-}> = ({driver, width: originalWidth}) => {
+	fill: string;
+}> = ({driver, width: originalWidth, fill}) => {
 	const {height, width: compWidth} = useVideoConfig();
 	const width = originalWidth ?? compWidth;
 	const rx = width * 0.2;
@@ -30,7 +30,7 @@ export const AnimatedReactLogo: React.FC<{
 								cy={height / 2}
 								rx={rx}
 								ry={ry}
-								stroke={COLORS[0]}
+								stroke={fill}
 								fill="transparent"
 								strokeWidth={strokeWidth}
 							/>
@@ -38,6 +38,18 @@ export const AnimatedReactLogo: React.FC<{
 					</AbsoluteFill>
 				);
 			})}
+			<AbsoluteFill>
+				<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+					<ellipse
+						cx={width / 2}
+						cy={height / 2}
+						rx={width * 0.02}
+						ry={width * 0.02}
+						fill={fill}
+						strokeWidth={strokeWidth}
+					/>
+				</svg>
+			</AbsoluteFill>
 		</>
 	);
 };

@@ -51,6 +51,7 @@ import {VideoApps} from './VideoApps';
 import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 import {WayTooSlow} from './WayTooSlow';
+import {WhatWillYouBuild} from './WhatWillYouBuild';
 import {WriteInReact} from './WriteInReact';
 
 export const RemotionVideo: React.FC = () => {
@@ -467,6 +468,9 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 				width={1920}
 				fps={24}
+				defaultProps={{
+					start: 0,
+				}}
 			/>
 			<Composition
 				id="Pricing"
@@ -519,6 +523,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="EndCard"
 				component={EndCard}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="WhatWillYouBuild"
+				component={WhatWillYouBuild}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

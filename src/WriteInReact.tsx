@@ -58,7 +58,7 @@ export const WriteInReact: React.FC<{
 						transform: `scale(0.75) translateY(-${width * 0.1}px)`,
 					}}
 				>
-					<AnimatedReactLogo driver={driver} width={width} />
+					<AnimatedReactLogo driver={driver} width={width} fill={COLORS[0]} />
 				</AbsoluteFill>
 				<AbsoluteFill
 					style={{
