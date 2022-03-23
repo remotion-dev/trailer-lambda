@@ -7,18 +7,25 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {Docs} from './Docs';
+import {IsOpenSource} from './NpmInitVideo';
 
 const Card: React.FC<{
 	strokeWidth: number;
-}> = ({strokeWidth}) => {
+	color: string;
+}> = ({strokeWidth, color, children}) => {
 	return (
 		<div
 			style={{
-				border: strokeWidth + 'px solid ' + COLORS[0],
+				border: strokeWidth + 'px solid ' + color,
 				flex: 1,
 				borderRadius: 50,
+				position: 'relative',
+				overflow: 'hidden',
 			}}
-		/>
+		>
+			{children}
+		</div>
 	);
 };
 
@@ -32,7 +39,7 @@ export const EndCard: React.FC = () => {
 		fps,
 		frame,
 		config: {
-			mass: 3,
+			mass: 5,
 			damping: 200,
 		},
 	});
@@ -43,7 +50,7 @@ export const EndCard: React.FC = () => {
 		fps,
 		frame: frame - 15,
 		config: {
-			mass: 3,
+			mass: 5,
 			damping: 200,
 		},
 	});
@@ -61,7 +68,7 @@ export const EndCard: React.FC = () => {
 		fps,
 		frame: frame - 25,
 		config: {
-			mass: 3,
+			mass: 5,
 
 			damping: 200,
 		},
@@ -99,7 +106,7 @@ export const EndCard: React.FC = () => {
 						display: 'flex',
 					}}
 				>
-					<Card strokeWidth={10} />
+					<Card strokeWidth={10} color={COLORS[0]} />
 				</div>
 				<div
 					style={{
@@ -118,7 +125,9 @@ export const EndCard: React.FC = () => {
 							paddingLeft: 0,
 						}}
 					>
-						<Card strokeWidth={stroke1} />
+						<Card strokeWidth={stroke1} color="black">
+							<Docs />
+						</Card>
 					</div>
 					<div
 						style={{
@@ -130,7 +139,9 @@ export const EndCard: React.FC = () => {
 							paddingLeft: 0,
 						}}
 					>
-						<Card strokeWidth={stroke2} />
+						<Card strokeWidth={stroke2} color="black">
+							<IsOpenSource />
+						</Card>
 					</div>
 				</div>
 			</div>
