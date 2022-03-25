@@ -1,6 +1,5 @@
 import React from 'react';
 import {useVideoConfig} from 'remotion';
-import {BackgroundNoise} from './BackgroundNoise';
 import {Rocket} from './Rocket';
 
 const container: React.CSSProperties = {
@@ -13,13 +12,13 @@ const ROCKET_SIZE_1 = 700;
 const ROCKET_SIZE_2 = 400;
 const ROCKET_SIZE_3 = 200;
 
-export const Main: React.FC = () => {
+export const Rockets: React.FC = () => {
 	const {width, height} = useVideoConfig();
 
 	const rocket1OriginX = -ROCKET_SIZE_1 / 2;
 	const rocket1OriginY = height + ROCKET_SIZE_1 / 2;
-	const rocket1TargetX = width / 2;
-	const rocket1TargetY = height / 2;
+	const rocket1TargetX = width + 400;
+	const rocket1TargetY = -ROCKET_SIZE_1;
 
 	const rocket2OriginX = width;
 	const rocket2OriginY = height + ROCKET_SIZE_2;
@@ -33,7 +32,6 @@ export const Main: React.FC = () => {
 
 	return (
 		<div style={container}>
-			<BackgroundNoise />
 			<Rocket
 				fumeOut
 				originX={rocket3OriginX}
@@ -41,7 +39,7 @@ export const Main: React.FC = () => {
 				size={ROCKET_SIZE_3}
 				targetX={rocket3TargetX}
 				targetY={rocket3TargetY}
-				delay={120}
+				delay={45}
 			/>
 			<Rocket
 				fumeOut
@@ -50,15 +48,15 @@ export const Main: React.FC = () => {
 				size={ROCKET_SIZE_2}
 				targetX={rocket2TargetX}
 				targetY={rocket2TargetY}
-				delay={60}
+				delay={30}
 			/>
 			<Rocket
+				fumeOut
 				originX={rocket1OriginX}
 				originY={rocket1OriginY}
 				size={ROCKET_SIZE_1}
 				targetX={rocket1TargetX}
 				targetY={rocket1TargetY}
-				fumeOut={false}
 				delay={15}
 			/>
 		</div>

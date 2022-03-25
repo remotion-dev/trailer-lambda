@@ -17,7 +17,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 
 	const prog1 = spring({
 		fps,
-		frame: frame - 30,
+		frame: frame - 20,
 		config: {
 			damping: 200,
 		},
@@ -25,7 +25,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 
 	const prog2 = spring({
 		fps,
-		frame: frame - 60,
+		frame: frame - 40,
 		config: {
 			damping: 200,
 		},
@@ -33,7 +33,7 @@ export const FastCheapEasyScalable: React.FC = () => {
 
 	const prog3 = spring({
 		fps,
-		frame: frame - 90,
+		frame: frame - 60,
 		config: {
 			damping: 200,
 		},
@@ -78,7 +78,6 @@ export const FastCheapEasyScalable: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					display: 'flex',
-					overflow: 'hidden',
 				}}
 			>
 				<Fast />
@@ -92,7 +91,6 @@ export const FastCheapEasyScalable: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					display: 'flex',
-					overflow: 'hidden',
 				}}
 			>
 				<Scalable />
@@ -106,7 +104,6 @@ export const FastCheapEasyScalable: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					display: 'flex',
-					overflow: 'hidden',
 				}}
 			>
 				<Cheap width={width3} />
@@ -120,7 +117,6 @@ export const FastCheapEasyScalable: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					display: 'flex',
-					overflow: 'hidden',
 				}}
 			>
 				<Easy width={width4} />

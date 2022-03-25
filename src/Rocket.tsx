@@ -10,7 +10,17 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
+import {COLORS} from './colors';
 import {point} from './point';
+
+const svgHoleSize = 906;
+const originalSvgWidth = 1729;
+const originalSvgHeight = 2712;
+const remotionHolesize = 600;
+const ratio = remotionHolesize / svgHoleSize;
+
+const actualSvgWidth = ratio * originalSvgWidth;
+const actualSvgHeight = ratio * originalSvgHeight;
 
 export const Rocket: React.FC<{
 	targetX: number;
@@ -93,7 +103,7 @@ export const Rocket: React.FC<{
 				x: interpolate(i / 200, [0, 1], [originX, rocket1PosX]) + rx + x,
 				y: interpolate(i / 200, [0, 1], [originY, rocket1PosY]) + ry + y,
 				canvas: context,
-				color: interpolateColors(i, [0, 200], ['#F03C69', 'yellow']),
+				color: interpolateColors(i, [0, 200], [COLORS[0], 'white']),
 				size:
 					70 *
 					interpolate(scalenoise.noise2D(frame / 50, i), [-1, 1], [0.9, 1.1]),
@@ -132,31 +142,47 @@ export const Rocket: React.FC<{
 					zIndex: 0,
 				}}
 			/>
+
 			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 36 36"
+				width={actualSvgWidth}
+				height={actualSvgHeight}
+				viewBox="0 0 1729 2712"
+				fill="none"
 				style={{
 					position: 'absolute',
 					height: size,
 					width: size,
-					transform: `rotate(${rot + angle + Math.PI / 4}rad) `,
+					transform: `rotate(${rot + angle + Math.PI / 2}rad) `,
 					marginLeft: x - size / 2 + rocket1PosX,
 					marginTop: y - size / 2 + rocket1PosY,
 				}}
+				xmlns="http://www.w3.org/2000/svg"
 			>
 				<path
-					fill="#A0041E"
-					d="M1 17l8-7 16 1 1 16-7 8s.001-5.999-6-12-12-6-12-6z"
+					d="M1311 1738L1550 2061.5L1693.46 2656.1C1698.72 2673.48 1702.77 2690.18 1705.5 2706L1693.46 2656.1C1627.25 2437.22 1369.23 2111.5 1129 2111.5C1129 2111.5 1190 1827.67 1311 1738Z"
+					fill="#0B84F3"
 				/>
 				<path
-					fill="#55ACEE"
-					d="M35.999 0s-10 0-22 10c-6 5-6 14-4 16s11 2 16-4c10-12 10-22 10-22z"
+					d="M1311 1738L1550 2061.5L1705.5 2706C1668.34 2491 1388.3 2111.5 1129 2111.5C1129 2111.5 1190 1827.67 1311 1738Z"
+					stroke="#0B84F3"
+					strokeWidth="47"
 				/>
-				<path d="M26.999 5c-1.623 0-3.013.971-3.641 2.36.502-.227 1.055-.36 1.641-.36 2.209 0 4 1.791 4 4 0 .586-.133 1.139-.359 1.64 1.389-.627 2.359-2.017 2.359-3.64 0-2.209-1.791-4-4-4z" />
 				<path
-					fill="#A0041E"
-					d="M8 28s0-4 1-5 13.001-10.999 14-10-9.001 13-10.001 14S8 28 8 28z"
+					d="M418.5 1738L179.504 2061.5L36.041 2656.1C30.7831 2673.48 26.7346 2690.18 24.0005 2706L36.041 2656.1C102.256 2437.22 360.278 2111.5 600.504 2111.5C600.504 2111.5 539.5 1827.67 418.5 1738Z"
+					fill="#0B84F3"
 				/>
+				<path
+					d="M418.5 1738L179.504 2061.5L24.0005 2706C61.1672 2491 341.203 2111.5 600.504 2111.5C600.504 2111.5 539.5 1827.67 418.5 1738Z"
+					stroke="#0B84F3"
+					strokeWidth="47"
+				/>
+				<path
+					d="M864.501 2151.5C1993.84 2151.5 1345.43 900.666 945.012 151.329C911.686 88.9634 820.98 90.7834 789.493 154.097C414.658 907.806 -263.971 2151.5 864.501 2151.5Z"
+					fill="#0B84F3"
+					stroke="#0B84F3"
+					strokeWidth="47"
+				/>
+				<circle cx={1729 / 2} cy={1600} r={300} fill="white" />
 			</svg>
 		</div>
 	);

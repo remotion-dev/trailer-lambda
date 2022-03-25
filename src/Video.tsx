@@ -2,12 +2,12 @@ import {Composition, Still} from 'remotion';
 import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
 import {CheapNoise} from './CheapNoise';
+import {Checklist} from './Checklist';
 import {Clocks} from './Clocks';
 import {ColorSwitcher} from './ColorSwitcher';
 import {Cursor} from './Cursor';
 import {Curtain} from './Curtain';
 import {Dust} from './Dust';
-import {EasyNoise} from './EasyNoise';
 import {Elevator} from './Elevator';
 import {EndCard} from './EndCard';
 import {FastCheapEasyScalable} from './FastCheapEasyScalable';
@@ -16,7 +16,8 @@ import {Free} from './Free';
 import {HugeOrb} from './HugeOrb';
 import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
-import {Main} from './Main';
+import {LambdaVis} from './LambdaVis';
+import {Rockets} from './Main';
 import {ManyOrbs} from './ManyOrbs';
 import {ManySpin} from './ManySpin';
 import {MasterComp} from './MasterComp';
@@ -32,6 +33,7 @@ import {PlayerExample} from './PlayerExample';
 import {Pricing} from './Pricing';
 import {PricingToSourceAvailable} from './PricingToSourceAvailable';
 import {ProductLineUp} from './ProductLineUp';
+import {RocketCard} from './RocketCard';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
@@ -68,8 +70,8 @@ export const RemotionVideo: React.FC = () => {
 			/>
 
 			<Composition
-				id="HelloWorld"
-				component={Main}
+				id="Rockets"
+				component={Rockets}
 				durationInFrames={150}
 				fps={VIDEO_FPS}
 				width={1920}
@@ -398,18 +400,6 @@ export const RemotionVideo: React.FC = () => {
 				fps={24}
 			/>
 			<Composition
-				id="EasyNoise"
-				component={EasyNoise}
-				durationInFrames={300}
-				height={1080}
-				width={1920}
-				fps={24}
-				defaultProps={{
-					height: 1080,
-					width: 1920,
-				}}
-			/>
-			<Composition
 				id="CheapNoise"
 				component={CheapNoise}
 				durationInFrames={300}
@@ -540,6 +530,30 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="ColorSwitcher"
 				component={ColorSwitcher}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="Checklist"
+				component={Checklist}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="RocketCard"
+				component={RocketCard}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="LambdaVis"
+				component={LambdaVis}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

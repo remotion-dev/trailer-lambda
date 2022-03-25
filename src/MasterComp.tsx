@@ -1,11 +1,11 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
 import {EndCard} from './EndCard';
-import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {Pitch} from './Pitch';
 import {PricingToSourceAvailable} from './PricingToSourceAvailable';
 import {ProductLineUp} from './ProductLineUp';
+import {RocketCard} from './RocketCard';
 import {TimelineSplit} from './TimelineSplit';
 import {Vis} from './Vis';
 import {WayTooSlow} from './WayTooSlow';
@@ -32,11 +32,11 @@ export const MasterComp: React.FC = () => {
 					<Series.Sequence durationInFrames={750}>
 						<Vis />
 					</Series.Sequence>
-					<Series.Sequence durationInFrames={250}>
+					<Series.Sequence durationInFrames={240}>
 						<TimelineSplit />
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={120}>
-						<FastCheapEasyScalable />
+						<RocketCard />
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={480}>
 						<ProductLineUp />
