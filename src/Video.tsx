@@ -1,7 +1,5 @@
 import {Composition, Still} from 'remotion';
-import {BackgroundNoise} from './BackgroundNoise';
 import {Model} from './Casette';
-import {CheapNoise} from './CheapNoise';
 import {Checklist} from './Checklist';
 import {Clocks} from './Clocks';
 import {ColorSwitcher} from './ColorSwitcher';
@@ -10,7 +8,6 @@ import {Curtain} from './Curtain';
 import {Dust} from './Dust';
 import {Elevator} from './Elevator';
 import {EndCard} from './EndCard';
-import {FastCheapEasyScalable} from './FastCheapEasyScalable';
 import {FlatCasette} from './FlatCasette';
 import {Free} from './Free';
 import {HugeOrb} from './HugeOrb';
@@ -40,7 +37,6 @@ import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
 import {SourceAvailable} from './SourceAvailable';
 import {SpaceDust} from './SpaceDust';
-import {Spin} from './Spin';
 import {StarryNumber} from './StarryNumber';
 import {StarryNumbers} from './StarryNumbers';
 import {TextStretch} from './TextStretch';
@@ -81,29 +77,6 @@ export const RemotionVideo: React.FC = () => {
 				defaultProps={{
 					titleText: 'Welcome to Remotion',
 					titleColor: 'black',
-				}}
-			/>
-			<Composition
-				id="Noise"
-				component={BackgroundNoise}
-				durationInFrames={150}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
-				defaultProps={{
-					titleText: 'Welcome to Remotion',
-					titleColor: 'black',
-				}}
-			/>
-			<Composition
-				id="Spin"
-				component={Spin}
-				durationInFrames={150}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
-				defaultProps={{
-					seed: '0',
 				}}
 			/>
 			<Composition
@@ -393,26 +366,6 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 				width={1920}
 				fps={24}
-			/>
-			<Composition
-				id="FastCheapEasyScalable"
-				component={FastCheapEasyScalable}
-				durationInFrames={300}
-				height={1080}
-				width={1920}
-				fps={24}
-			/>
-			<Composition
-				id="CheapNoise"
-				component={CheapNoise}
-				durationInFrames={300}
-				height={1080}
-				width={1920}
-				fps={24}
-				defaultProps={{
-					height: 1080,
-					width: 1920,
-				}}
 			/>
 			<Composition
 				id="WriteInReact"

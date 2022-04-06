@@ -19,7 +19,7 @@ const getTopOffset = ({
 	return {fromTop: yPos, fromLeft: xPos, cp1OffsetX, cp1OffsetY};
 };
 
-export type Point = {
+type Point = {
 	x: number;
 	y: number;
 };
@@ -36,7 +36,7 @@ type Statement =
 			cp2: Point;
 	  };
 
-export type SvgPath = Statement[];
+type SvgPath = Statement[];
 
 export const svgPathToD = (svgPath: SvgPath) => {
 	return svgPath

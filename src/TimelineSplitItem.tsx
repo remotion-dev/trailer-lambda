@@ -21,13 +21,13 @@ const greekLetterWidth = 36;
 const greekLetterHeight =
 	(greekLetterWidth / greekLetterOriginalWidth) * greekLetterOriginalHeight;
 
-export const PIECE_HEIGHT = 300;
-export const PIECE_WIDTH = 180;
-export const BORDER_RADIUS = 8;
-export const ROWS = 1;
-export const COLUMNS = 6;
+const PIECE_HEIGHT = 300;
+const PIECE_WIDTH = 180;
+const BORDER_RADIUS = 8;
+const ROWS = 1;
+const COLUMNS = 6;
 export const PIECES = ROWS * COLUMNS;
-export const PIECE_RADIUS = 50;
+const PIECE_RADIUS = 50;
 
 const LAMBDA_PILL_SIZE = 100;
 

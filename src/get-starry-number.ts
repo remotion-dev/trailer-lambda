@@ -38,7 +38,7 @@ const getPath = (font: Font, char: string) => {
 	return pathProperties;
 };
 
-export const getStarryNumber = (
+const getStarryNumber = (
 	char: string,
 	font: Font,
 	frame: number

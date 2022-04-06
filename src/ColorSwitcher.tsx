@@ -20,7 +20,7 @@ const circle: React.CSSProperties = {
 	marginRight: PADDING,
 };
 
-export const getPosFromFrame = (frame: number, fps: number) => {
+const getPosFromFrame = (frame: number, fps: number) => {
 	const prog1 = spring({
 		fps,
 		frame: frame - 15,

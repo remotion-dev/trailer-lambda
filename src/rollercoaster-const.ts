@@ -1,4 +1,4 @@
-export const CAMERA_DISTANCE = 50;
+const CAMERA_DISTANCE = 50;
 
 export const CAMERA_POSITION: [number, number, number] = [
 	0,
