@@ -7,12 +7,15 @@ import {
 	useVideoConfig,
 } from 'remotion';
 
-export const WheelTransition: React.FC = ({children}) => {
+export const WheelTransition: React.FC<{
+	type: 'in' | 'out';
+	delay: number;
+}> = ({children, delay, type}) => {
 	const {fps, height, width} = useVideoConfig();
 	const frame = useCurrentFrame();
 	const move = spring({
 		fps,
-		frame,
+		frame: frame - delay,
 		config: {damping: 200},
 	});
 
@@ -23,11 +26,12 @@ export const WheelTransition: React.FC = ({children}) => {
 		y: height / 2 + RADIUS,
 	};
 
-	const START_ANGLE = Math.PI;
+	const CENTER_ANGLE = Math.PI;
+	const END_ANGLE = CENTER_ANGLE + Math.PI * 0.2 * (type === 'in' ? 1 : -1);
 	const ANGLE = interpolate(
 		move,
 		[0, 1],
-		[START_ANGLE, START_ANGLE - Math.PI * 0.2]
+		type === 'in' ? [END_ANGLE, CENTER_ANGLE] : [CENTER_ANGLE, END_ANGLE]
 	);
 	const XOFFSET = Math.sin(ANGLE) * RADIUS;
 	const YOFFSET = Math.cos(ANGLE) * RADIUS;

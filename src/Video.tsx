@@ -17,10 +17,9 @@ import {HugeOrb} from './HugeOrb';
 import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
 import {LambdaVis} from './LambdaVis';
-import {Rockets} from './Main';
+import {Main} from './Main';
 import {ManyOrbs} from './ManyOrbs';
 import {ManySpin} from './ManySpin';
-import {MasterComp} from './MasterComp';
 import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
 import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
@@ -34,6 +33,7 @@ import {Pricing} from './Pricing';
 import {PricingToSourceAvailable} from './PricingToSourceAvailable';
 import {ProductLineUp} from './ProductLineUp';
 import {RocketCard} from './RocketCard';
+import {Rockets} from './Rockets';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
 import {Rounder} from './Rounder';
@@ -55,7 +55,7 @@ import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 import {WayTooSlow} from './WayTooSlow';
 import {WhatWillYouBuild} from './WhatWillYouBuild';
-import {WheelTransitionDemo} from './WheelTransitionDemo';
+import {WheelTransitionIn, WheelTransitionOut} from './WheelTransitionDemo';
 import {WriteInReact} from './WriteInReact';
 
 export const RemotionVideo: React.FC = () => {
@@ -63,7 +63,7 @@ export const RemotionVideo: React.FC = () => {
 		<>
 			<Composition
 				id="Main"
-				component={MasterComp}
+				component={Main}
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
@@ -561,8 +561,16 @@ export const RemotionVideo: React.FC = () => {
 				fps={24}
 			/>
 			<Composition
-				id="WheelTransition"
-				component={WheelTransitionDemo}
+				id="WheelTransitionIn"
+				component={WheelTransitionIn}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="WheelTransitionOut"
+				component={WheelTransitionOut}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

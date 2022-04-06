@@ -119,6 +119,11 @@ export const RocketShip: React.FC = () => {
 			</Sequence>
 
 			<Sequence from={80} durationInFrames={400}>
+				<AbsoluteFill
+					style={{
+						backgroundColor: 'black',
+					}}
+				/>
 				<SpaceDust />
 			</Sequence>
 			<Sequence from={80}>

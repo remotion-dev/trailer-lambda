@@ -1,64 +1,57 @@
 import React from 'react';
-import {useVideoConfig} from 'remotion';
-import {Rocket} from './Rocket';
+import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
+import {EndCard} from './EndCard';
+import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
+import {Pitch} from './Pitch';
+import {PricingToSourceAvailable} from './PricingToSourceAvailable';
+import {ProductLineUp} from './ProductLineUp';
+import {RocketCard} from './RocketCard';
+import {TimelineSplit} from './TimelineSplit';
+import {Vis} from './Vis';
+import {WayTooSlow} from './WayTooSlow';
+import {WheelTransition} from './WheelTransition';
 
-const container: React.CSSProperties = {
-	display: 'flex',
-	backgroundColor: 'white',
-	flex: 1,
-};
-
-const ROCKET_SIZE_1 = 700;
-const ROCKET_SIZE_2 = 400;
-const ROCKET_SIZE_3 = 200;
-
-export const Rockets: React.FC = () => {
-	const {width, height} = useVideoConfig();
-
-	const rocket1OriginX = -ROCKET_SIZE_1 / 2;
-	const rocket1OriginY = height + ROCKET_SIZE_1 / 2;
-	const rocket1TargetX = width + 400;
-	const rocket1TargetY = -ROCKET_SIZE_1;
-
-	const rocket2OriginX = width;
-	const rocket2OriginY = height + ROCKET_SIZE_2;
-	const rocket2TargetX = width - ROCKET_SIZE_2 / 2;
-	const rocket2TargetY = -ROCKET_SIZE_2 / 2;
-
-	const rocket3OriginX = width + ROCKET_SIZE_3;
-	const rocket3OriginY = height / 2;
-	const rocket3TargetX = -ROCKET_SIZE_3;
-	const rocket3TargetY = ROCKET_SIZE_3 / 2;
-
+export const Main: React.FC = () => {
 	return (
-		<div style={container}>
-			<Rocket
-				fumeOut
-				originX={rocket3OriginX}
-				originY={rocket3OriginY}
-				size={ROCKET_SIZE_3}
-				targetX={rocket3TargetX}
-				targetY={rocket3TargetY}
-				delay={45}
-			/>
-			<Rocket
-				fumeOut
-				originX={rocket2OriginX}
-				originY={rocket2OriginY}
-				size={ROCKET_SIZE_2}
-				targetX={rocket2TargetX}
-				targetY={rocket2TargetY}
-				delay={30}
-			/>
-			<Rocket
-				fumeOut
-				originX={rocket1OriginX}
-				originY={rocket1OriginY}
-				size={ROCKET_SIZE_1}
-				targetX={rocket1TargetX}
-				targetY={rocket1TargetY}
-				delay={15}
-			/>
-		</div>
+		<AbsoluteFill
+			style={{
+				backgroundColor: 'white',
+			}}
+		>
+			<Audio src={staticFile('voiceover-all.mp3')} />
+			<Sequence durationInFrames={200} from={175}>
+				<NormallyTakesMultiplied />
+			</Sequence>
+			<Sequence durationInFrames={100} from={300}>
+				<WayTooSlow />
+			</Sequence>
+			<Sequence from={0} durationInFrames={200}>
+				<Pitch />
+			</Sequence>
+			<Sequence from={360}>
+				<Series>
+					<Series.Sequence durationInFrames={750}>
+						<Vis />
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={240}>
+						<WheelTransition delay={0} type="in">
+							<TimelineSplit />
+						</WheelTransition>
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={120}>
+						<RocketCard />
+					</Series.Sequence>
+					<Series.Sequence durationInFrames={480}>
+						<ProductLineUp />
+					</Series.Sequence>
+				</Series>
+			</Sequence>
+			<Sequence durationInFrames={200} from={1960}>
+				<PricingToSourceAvailable />
+			</Sequence>
+			<Sequence from={2160}>
+				<EndCard />
+			</Sequence>
+		</AbsoluteFill>
 	);
 };

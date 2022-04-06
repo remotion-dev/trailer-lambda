@@ -10,6 +10,7 @@ import {
 import {COLORS} from './colors';
 import {StarryNumber} from './StarryNumber';
 import {ToReactStarry} from './ToReactStarry';
+import {WheelTransition} from './WheelTransition';
 
 export const StarryNumbers: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -74,65 +75,67 @@ export const StarryNumbers: React.FC = () => {
 	const translateSeconds = translateSecondsBasic + renderedOvershoot;
 
 	return (
-		<AbsoluteFill
-			style={{
-				transform: `scale(${scaleText})`,
-			}}
-		>
-			<AbsoluteFill style={{transform: `scale(${scale})`}}>
-				<Series>
-					<Series.Sequence durationInFrames={seq1Length}>
-						<StarryNumber from="30" to="30" />
-					</Series.Sequence>
-					<Series.Sequence durationInFrames={seq2Length}>
-						<StarryNumber from="30" to="25" />
-					</Series.Sequence>
-					<Series.Sequence durationInFrames={seq3Length}>
-						<StarryNumber from="25" to="20" />
-					</Series.Sequence>
-					<Series.Sequence durationInFrames={seq4Length}>
-						<AbsoluteFill
-							style={{
-								transform: `translateY(${
-									renderedOvershoot + secondsOvershoot
-								}px)`,
-							}}
-						>
-							<ToReactStarry />
-						</AbsoluteFill>
-					</Series.Sequence>
-				</Series>
+		<WheelTransition type="out" delay={startRenderedIn + 120}>
+			<AbsoluteFill
+				style={{
+					transform: `scale(${scaleText})`,
+				}}
+			>
+				<AbsoluteFill style={{transform: `scale(${scale})`}}>
+					<Series>
+						<Series.Sequence durationInFrames={seq1Length}>
+							<StarryNumber from="30" to="30" />
+						</Series.Sequence>
+						<Series.Sequence durationInFrames={seq2Length}>
+							<StarryNumber from="30" to="25" />
+						</Series.Sequence>
+						<Series.Sequence durationInFrames={seq3Length}>
+							<StarryNumber from="25" to="20" />
+						</Series.Sequence>
+						<Series.Sequence durationInFrames={seq4Length}>
+							<AbsoluteFill
+								style={{
+									transform: `translateY(${
+										renderedOvershoot + secondsOvershoot
+									}px)`,
+								}}
+							>
+								<ToReactStarry />
+							</AbsoluteFill>
+						</Series.Sequence>
+					</Series>
+				</AbsoluteFill>
+				<AbsoluteFill>
+					<div
+						style={{
+							fontSize: 80,
+							fontFamily: 'SF Pro',
+							fontWeight: 'bold',
+							textAlign: 'center',
+							marginTop: 280,
+							color: COLORS[0],
+							transform: `translateY(${translateRendered}px)`,
+						}}
+					>
+						rendered in
+					</div>
+				</AbsoluteFill>
+				<AbsoluteFill>
+					<div
+						style={{
+							fontSize: 80,
+							fontFamily: 'SF Pro',
+							fontWeight: 'bold',
+							textAlign: 'center',
+							marginTop: 750,
+							color: COLORS[0],
+							transform: `translateY(${translateSeconds}px)`,
+						}}
+					>
+						seconds
+					</div>
+				</AbsoluteFill>
 			</AbsoluteFill>
-			<AbsoluteFill>
-				<div
-					style={{
-						fontSize: 80,
-						fontFamily: 'SF Pro',
-						fontWeight: 'bold',
-						textAlign: 'center',
-						marginTop: 280,
-						color: COLORS[0],
-						transform: `translateY(${translateRendered}px)`,
-					}}
-				>
-					rendered in
-				</div>
-			</AbsoluteFill>
-			<AbsoluteFill>
-				<div
-					style={{
-						fontSize: 80,
-						fontFamily: 'SF Pro',
-						fontWeight: 'bold',
-						textAlign: 'center',
-						marginTop: 750,
-						color: COLORS[0],
-						transform: `translateY(${translateSeconds}px)`,
-					}}
-				>
-					seconds
-				</div>
-			</AbsoluteFill>
-		</AbsoluteFill>
+		</WheelTransition>
 	);
 };
