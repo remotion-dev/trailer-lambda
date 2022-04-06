@@ -55,6 +55,7 @@ import {Vis} from './Vis';
 import {ManyWaves} from './Wave';
 import {WayTooSlow} from './WayTooSlow';
 import {WhatWillYouBuild} from './WhatWillYouBuild';
+import {WheelTransitionDemo} from './WheelTransitionDemo';
 import {WriteInReact} from './WriteInReact';
 
 export const RemotionVideo: React.FC = () => {
@@ -554,6 +555,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="LambdaVis"
 				component={LambdaVis}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="WheelTransition"
+				component={WheelTransitionDemo}
 				durationInFrames={300}
 				height={1080}
 				width={1920}
