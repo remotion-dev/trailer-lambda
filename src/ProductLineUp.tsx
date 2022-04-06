@@ -116,7 +116,7 @@ export const ProductLineUp: React.FC = () => {
 					}}
 				>
 					<Sequence from={200}>
-						<ManySpin flipProgress={null} /* width={width3} */ />
+						<ManySpin width={width3} flipProgress={null} />
 					</Sequence>
 				</div>
 			</Sequence>

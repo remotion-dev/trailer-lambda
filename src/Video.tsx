@@ -16,6 +16,7 @@ import {Free} from './Free';
 import {HugeOrb} from './HugeOrb';
 import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
+import {Cluster} from './LambdaCluster';
 import {LambdaVis} from './LambdaVis';
 import {Main} from './Main';
 import {ManyOrbs} from './ManyOrbs';
@@ -113,6 +114,7 @@ export const RemotionVideo: React.FC = () => {
 				width={1920}
 				height={1080}
 				defaultProps={{
+					width: null,
 					flipProgress: 0,
 				}}
 			/>
@@ -571,6 +573,14 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="WheelTransitionOut"
 				component={WheelTransitionOut}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+			/>
+			<Composition
+				id="Cluster"
+				component={Cluster}
 				durationInFrames={300}
 				height={1080}
 				width={1920}

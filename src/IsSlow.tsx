@@ -40,7 +40,7 @@ export const IsSlow: React.FC = () => {
 				style={{
 					fontFamily: 'SF Pro',
 					fontSize: renderingFontSize,
-					color: COLORS[0],
+					color: 'black',
 					marginTop: 0,
 					marginBottom: 0,
 					fontWeight: 700,

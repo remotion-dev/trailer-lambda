@@ -2,25 +2,24 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
-	random,
-	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
-import {Spin} from './Spin';
+import {Cluster} from './LambdaCluster';
 
 export const ManySpin: React.FC<{
 	flipProgress: number | null;
-}> = ({flipProgress}) => {
+	width: number | null;
+}> = ({flipProgress, width}) => {
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
 	const actualFlipProgress =
 		flipProgress ??
 		spring({
 			fps,
-			frame: frame - 50,
+			frame: frame - 60,
 			config: {
 				damping: 200,
 			},
@@ -43,16 +42,7 @@ export const ManySpin: React.FC<{
 					opacity: 0.999,
 				}}
 			>
-				{new Array(30).fill(1).map((_, i) => {
-					return (
-						<Sequence
-							key={String(i)}
-							from={parseInt(String(random(i) * 100), 10)}
-						>
-							<Spin seed={String(i)} />
-						</Sequence>
-					);
-				})}
+				<Cluster actualWidth={width} />
 			</AbsoluteFill>
 			<AbsoluteFill
 				style={{
