@@ -8,7 +8,7 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 import {Docs} from './Docs';
-import {IsOnGitHub} from './NpmInitVideo';
+import {IsOnGitHub} from './IsOnGitHub';
 import {WhatWillYouBuild} from './WhatWillYouBuild';
 
 const Card: React.FC<{

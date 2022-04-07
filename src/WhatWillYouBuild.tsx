@@ -8,6 +8,7 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {NpmInitVideo} from './NpmInitVideo';
 import {remapSpeed} from './remap-speed';
 
 export const WhatWillYouBuild: React.FC = () => {
@@ -87,11 +88,7 @@ export const WhatWillYouBuild: React.FC = () => {
 				</h1>
 			</AbsoluteFill>
 			<Sequence from={60}>
-				<AbsoluteFill
-					style={{
-						backgroundColor: 'red',
-					}}
-				/>
+				<NpmInitVideo />
 			</Sequence>
 		</AbsoluteFill>
 	);

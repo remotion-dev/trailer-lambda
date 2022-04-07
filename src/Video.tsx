@@ -1,7 +1,6 @@
 import {Composition, Still} from 'remotion';
 import {Model} from './Casette';
 import {Checklist} from './Checklist';
-import {Clocks} from './Clocks';
 import {ColorSwitcher} from './ColorSwitcher';
 import {Cursor} from './Cursor';
 import {Curtain} from './Curtain';
@@ -24,7 +23,6 @@ import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {BigNum} from './Number';
 import {Olympia} from './Olympia/Olympia';
 import {Paid} from './Paid';
-import {Party} from './Party';
 import {Pitch} from './Pitch';
 import {PlayerExample} from './PlayerExample';
 import {Pricing} from './Pricing';
@@ -34,14 +32,12 @@ import {RocketCard} from './RocketCard';
 import {Rockets} from './Rockets';
 import {RocketShip} from './RocketShip';
 import {Rollercoaster} from './Rollercoaster';
-import {Rounder} from './Rounder';
 import {SourceAvailable} from './SourceAvailable';
 import {SpaceDust} from './SpaceDust';
 import {StarryNumber} from './StarryNumber';
 import {StarryNumbers} from './StarryNumbers';
 import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
-import {TextureAndDust} from './TextureAndDust';
 import {ThisVideo} from './ThisVideo';
 import {TimelineSplit} from './TimelineSplit';
 import {Tunnel} from './Tunnel';
@@ -172,49 +168,12 @@ export const RemotionVideo: React.FC = () => {
 				height={1080}
 			/>
 			<Composition
-				id="TextureAndDust"
-				component={TextureAndDust}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
-			/>
-			<Composition
-				id="Party"
-				component={Party}
-				durationInFrames={500}
-				fps={VIDEO_FPS}
-				width={1080}
-				height={1080}
-				defaultProps={{ticketName: 'Severin Wullschleger\nLaura Fiala'}}
-			/>
-			<Composition
-				id="Clocks"
-				component={Clocks}
-				durationInFrames={650}
-				fps={VIDEO_FPS}
-				width={1080}
-				height={1080}
-			/>
-			<Composition
 				id="Casette"
 				component={Model}
 				durationInFrames={100}
 				fps={VIDEO_FPS}
 				width={1080}
 				height={1080}
-			/>
-			<Composition
-				id="rounder"
-				component={Rounder}
-				durationInFrames={100}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
-				defaultProps={{
-					num: 10,
-					scale: 2,
-				}}
 			/>
 			<Composition
 				id="lambda"
