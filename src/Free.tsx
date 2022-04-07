@@ -10,7 +10,7 @@ import {COLORS} from './colors';
 
 export const Free: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {fps, height} = useVideoConfig();
+	const {fps} = useVideoConfig();
 	const progress = spring({
 		fps,
 		frame,
@@ -20,8 +20,6 @@ export const Free: React.FC = () => {
 	});
 
 	const scale = interpolate(progress, [0, 1], [1, 0.8]);
-	const translateY = interpolate(progress, [0, 1], [0, -180]);
-	const secondTranslateY = interpolate(progress, [0, 1], [height, 150]);
 
 	return (
 		<AbsoluteFill
@@ -34,7 +32,7 @@ export const Free: React.FC = () => {
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `scale(${scale}) translateY(${translateY}px)`,
+					transform: `scale(${scale}) translateY(${-180}px)`,
 				}}
 			>
 				<div
@@ -59,7 +57,7 @@ export const Free: React.FC = () => {
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					transform: `translateY(${secondTranslateY}px)`,
+					transform: `translateY(${150}px)`,
 				}}
 			>
 				<div

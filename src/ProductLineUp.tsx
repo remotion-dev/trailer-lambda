@@ -18,9 +18,10 @@ export const ProductLineUp: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps, height, width} = useVideoConfig();
 
+	const delay1 = 90;
 	const prog1 = spring({
 		fps,
-		frame: frame - 90,
+		frame: frame - delay1,
 		config: {
 			damping: 200,
 		},
@@ -85,7 +86,11 @@ export const ProductLineUp: React.FC = () => {
 						transform: `translateY(${disappearY(0)}px)`,
 					}}
 				>
-					<WriteInReact flipProgress={prog1} width={width1} />
+					<WriteInReact
+						flipProgress={prog1}
+						width={width1}
+						flipDelay={delay1}
+					/>
 				</div>
 				<div
 					style={{

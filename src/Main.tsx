@@ -37,13 +37,17 @@ export const Main: React.FC = () => {
 							<TimelineSplit />
 						</WheelTransition>
 					</Series.Sequence>
-					<Series.Sequence durationInFrames={480}>
-						<ProductLineUp />
+					<Series.Sequence durationInFrames={460}>
+						<WheelTransition type="out" delay={450}>
+							<ProductLineUp />
+						</WheelTransition>
 					</Series.Sequence>
 				</Series>
 			</Sequence>
-			<Sequence durationInFrames={200} from={1960}>
-				<PricingToSourceAvailable />
+			<Sequence durationInFrames={230} from={1930}>
+				<WheelTransition type="in" delay={0}>
+					<PricingToSourceAvailable />
+				</WheelTransition>
 			</Sequence>
 			<Sequence from={2160}>
 				<EndCard />

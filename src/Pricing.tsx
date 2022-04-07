@@ -18,7 +18,7 @@ export const Pricing: React.FC = () => {
 
 	const rawProgress = spring({
 		fps,
-		frame: frame - 25,
+		frame: frame - 50,
 		config: {
 			damping: 200,
 		},
@@ -36,7 +36,7 @@ export const Pricing: React.FC = () => {
 
 	const lineExplode = spring({
 		fps,
-		frame: frame - 100,
+		frame: frame - 120,
 		config: {
 			damping: 200,
 		},

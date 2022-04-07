@@ -13,22 +13,39 @@ import {Cursor} from './Cursor';
 export const WriteInReact: React.FC<{
 	width: number;
 	flipProgress: number | null;
-}> = ({width: originalWidth, flipProgress}) => {
+	flipDelay: number;
+}> = ({width: originalWidth, flipProgress, flipDelay = 50}) => {
 	const {fps, width: compWidth} = useVideoConfig();
 	const frame = useCurrentFrame();
 	const actualFlipProgress =
 		flipProgress ??
 		spring({
 			fps,
-			frame: frame - 50,
+			frame: frame - flipDelay,
 			config: {
 				damping: 200,
 			},
 		});
 	const width = originalWidth ?? compWidth;
-	const driver = spring({
+	const transitionIn = spring({
 		fps,
 		frame,
+		config: {
+			mass: 0.2,
+			damping: 100,
+		},
+	});
+	const transitionOut = spring({
+		fps,
+		frame: frame - flipDelay + 5,
+		config: {
+			mass: 0.2,
+			damping: 100,
+		},
+	});
+	const driver = spring({
+		fps,
+		frame: frame - 10,
 		config: {
 			damping: 200,
 			mass: 2,
@@ -55,14 +72,20 @@ export const WriteInReact: React.FC<{
 			>
 				<AbsoluteFill
 					style={{
-						transform: `scale(0.75) translateY(-${width * 0.1}px)`,
+						transform: `scale(${0.75}) translateY(-${width * 0.1}px)`,
 					}}
 				>
-					<AnimatedReactLogo driver={driver} width={width} fill={COLORS[0]} />
+					<AbsoluteFill style={{transform: `scale(${transitionIn})`}}>
+						<AnimatedReactLogo driver={driver} width={width} fill={COLORS[0]} />
+					</AbsoluteFill>
 				</AbsoluteFill>
 				<AbsoluteFill
 					style={{
-						transform: `scale(0.5) translateY(1000px)`,
+						transform: `scale(0.5) translateY(${
+							1000 +
+							interpolate(transitionIn, [0, 1], [500, 0]) +
+							+interpolate(transitionOut, [0, 1], [0, 1000])
+						}px)`,
 						backfaceVisibility: 'hidden',
 					}}
 				>
