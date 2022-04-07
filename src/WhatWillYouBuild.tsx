@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
@@ -85,6 +86,13 @@ export const WhatWillYouBuild: React.FC = () => {
 					</span>
 				</h1>
 			</AbsoluteFill>
+			<Sequence from={60}>
+				<AbsoluteFill
+					style={{
+						backgroundColor: 'red',
+					}}
+				/>
+			</Sequence>
 		</AbsoluteFill>
 	);
 };

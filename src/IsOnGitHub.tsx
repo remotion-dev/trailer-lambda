@@ -8,7 +8,7 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 
-export const IsOpenSource: React.FC = () => {
+export const IsOnGitHub: React.FC = () => {
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
 	const scale = spring({

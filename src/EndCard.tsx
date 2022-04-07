@@ -8,7 +8,7 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 import {Docs} from './Docs';
-import {IsOpenSource} from './NpmInitVideo';
+import {IsOnGitHub} from './NpmInitVideo';
 import {WhatWillYouBuild} from './WhatWillYouBuild';
 
 const Card: React.FC<{
@@ -143,7 +143,7 @@ export const EndCard: React.FC = () => {
 						}}
 					>
 						<Card strokeWidth={stroke2} color="black">
-							<IsOpenSource />
+							<IsOnGitHub />
 						</Card>
 					</div>
 				</div>
