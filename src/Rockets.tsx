@@ -4,7 +4,6 @@ import {Rocket} from './Rocket';
 
 const container: React.CSSProperties = {
 	display: 'flex',
-	backgroundColor: 'white',
 	flex: 1,
 };
 
@@ -23,12 +22,12 @@ export const Rockets: React.FC = () => {
 	const rocket2OriginX = width;
 	const rocket2OriginY = height + ROCKET_SIZE_2;
 	const rocket2TargetX = width - ROCKET_SIZE_2 / 2;
-	const rocket2TargetY = -ROCKET_SIZE_2 / 2;
+	const rocket2TargetY = -ROCKET_SIZE_2 / 2 - 200;
 
 	const rocket3OriginX = width + ROCKET_SIZE_3;
 	const rocket3OriginY = height / 2;
 	const rocket3TargetX = -ROCKET_SIZE_3;
-	const rocket3TargetY = ROCKET_SIZE_3 / 2;
+	const rocket3TargetY = ROCKET_SIZE_3 / 2 - 200;
 
 	return (
 		<div style={container}>

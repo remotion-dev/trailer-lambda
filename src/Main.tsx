@@ -5,7 +5,6 @@ import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {Pitch} from './Pitch';
 import {PricingToSourceAvailable} from './PricingToSourceAvailable';
 import {ProductLineUp} from './ProductLineUp';
-import {RocketCard} from './RocketCard';
 import {TimelineSplit} from './TimelineSplit';
 import {Vis} from './Vis';
 import {WayTooSlow} from './WayTooSlow';
@@ -33,13 +32,10 @@ export const Main: React.FC = () => {
 					<Series.Sequence durationInFrames={750}>
 						<Vis />
 					</Series.Sequence>
-					<Series.Sequence durationInFrames={240}>
+					<Series.Sequence durationInFrames={360}>
 						<WheelTransition delay={0} type="in">
 							<TimelineSplit />
 						</WheelTransition>
-					</Series.Sequence>
-					<Series.Sequence durationInFrames={120}>
-						<RocketCard />
 					</Series.Sequence>
 					<Series.Sequence durationInFrames={480}>
 						<ProductLineUp />

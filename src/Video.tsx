@@ -21,7 +21,6 @@ import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
 import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {BigNum} from './Number';
-import {Olympia} from './Olympia/Olympia';
 import {Paid} from './Paid';
 import {Pitch} from './Pitch';
 import {PlayerExample} from './PlayerExample';
@@ -110,18 +109,6 @@ export const RemotionVideo: React.FC = () => {
 				fps={VIDEO_FPS}
 				width={600}
 				height={470}
-			/>
-			<Composition
-				id="Olympia"
-				component={Olympia}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={1280}
-				height={720}
-				defaultProps={{
-					focalPoint: [0.5, 0.5],
-					backgroundColor: 'white',
-				}}
 			/>
 			<Composition
 				id="HugeOrb"

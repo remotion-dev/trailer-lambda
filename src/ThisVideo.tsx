@@ -63,7 +63,7 @@ export const ThisVideo: React.FC<{
 					style={{
 						height: SQUARE_HEIGHT,
 						width: aspectRatio * SQUARE_HEIGHT,
-						border: '12px solid' + COLORS[0],
+						border: '12px solid black',
 						justifyContent: 'center',
 						alignItems: 'center',
 						display: 'flex',

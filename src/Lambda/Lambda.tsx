@@ -5,7 +5,6 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {COLORS} from '../colors';
 import {Mask} from '../Mask';
 import {getLambdaHoleSize} from '../math/start-hug';
 import {
@@ -64,7 +63,7 @@ export const Lambda: React.FC = () => {
 											width={greekLetterWidth}
 											height={greekLetterHeight}
 											alternate={alternate}
-											color={COLORS[0]}
+											color="black"
 										/>
 									</div>
 								);

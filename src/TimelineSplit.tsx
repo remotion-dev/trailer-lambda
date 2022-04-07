@@ -2,12 +2,15 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	spring,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
 import {FlatCasette} from './FlatCasette';
+import {RocketCard} from './RocketCard';
 import {PIECES, TimelineSplitItem} from './TimelineSplitItem';
+import {WheelTransition} from './WheelTransition';
 
 export const TimelineSplit: React.FC = () => {
 	const frame = useCurrentFrame();
@@ -44,6 +47,31 @@ export const TimelineSplit: React.FC = () => {
 	);
 	const scale = interpolate(goBackTogether, [outFlipMark, 1], [0.7, 1]);
 
+	const transitionToCard = spring({
+		fps,
+		frame: frame - 235,
+		config: {
+			damping: 200,
+		},
+	});
+
+	const transitionRotation1 = interpolate(
+		transitionToCard,
+		[0, 1],
+		[0, -Math.PI],
+		{
+			extrapolateRight: 'clamp',
+		}
+	);
+	const transitionRotation2 = interpolate(
+		transitionToCard,
+		[0, 1],
+		[Math.PI, 0],
+		{
+			extrapolateLeft: 'clamp',
+		}
+	);
+
 	return (
 		<AbsoluteFill
 			style={{
@@ -72,7 +100,7 @@ export const TimelineSplit: React.FC = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					backfaceVisibility: 'hidden',
-					transform: `rotateY(${rotation}rad)`,
+					transform: `rotateY(${rotation + transitionRotation1}rad)`,
 				}}
 			>
 				<FlatCasette
@@ -83,6 +111,24 @@ export const TimelineSplit: React.FC = () => {
 					label="out.mp4"
 				/>
 			</AbsoluteFill>
+			<WheelTransition type="out" delay={340}>
+				<Sequence from={235} durationInFrames={120}>
+					<AbsoluteFill
+						style={{
+							perspective: 1000,
+						}}
+					>
+						<AbsoluteFill
+							style={{
+								backfaceVisibility: 'hidden',
+								transform: `rotateY(${transitionRotation2}rad)`,
+							}}
+						>
+							<RocketCard showRockets={transitionToCard > 0.99} />
+						</AbsoluteFill>
+					</AbsoluteFill>
+				</Sequence>
+			</WheelTransition>
 		</AbsoluteFill>
 	);
 };

@@ -8,7 +8,6 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {COLORS} from './colors';
 import {BigNum} from './Number';
 
 export const NormallyTakes: React.FC = () => {
@@ -79,7 +78,7 @@ export const NormallyTakes: React.FC = () => {
 							cx={width / 2}
 							cy={height / 2}
 							r={r}
-							stroke={COLORS[0]}
+							stroke="black"
 							fill="white"
 							strokeWidth={60}
 							strokeDasharray={strokeDashArray}
@@ -109,7 +108,7 @@ export const NormallyTakes: React.FC = () => {
 							d={`M ${width / 2} ${height / 2 - r} L ${width / 2} ${
 								height / 2 - r - pressTickLength
 							}`}
-							stroke={COLORS[0]}
+							stroke="black"
 							strokeWidth={60}
 							strokeLinecap="round"
 						/>
@@ -117,14 +116,14 @@ export const NormallyTakes: React.FC = () => {
 							d={`M ${width / 2 - 50} ${height / 2 - r - pressTickLength} L ${
 								width / 2 + 50
 							} ${height / 2 - r - pressTickLength}`}
-							stroke={COLORS[0]}
+							stroke="black"
 							strokeWidth={60}
 							strokeLinecap="round"
 						/>
 						{frame > 3 ? (
 							<path
 								d={`M ${point1timer[0]} ${point1timer[1]} L ${point2timer[0]} ${point2timer[1]}`}
-								stroke={COLORS[0]}
+								stroke="black"
 								strokeWidth={60}
 								strokeLinecap="round"
 							/>

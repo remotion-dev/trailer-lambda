@@ -75,7 +75,7 @@ export const StarryNumbers: React.FC = () => {
 	const translateSeconds = translateSecondsBasic + renderedOvershoot;
 
 	return (
-		<WheelTransition type="out" delay={startRenderedIn + 120}>
+		<WheelTransition type="out" delay={startRenderedIn + 127}>
 			<AbsoluteFill
 				style={{
 					transform: `scale(${scaleText})`,
