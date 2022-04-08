@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
 	AbsoluteFill,
 	interpolateColors,
@@ -16,13 +16,21 @@ export const RocketFumes: React.FC<{
 }> = ({estinguishProgress}) => {
 	const frame = useCurrentFrame();
 	const {width} = useVideoConfig();
+
+	const noise = useMemo(() => {
+		return new Array(fumeCount).fill(true).map((_, i) => {
+			return {
+				x: new SimplexNoise('noiseoffsetx' + i),
+				y: new SimplexNoise('noiseoffsety' + i),
+			};
+		});
+	}, []);
+
 	return (
 		<AbsoluteFill>
 			{new Array(fumeCount).fill(true).map((fume, i) => {
-				const noiseX =
-					new SimplexNoise('noiseoffsetx' + i).noise2D(0, frame / 10) * 20;
-				const noiseY =
-					new SimplexNoise('noiseoffsety' + i).noise2D(0, frame / 10) * 100;
+				const noiseX = noise[i].x.noise2D(0, frame / 10) * 20;
+				const noiseY = noise[i].y.noise2D(0, frame / 10) * 100;
 				const size =
 					(1 - estinguishProgress) * (random('size' + i) * 100 + 200);
 				const xOffset = (random('xoffset' + i) - 0.5) * 400 + noiseX;

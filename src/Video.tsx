@@ -1,10 +1,8 @@
 import {Composition, Still} from 'remotion';
-import {Model} from './Casette';
 import {Checklist} from './Checklist';
 import {ColorSwitcher} from './ColorSwitcher';
 import {Cursor} from './Cursor';
 import {Curtain} from './Curtain';
-import {Dust} from './Dust';
 import {Elevator} from './Elevator';
 import {EndCard} from './EndCard';
 import {FlatCasette} from './FlatCasette';
@@ -137,22 +135,7 @@ export const RemotionVideo: React.FC = () => {
 				width={1280}
 				height={720}
 			/>
-			<Composition
-				id="Dust"
-				component={Dust}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
-			/>
-			<Composition
-				id="Casette"
-				component={Model}
-				durationInFrames={100}
-				fps={VIDEO_FPS}
-				width={1080}
-				height={1080}
-			/>
+
 			<Composition
 				id="lambda"
 				component={Lambda}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -80,13 +80,13 @@ const Rocket: React.FC<{
 	);
 };
 
-const shake = new SimplexNoise('shake');
-const shakeX = new SimplexNoise('shakex');
-const rotate = new SimplexNoise('rotate');
-
 export const RocketShip: React.FC = () => {
 	const {height, width} = useVideoConfig();
 	const frame = useCurrentFrame();
+
+	const shake = useMemo(() => new SimplexNoise('shake'), []);
+	const shakeX = useMemo(() => new SimplexNoise('shakex'), []);
+	const rotate = useMemo(() => new SimplexNoise('rotate'), []);
 
 	const xOffset = shake.noise2D(0, frame / 30) * 30;
 	const YOffset = shakeX.noise2D(0, frame / 30) * 30;
