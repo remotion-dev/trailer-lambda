@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import {
 	interpolate,
 	interpolateColors,
@@ -11,7 +11,6 @@ import {
 } from 'remotion';
 import SimplexNoise from 'simplex-noise';
 import {COLORS} from './colors';
-import {point} from './point';
 
 const svgHoleSize = 906;
 const originalSvgWidth = 1729;
@@ -21,6 +20,13 @@ const ratio = remotionHolesize / svgHoleSize;
 
 const actualSvgWidth = ratio * originalSvgWidth;
 const actualSvgHeight = ratio * originalSvgHeight;
+
+type Point = {
+	x: number;
+	y: number;
+	color: string;
+	size: number;
+};
 
 export const Rocket: React.FC<{
 	targetX: number;
@@ -82,40 +88,30 @@ export const Rocket: React.FC<{
 	const rocket1PosX = interpolate(rocketProg, [0, 1], [originX, targetX]);
 	const rocket1PosY = interpolate(rocketProg, [0, 1], [originY, targetY]);
 
-	useEffect(() => {
-		const context = canvas.current?.getContext(
-			'2d'
-		) as CanvasRenderingContext2D;
-
-		if (!context) {
-			return;
-		}
-		context.clearRect(0, 0, width, height);
-		for (let i = 0; i < 200; i++) {
+	const points = useMemo(() => {
+		return new Array(200).fill(true).map((_, i) => {
 			const spread = interpolate(i, [0, 150, 200], [10, 180, 80]);
 			const ry = noi.noise2D(frame / 50, i) * spread;
 			const rx = noi2.noise2D(frame / 50, i) * 10;
 			const stopDrawing = frame > springDuration + i * 0.05 + delay;
 			if (stopDrawing && fumeOut) {
-				continue;
+				return null;
 			}
-			point({
+
+			return {
 				x: interpolate(i / 200, [0, 1], [originX, rocket1PosX]) + rx + x,
 				y: interpolate(i / 200, [0, 1], [originY, rocket1PosY]) + ry + y,
-				canvas: context,
 				color: interpolateColors(i, [0, 200], [COLORS[0], 'white']),
 				size:
 					70 *
 					interpolate(scalenoise.noise2D(frame / 50, i), [-1, 1], [0.9, 1.1]),
-			});
-		}
+			};
+		}, []);
 	}, [
 		frame,
-		height,
 		originX,
 		originY,
 		rocket1PosY,
-		width,
 		x,
 		y,
 		rocket1PosX,
@@ -131,18 +127,28 @@ export const Rocket: React.FC<{
 
 	return (
 		<div style={{position: 'absolute'}}>
-			<canvas
-				ref={canvas}
+			<svg
 				width={width}
 				height={height}
+				viewBox={`0 0 ${width} ${height}`}
 				style={{
-					width,
-					height,
 					position: 'absolute',
-					zIndex: 0,
 				}}
-			/>
-
+			>
+				{points.map((point) => {
+					if (!point) {
+						return null;
+					}
+					return (
+						<circle
+							cx={point?.x}
+							cy={point.y}
+							fill={point.color}
+							r={point.size}
+						/>
+					);
+				})}
+			</svg>
 			<svg
 				width={actualSvgWidth}
 				height={actualSvgHeight}
