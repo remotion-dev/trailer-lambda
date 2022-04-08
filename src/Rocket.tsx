@@ -1,4 +1,4 @@
-import React, {useMemo, useRef, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
 	interpolate,
 	interpolateColors,
@@ -20,13 +20,6 @@ const ratio = remotionHolesize / svgHoleSize;
 
 const actualSvgWidth = ratio * originalSvgWidth;
 const actualSvgHeight = ratio * originalSvgHeight;
-
-type Point = {
-	x: number;
-	y: number;
-	color: string;
-	size: number;
-};
 
 export const Rocket: React.FC<{
 	targetX: number;
@@ -64,7 +57,6 @@ export const Rocket: React.FC<{
 		[seed]
 	);
 
-	const canvas = useRef<HTMLCanvasElement>(null);
 	const {width, height, fps} = useVideoConfig();
 	const frame = useCurrentFrame();
 
