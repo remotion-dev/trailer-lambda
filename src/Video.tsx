@@ -7,13 +7,11 @@ import {Elevator} from './Elevator';
 import {EndCard} from './EndCard';
 import {FlatCasette} from './FlatCasette';
 import {Free} from './Free';
-import {HugeOrb} from './HugeOrb';
 import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
 import {Cluster} from './LambdaCluster';
 import {LambdaVis} from './LambdaVis';
 import {Main} from './Main';
-import {ManyOrbs} from './ManyOrbs';
 import {ManySpin} from './ManySpin';
 import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
@@ -100,14 +98,6 @@ export const RemotionVideo: React.FC = () => {
 				height={470}
 			/>
 			<Composition
-				id="HugeOrb"
-				component={HugeOrb}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={1280}
-				height={720}
-			/>
-			<Composition
 				id="ThisVideo"
 				component={ThisVideo}
 				durationInFrames={90}
@@ -118,14 +108,6 @@ export const RemotionVideo: React.FC = () => {
 					frameNum: 0,
 					showSpecs: true,
 				}}
-			/>
-			<Composition
-				id="ManyOrbs"
-				component={ManyOrbs}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={1280}
-				height={720}
 			/>
 			<Composition
 				id="Texture"
