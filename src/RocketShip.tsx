@@ -114,11 +114,11 @@ export const RocketShip: React.FC = () => {
 
 	return (
 		<AbsoluteFill>
-			<Sequence from={0} durationInFrames={120}>
+			<Sequence from={0} durationInFrames={120} name="upwind">
 				<Upwind />
 			</Sequence>
 
-			<Sequence from={80} durationInFrames={400}>
+			<Sequence from={80} durationInFrames={185} name="dust">
 				<AbsoluteFill
 					style={{
 						backgroundColor: 'black',

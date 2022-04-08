@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
+	Sequence,
 	Series,
 	spring,
 	useCurrentFrame,
@@ -105,36 +106,38 @@ export const StarryNumbers: React.FC = () => {
 						</Series.Sequence>
 					</Series>
 				</AbsoluteFill>
-				<AbsoluteFill>
-					<div
-						style={{
-							fontSize: 80,
-							fontFamily: 'SF Pro',
-							fontWeight: 'bold',
-							textAlign: 'center',
-							marginTop: 280,
-							color: COLORS[0],
-							transform: `translateY(${translateRendered}px)`,
-						}}
-					>
-						rendered in
-					</div>
-				</AbsoluteFill>
-				<AbsoluteFill>
-					<div
-						style={{
-							fontSize: 80,
-							fontFamily: 'SF Pro',
-							fontWeight: 'bold',
-							textAlign: 'center',
-							marginTop: 750,
-							color: COLORS[0],
-							transform: `translateY(${translateSeconds}px)`,
-						}}
-					>
-						seconds
-					</div>
-				</AbsoluteFill>
+				<Sequence from={300}>
+					<AbsoluteFill>
+						<div
+							style={{
+								fontSize: 80,
+								fontFamily: 'SF Pro',
+								fontWeight: 'bold',
+								textAlign: 'center',
+								marginTop: 280,
+								color: COLORS[0],
+								transform: `translateY(${translateRendered}px)`,
+							}}
+						>
+							rendered in
+						</div>
+					</AbsoluteFill>
+					<AbsoluteFill>
+						<div
+							style={{
+								fontSize: 80,
+								fontFamily: 'SF Pro',
+								fontWeight: 'bold',
+								textAlign: 'center',
+								marginTop: 750,
+								color: COLORS[0],
+								transform: `translateY(${translateSeconds}px)`,
+							}}
+						>
+							seconds
+						</div>
+					</AbsoluteFill>
+				</Sequence>
 			</AbsoluteFill>
 		</WheelTransition>
 	);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Sequence, Series} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, Series, staticFile} from 'remotion';
 import {EndCard} from './EndCard';
 import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
 import {Pitch} from './Pitch';
@@ -17,7 +17,7 @@ export const Main: React.FC = () => {
 				backgroundColor: 'white',
 			}}
 		>
-			{/* <Audio src={staticFile('voiceover-all.mp3')} /> */}
+			<Audio src={staticFile('voiceover-all.mp3')} />
 			<Sequence durationInFrames={200} from={175}>
 				<NormallyTakesMultiplied />
 			</Sequence>

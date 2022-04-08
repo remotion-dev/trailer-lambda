@@ -30,7 +30,6 @@ import {ProductLineUp} from './ProductLineUp';
 import {RocketCard} from './RocketCard';
 import {Rockets} from './Rockets';
 import {RocketShip} from './RocketShip';
-import {Rollercoaster} from './Rollercoaster';
 import {SourceAvailable} from './SourceAvailable';
 import {SpaceDust} from './SpaceDust';
 import {StarryNumber} from './StarryNumber';
@@ -85,14 +84,6 @@ export const RemotionVideo: React.FC = () => {
 					width: null,
 					flipProgress: 0,
 				}}
-			/>
-			<Composition
-				id="Rollercoaster"
-				component={Rollercoaster}
-				durationInFrames={900}
-				fps={VIDEO_FPS}
-				width={1920}
-				height={1080}
 			/>
 			<Composition
 				id="Tunnel"

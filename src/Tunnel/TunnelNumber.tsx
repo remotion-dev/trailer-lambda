@@ -30,7 +30,6 @@ export const TunnelNumber: React.FC<{
 					style={{
 						fontSize: 100,
 						color: isFinalNumber ? COLORS[0] : 'white',
-						textShadow: `0 0 ${interpolate(scale, [0, 10], [0, 1])}px #eee`,
 						transform: `rotateY(${rotation}rad)`,
 						fontFamily: 'Assistant',
 					}}
