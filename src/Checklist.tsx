@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -8,6 +8,7 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 import {GreekLetter} from './Lambda/GreekLetter';
+import {ensureSFProBold} from './load-font';
 
 const width = 550;
 const height = 800;
@@ -17,7 +18,6 @@ const bubbleSize = 70;
 const fast: React.CSSProperties = {
 	color: 'black',
 	fontSize: 70,
-	fontFamily: 'SF Pro',
 	fontWeight: 'bold',
 	marginTop: 15,
 	marginBottom: 15,
@@ -70,6 +70,8 @@ const Row: React.FC<{
 }> = ({delay, label}) => {
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProBold());
+
 	const moveUp = spring({
 		fps,
 		frame: frame - delay,
@@ -91,6 +93,7 @@ const Row: React.FC<{
 			<div
 				style={{
 					...fast,
+					fontFamily: sfPro,
 				}}
 			>
 				{label}

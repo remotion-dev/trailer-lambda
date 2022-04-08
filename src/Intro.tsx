@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import {ensureSFProBold} from './load-font';
 
 export const Intro: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {durationInFrames} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const opacity = interpolate(
 		frame,
 		[durationInFrames - 25, durationInFrames - 10],
@@ -24,7 +26,7 @@ export const Intro: React.FC = () => {
 		>
 			<div
 				style={{
-					fontFamily: 'SF Pro Display',
+					fontFamily: sfPro,
 					color: 'black',
 					fontSize: 100,
 					textAlign: 'center',

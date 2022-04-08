@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -7,10 +7,12 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProBold} from './load-font';
 
 export const Docs: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+	const [sfProBold] = useState(() => ensureSFProBold());
 	const scale = spring({
 		fps,
 		frame: frame - 30,
@@ -28,7 +30,7 @@ export const Docs: React.FC = () => {
 		>
 			<div
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfProBold,
 					fontSize: '2.5em',
 					fontWeight: 'bold',
 				}}
@@ -37,7 +39,7 @@ export const Docs: React.FC = () => {
 			</div>
 			<div
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfProBold,
 					fontSize: '3.5em',
 					fontWeight: 'bold',
 					color: COLORS[0],

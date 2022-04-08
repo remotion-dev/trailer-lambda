@@ -37,6 +37,39 @@ export const ensureFiraCode = () => {
 	}
 };
 
+const SF_PRO_BOLD = 'SFProBold';
+const SF_PRO_HEAVY_ITALIC = 'SFProHeavyItalic';
+
+export const ensureSFProHeavyItalic = () => {
+	if (typeof window !== 'undefined' && 'FontFace' in window) {
+		const font = new FontFace(
+			SF_PRO_HEAVY_ITALIC,
+			'url(' + staticFile('/sfpro-heavy-italic.otf') + ') '
+		);
+		const handle = delayRender();
+		font.load().then(() => {
+			document.fonts.add(font);
+			continueRender(handle);
+		});
+	}
+	return SF_PRO_HEAVY_ITALIC;
+};
+
+export const ensureSFProBold = () => {
+	if (typeof window !== 'undefined' && 'FontFace' in window) {
+		const font = new FontFace(
+			SF_PRO_BOLD,
+			'url(' + staticFile('/sfpro-bold.otf') + ') '
+		);
+		const handle = delayRender();
+		font.load().then(() => {
+			document.fonts.add(font);
+			continueRender(handle);
+		});
+	}
+	return SF_PRO_BOLD;
+};
+
 let globalFont: Font | null = null;
 
 export const useFont = () => {

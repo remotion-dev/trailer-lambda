@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -9,6 +9,7 @@ import {
 import {AnimatedReactLogo} from './AnimatedReactLogo';
 import {COLORS} from './colors';
 import {Cursor} from './Cursor';
+import {ensureSFProBold} from './load-font';
 
 export const WriteInReact: React.FC<{
 	width: number;
@@ -17,6 +18,7 @@ export const WriteInReact: React.FC<{
 }> = ({width: originalWidth, flipProgress, flipDelay = 50}) => {
 	const {fps, width: compWidth} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const actualFlipProgress =
 		flipProgress ??
 		spring({
@@ -106,7 +108,7 @@ export const WriteInReact: React.FC<{
 			>
 				<h1
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 80,
 						color: COLORS[0],
 						marginTop: 0,
@@ -120,7 +122,7 @@ export const WriteInReact: React.FC<{
 				</h1>
 				<h2
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 35,
 						color: '#444',
 						marginTop: 20,

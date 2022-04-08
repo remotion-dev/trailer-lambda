@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -8,11 +8,13 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProHeavyItalic} from './load-font';
 import {NpmInitVideo} from './NpmInitVideo';
 import {remapSpeed} from './remap-speed';
 
 export const WhatWillYouBuild: React.FC = () => {
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProHeavyItalic());
 
 	const remappedFrame = remapSpeed({
 		frame,
@@ -41,7 +43,7 @@ export const WhatWillYouBuild: React.FC = () => {
 			>
 				<h1
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 180,
 						color: COLORS[0],
 						marginTop: 0,

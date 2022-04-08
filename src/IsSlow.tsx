@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -7,11 +7,13 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProBold} from './load-font';
 import {remapSpeed} from './remap-speed';
 
 export const IsSlow: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 
 	const remappedFrame = remapSpeed({
 		frame,
@@ -38,7 +40,7 @@ export const IsSlow: React.FC = () => {
 		>
 			<h1
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfPro,
 					fontSize: renderingFontSize,
 					color: 'black',
 					marginTop: 0,
@@ -50,7 +52,7 @@ export const IsSlow: React.FC = () => {
 			</h1>
 			<h1
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfPro,
 					fontSize: slowFontSize,
 					color: COLORS[0],
 					marginTop: 0,

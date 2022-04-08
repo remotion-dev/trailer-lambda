@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -8,6 +8,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import {ensureSFProBold} from './load-font';
 import {StarryNumber} from './StarryNumber';
 import {ToReactStarry} from './ToReactStarry';
 import {WheelTransition} from './WheelTransition';
@@ -15,6 +16,7 @@ import {WheelTransition} from './WheelTransition';
 export const StarryNumbers: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const scale =
 		spring({
 			fps,
@@ -110,7 +112,7 @@ export const StarryNumbers: React.FC = () => {
 						<div
 							style={{
 								fontSize: 80,
-								fontFamily: 'SF Pro',
+								fontFamily: sfPro,
 								fontWeight: 'bold',
 								textAlign: 'center',
 								marginTop: 280,
@@ -125,7 +127,7 @@ export const StarryNumbers: React.FC = () => {
 						<div
 							style={{
 								fontSize: 80,
-								fontFamily: 'SF Pro',
+								fontFamily: sfPro,
 								fontWeight: 'bold',
 								textAlign: 'center',
 								marginTop: 750,

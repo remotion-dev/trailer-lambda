@@ -29,7 +29,6 @@ const LambdaBubble: React.FC = () => {
 				justifyContent: 'center',
 				alignItems: 'center',
 				color: COLORS[0],
-				fontFamily: 'SF Pro Display',
 				backgroundColor: 'white',
 				boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
 				borderRadius: ROCKET_SIZE / 2,

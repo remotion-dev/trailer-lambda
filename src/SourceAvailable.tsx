@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -8,10 +8,12 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 import {Curtain} from './Curtain';
+import {ensureSFProBold} from './load-font';
 
 export const SourceAvailable: React.FC = () => {
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const progress = spring({
 		fps,
 		frame,
@@ -51,7 +53,7 @@ export const SourceAvailable: React.FC = () => {
 					</svg>{' '}
 					<h1
 						style={{
-							fontFamily: 'SF Pro',
+							fontFamily: sfPro,
 							fontSize: 100,
 							color: COLORS[0],
 							marginTop: 0,
@@ -70,7 +72,7 @@ export const SourceAvailable: React.FC = () => {
 					</h1>
 					<div
 						style={{
-							fontFamily: 'SF Pro',
+							fontFamily: sfPro,
 							fontSize: 40,
 							color: 'black',
 							marginLeft: 30,

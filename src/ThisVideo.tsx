@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {COLORS} from './colors';
-import {ensureFiraCode} from './load-font';
+import {ensureFiraCode, ensureSFProBold} from './load-font';
 
 const aspectRatio = 16 / 9;
 const BAR_WIDTH = 50;
@@ -15,6 +15,7 @@ export const ThisVideo: React.FC<{
 }> = ({showSpecs, frameNum}) => {
 	const frame = useCurrentFrame();
 	const {width, height, fps} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 
 	const progress = spring({
 		fps,
@@ -95,7 +96,7 @@ export const ThisVideo: React.FC<{
 								<h1
 									style={{
 										color: COLORS[0],
-										fontFamily: 'SF Pro',
+										fontFamily: sfPro,
 										fontSize: 200,
 										fontWeight: 800,
 									}}
@@ -117,7 +118,7 @@ export const ThisVideo: React.FC<{
 								<h1
 									style={{
 										color: COLORS[0],
-										fontFamily: 'SF Pro',
+										fontFamily: sfPro,
 										fontSize: 200,
 										fontWeight: 800,
 										textAlign: 'center',

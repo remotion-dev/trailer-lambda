@@ -1,10 +1,12 @@
-import React, {SVGProps} from 'react';
+import React, {SVGProps, useState} from 'react';
+import {ensureSFProBold} from './load-font';
 
 export const FlatCasette: React.FC<
 	SVGProps<SVGSVGElement> & {
 		label: string;
 	}
 > = ({label, ...props}) => {
+	const [sfPro] = useState(() => ensureSFProBold());
 	return (
 		<svg
 			viewBox="0 0 541 946"
@@ -23,7 +25,7 @@ export const FlatCasette: React.FC<
 				fill="white"
 				xmlSpace="preserve"
 				style={{whiteSpace: 'pre'}}
-				fontFamily="SF Pro Display"
+				fontFamily={sfPro}
 				fontSize="70"
 				textAnchor="center"
 				fontWeight="500"

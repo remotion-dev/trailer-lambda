@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProHeavyItalic} from './load-font';
 
 export const NpmInitVideo: React.FC = () => {
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProHeavyItalic());
 	const scale = (delay: number) =>
 		spring({
 			fps,
@@ -24,7 +26,7 @@ export const NpmInitVideo: React.FC = () => {
 		>
 			<div
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfPro,
 					fontSize: '2.5em',
 					fontWeight: 'bold',
 				}}
@@ -33,7 +35,7 @@ export const NpmInitVideo: React.FC = () => {
 			</div>
 			<div
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfPro,
 					fontSize: '5em',
 					fontWeight: 900,
 					color: COLORS[0],

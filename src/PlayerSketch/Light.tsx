@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -10,6 +10,7 @@ import {
 import {AnimatedReactLogo} from '../AnimatedReactLogo';
 import {COLORS} from '../colors';
 import {ColorSwitcher, getColorFromFrame} from '../ColorSwitcher';
+import {ensureSFProBold} from '../load-font';
 import {Controls} from './Controls';
 
 const REACT_LOGO_SCALE = 0.5;
@@ -25,6 +26,7 @@ export const Light: React.FC<{
 	const width = originalWidth ?? compWidth;
 	const height = (width / 16) * 9;
 	const PADDING = width * 0.05;
+	const [sfPro] = useState(() => ensureSFProBold());
 
 	const actualFlipProgress =
 		flipProgress ??
@@ -141,7 +143,7 @@ export const Light: React.FC<{
 			>
 				<h1
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 80,
 						color: COLORS[0],
 						marginTop: 0,
@@ -155,7 +157,7 @@ export const Light: React.FC<{
 				</h1>
 				<h2
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 35,
 						color: '#444',
 						marginTop: 20,

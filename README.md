@@ -1,4 +1,4 @@
-# Remotion video
+# Remotion Lambda Trailer
 
 <p align="center">
   <a href="https://github.com/JonnyBurger/remotion-logo">
@@ -6,7 +6,7 @@
   </a>
 </p>
 
-Welcome to your Remotion project!
+This is the code behind the Remotion Lambda trailer.
 
 ## Commands
 

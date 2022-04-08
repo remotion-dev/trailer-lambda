@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -7,8 +7,10 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProBold} from './load-font';
 
 export const Free: React.FC = () => {
+	const [sfPro] = useState(() => ensureSFProBold());
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
 	const progress = spring({
@@ -40,7 +42,7 @@ export const Free: React.FC = () => {
 						border: '20px solid ' + COLORS[0],
 						color: COLORS[0],
 						display: 'inline-block',
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 300,
 						fontWeight: 'bold',
 						paddingLeft: 80,
@@ -64,7 +66,7 @@ export const Free: React.FC = () => {
 					style={{
 						color: 'black',
 						display: 'inline-block',
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 120,
 						fontWeight: 'bold',
 					}}

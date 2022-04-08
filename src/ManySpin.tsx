@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -8,6 +8,7 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 import {Cluster} from './LambdaCluster';
+import {ensureSFProBold} from './load-font';
 
 export const ManySpin: React.FC<{
 	flipProgress: number | null;
@@ -15,6 +16,7 @@ export const ManySpin: React.FC<{
 }> = ({flipProgress, width}) => {
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const actualFlipProgress =
 		flipProgress ??
 		spring({
@@ -58,7 +60,7 @@ export const ManySpin: React.FC<{
 			>
 				<h1
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 80,
 						color: COLORS[0],
 						marginTop: 0,
@@ -72,7 +74,7 @@ export const ManySpin: React.FC<{
 				</h1>
 				<h2
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 35,
 						color: '#444',
 						marginTop: 20,

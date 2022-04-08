@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -7,12 +7,14 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProBold} from './load-font';
 
 export const Paid: React.FC<{
 	start: number;
 }> = ({start}) => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 
 	const up = (delay: number) =>
 		spring({
@@ -42,7 +44,7 @@ export const Paid: React.FC<{
 						border: '20px solid ' + COLORS[0],
 						color: COLORS[0],
 						display: 'inline-block',
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 300,
 						fontWeight: 'bold',
 						paddingLeft: 50,
@@ -104,7 +106,7 @@ export const Paid: React.FC<{
 					style={{
 						color: 'black',
 						display: 'inline-block',
-						fontFamily: 'SF Pro',
+						fontFamily: sfPro,
 						fontSize: 120,
 						fontWeight: 'bold',
 						textAlign: 'center',

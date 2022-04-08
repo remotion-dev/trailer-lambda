@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -9,12 +9,14 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProBold} from './load-font';
 
 export const VideoApps: React.FC = () => {
 	const fontSize = 80;
 
 	const {fps} = useVideoConfig();
 	const frame = useCurrentFrame();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const delay = 45;
 	const sprconfig: Partial<SpringConfig> = {
 		damping: 200,
@@ -44,7 +46,7 @@ export const VideoApps: React.FC = () => {
 		>
 			<h1
 				style={{
-					fontFamily: 'SF Pro',
+					fontFamily: sfPro,
 					fontSize,
 					color: 'black',
 					marginTop: 0,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -7,6 +7,7 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProBold} from './load-font';
 import {NormallyTakes} from './NormallyTakes';
 
 const num = 4;
@@ -14,6 +15,7 @@ const num = 4;
 export const NormallyTakesMultiplied: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const spread = spring({
 		fps,
 		frame: frame - 50,
@@ -76,7 +78,7 @@ export const NormallyTakesMultiplied: React.FC = () => {
 						<h1
 							style={{
 								fontSize: 100,
-								fontFamily: 'SF Pro',
+								fontFamily: sfPro,
 								color: COLORS[0],
 							}}
 						>

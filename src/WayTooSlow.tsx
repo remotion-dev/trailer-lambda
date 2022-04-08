@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -7,10 +7,12 @@ import {
 	useVideoConfig,
 } from 'remotion';
 import {COLORS} from './colors';
+import {ensureSFProHeavyItalic} from './load-font';
 import {remapSpeed} from './remap-speed';
 
 export const WayTooSlow: React.FC = () => {
 	const frame = useCurrentFrame();
+	const [sfProItalic] = useState(() => ensureSFProHeavyItalic());
 
 	const remappedFrame = remapSpeed({
 		frame,
@@ -39,11 +41,10 @@ export const WayTooSlow: React.FC = () => {
 			>
 				<h1
 					style={{
-						fontFamily: 'SF Pro',
+						fontFamily: sfProItalic,
 						fontSize: 280,
 						color: COLORS[0],
 						marginTop: 0,
-						fontStyle: 'italic',
 						marginBottom: 0,
 						fontWeight: 900,
 						lineHeight: 1,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -6,6 +6,7 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
+import {ensureSFProBold} from '../load-font';
 import {CONTROLS_START, PLAY_START} from './const';
 
 const Play: React.FC = () => {
@@ -80,6 +81,7 @@ const Fullscreen: React.FC = () => {
 const Time: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+	const [sfPro] = useState(() => ensureSFProBold());
 	const currentTime = Math.max(0, frame - PLAY_START + 20);
 
 	const seconds = Math.floor(currentTime / fps);
@@ -87,7 +89,7 @@ const Time: React.FC = () => {
 	return (
 		<div
 			style={{
-				fontFamily: 'SF Pro Display',
+				fontFamily: sfPro,
 				fontWeight: 500,
 				fontSize: 26,
 			}}
