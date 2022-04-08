@@ -18,7 +18,7 @@ export const Vis: React.FC = () => {
 					/>
 					<InitialBigNum />
 				</Series.Sequence>
-				<Series.Sequence durationInFrames={132}>
+				<Series.Sequence durationInFrames={120}>
 					<AbsoluteFill
 						style={{
 							backgroundColor: 'white',

@@ -8,7 +8,6 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
-import {COLORS} from './colors';
 import {StarryNumber} from './StarryNumber';
 import {ToReactStarry} from './ToReactStarry';
 import {WheelTransition} from './WheelTransition';
@@ -115,7 +114,7 @@ export const StarryNumbers: React.FC = () => {
 								fontWeight: 'bold',
 								textAlign: 'center',
 								marginTop: 280,
-								color: COLORS[0],
+								color: 'black',
 								transform: `translateY(${translateRendered}px)`,
 							}}
 						>
@@ -130,7 +129,7 @@ export const StarryNumbers: React.FC = () => {
 								fontWeight: 'bold',
 								textAlign: 'center',
 								marginTop: 750,
-								color: COLORS[0],
+								color: 'black',
 								transform: `translateY(${translateSeconds}px)`,
 							}}
 						>
