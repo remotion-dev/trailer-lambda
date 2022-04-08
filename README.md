@@ -6,7 +6,20 @@
   </a>
 </p>
 
-This is the code behind the Remotion Lambda trailer.
+This is the source code the [Remotion Lambda trailer](https://todo.com). This video was written entirely in React using [Remotion](https://remotion.dev)
+
+## Rendering via Remotion Lambda
+
+To validate the claim in the video that it can be rendered in 15 seconds, first set up [Remotion Lambda](https://remotion.dev/docs/lambda/setup). Afterwards, deploy the project and render across 200 Lambda functions:
+
+```bash
+npx remotion lambda sites create src/index.tsx --site-name=trailer
+npx remotion lambda render trailer Main --frames-per-lambda=12
+npx remotion lambda render trailer Main --frames-per-lambda=12
+```
+
+On the second render, you should see a render time of around 15 seconds. We've achieved a time of 14.6 seconds in our best run.
+Note: We are rendering the video twice to "warm up" the Lambda functions. There is no caching going on.
 
 ## Commands
 
@@ -21,14 +34,6 @@ npm start
 ```console
 npm run build
 ```
-
-**Server render demo**
-
-```console
-npm run server
-```
-
-See [docs for server-side rendering](https://www.remotion.dev/docs/ssr) here.
 
 **Upgrade Remotion**
 
@@ -46,4 +51,5 @@ Found an issue with Remotion? [File an issue here](https://github.com/JonnyBurge
 
 ## License
 
-Notice that for some entities a company license is needed. Read [the terms here](https://github.com/JonnyBurger/remotion/blob/main/LICENSE.md).
+This code: MIT
+Remotion: Notice that for some entities a company license is needed. Read [the terms here](https://github.com/JonnyBurger/remotion/blob/main/LICENSE.md).
