@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {
 	AbsoluteFill,
 	interpolate,
@@ -12,8 +12,6 @@ import SimplexNoise from 'simplex-noise';
 import {Circle} from './Circle';
 import {Stage} from './Stage';
 import {TunnelNumber} from './TunnelNumber';
-
-const noise = new SimplexNoise('tunnel');
 
 const amount = 1000;
 
@@ -29,6 +27,8 @@ export const Tunnel: React.FC = () => {
 	const frame = useCurrentFrame();
 	const {width, height, fps} = useVideoConfig();
 	const distanceProgressed = interpolate(frame, [0, TOTAL_DISTANCE], [0, 1]);
+	const noise = useMemo(() => new SimplexNoise('tunnel'), []);
+
 	const numbersDistanceProgressed = interpolate(
 		frame,
 		[120, ANIMATION_DONE_AFTER],
