@@ -3,7 +3,7 @@ import {interpolate, random} from 'remotion';
 import {FONT_SIZE} from './math/font-size';
 
 import svgPathProperties = require('svg-path-properties');
-const amountOfPoints = 200;
+const amountOfPoints = 150;
 
 type ViewBox = Pick<BoundingBox, 'x1' | 'x2' | 'y1' | 'y2'>;
 

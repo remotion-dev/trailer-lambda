@@ -13,6 +13,7 @@ export const StarryNumber: React.FC<{
 	const font = useFont();
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+
 	const progress = spring({
 		fps,
 		frame,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Series} from 'remotion';
+import {AbsoluteFill, Sequence, Series} from 'remotion';
 import {AnimatedNumber} from './AnimatedNumber';
 import {InitialBigNum} from './InitialBigNumb';
 import {Lambda} from './Lambda/Lambda';
@@ -24,7 +24,9 @@ export const Vis: React.FC = () => {
 							backgroundColor: 'white',
 						}}
 					/>
-					<Lambda />
+					<Sequence from={0} durationInFrames={60}>
+						<Lambda />
+					</Sequence>
 					<ManyWaves />
 					<AnimatedNumber />
 				</Series.Sequence>

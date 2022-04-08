@@ -126,9 +126,9 @@ export const Tunnel: React.FC = () => {
 				<Stage focalX={focalPoint[0]} focalY={focalPoint[1]} />
 			</Sequence>
 			{new Array(numbersAmount).fill(true).map((_, num) => {
-				const displayNumber = num + 10;
+				const displayNumber = num + 15;
 
-				const isFinalNumber = displayNumber === 10;
+				const isFinalNumber = displayNumber === 15;
 
 				const i = numbersAmount - num - 1;
 				const distance = interpolate(i, [0, numbersAmount - 1], [0, 1]);
@@ -171,7 +171,7 @@ export const Tunnel: React.FC = () => {
 							scale={scale}
 							focalPoint={focalPoint}
 							number={String(displayNumber)}
-							isFinalNumber={displayNumber === 10}
+							isFinalNumber={displayNumber === 15}
 						/>
 					</AbsoluteFill>
 				);

@@ -4,7 +4,7 @@ import {getHugProgress, HUG_START} from './start-hug';
 export const WAVE_EVERY_FRAMES = 10;
 
 export const WAVES_START = 40 + HUG_START;
-export const NUMBER_OF_WAVES = 8;
+export const NUMBER_OF_WAVES = 6;
 
 export const getHugAndRetreatProgress = (frame: number) => {
 	const small = 0.4;

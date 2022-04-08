@@ -18,7 +18,7 @@ export const Main: React.FC = () => {
 			}}
 		>
 			<Audio src={staticFile('voiceover-all.mp3')} />
-			<Sequence durationInFrames={200} from={175}>
+			<Sequence durationInFrames={125} from={175}>
 				<NormallyTakesMultiplied />
 			</Sequence>
 			<Sequence durationInFrames={100} from={300}>

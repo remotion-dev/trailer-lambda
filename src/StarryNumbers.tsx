@@ -85,13 +85,13 @@ export const StarryNumbers: React.FC = () => {
 				<AbsoluteFill style={{transform: `scale(${scale})`}}>
 					<Series>
 						<Series.Sequence durationInFrames={seq1Length}>
-							<StarryNumber from="30" to="30" />
+							<StarryNumber from="35" to="35" />
 						</Series.Sequence>
 						<Series.Sequence durationInFrames={seq2Length}>
-							<StarryNumber from="30" to="25" />
+							<StarryNumber from="35" to="30" />
 						</Series.Sequence>
 						<Series.Sequence durationInFrames={seq3Length}>
-							<StarryNumber from="25" to="20" />
+							<StarryNumber from="30" to="25" />
 						</Series.Sequence>
 						<Series.Sequence durationInFrames={seq4Length}>
 							<AbsoluteFill

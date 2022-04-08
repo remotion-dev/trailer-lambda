@@ -17,8 +17,8 @@ const charContainer: React.CSSProperties = {
 	alignItems: 'center',
 };
 
-const leftNums = [4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4];
-const rightNums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const leftNums = [5, 6, 7, 8, 9, 0, 1, 2, 3, 4];
+const rightNums = [6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
 
 const spacingBetween = 15;
 const totalWidth = (charContainer.width as number) * 2 + spacingBetween;
@@ -42,7 +42,7 @@ export const Elevator: React.FC<{
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
-	const leftAnimation = interpolate(animation, [0, 0.1], [0, 1], {
+	const leftAnimation = interpolate(animation, [0.55, 0.65], [0, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
