@@ -30,7 +30,6 @@ import {SourceAvailable} from './SourceAvailable';
 import {SpaceDust} from './SpaceDust';
 import {StarryNumber} from './StarryNumber';
 import {StarryNumbers} from './StarryNumbers';
-import {TextStretch} from './TextStretch';
 import {Texture} from './Texture';
 import {ThisVideo} from './ThisVideo';
 import {TimelineSplit} from './TimelineSplit';
@@ -88,14 +87,6 @@ export const RemotionVideo: React.FC = () => {
 				fps={VIDEO_FPS}
 				width={1920}
 				height={1080}
-			/>
-			<Composition
-				id="TextStretch"
-				component={TextStretch}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={600}
-				height={470}
 			/>
 			<Composition
 				id="ThisVideo"
