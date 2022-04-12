@@ -76,7 +76,7 @@ export const SourceAvailable: React.FC = () => {
 							fontSize: 40,
 							color: 'black',
 							marginLeft: 30,
-							border: '4px solid ' + 'black',
+							border: '4px solid black',
 							padding: '6px 20px',
 							borderRadius: 12,
 							marginTop: 10,

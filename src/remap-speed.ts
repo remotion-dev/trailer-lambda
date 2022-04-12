@@ -9,5 +9,6 @@ export const remapSpeed = ({
 	for (let i = 0; i <= frame; i++) {
 		framesPassed += speed(i);
 	}
+
 	return framesPassed;
 };

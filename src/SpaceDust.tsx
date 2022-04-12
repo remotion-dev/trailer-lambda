@@ -28,6 +28,7 @@ export const SpaceDust: React.FC = () => {
 
 			temp.push({time, factor, speed, x, y, starter, entry});
 		}
+
 		return temp;
 	}, [height, width]);
 
@@ -49,7 +50,7 @@ export const SpaceDust: React.FC = () => {
 					x:
 						x +
 						Math.cos((t / 10) * factor) +
-						(((Math.sin(t * 1) * factor) / 10) * width) / 100,
+						(((Math.sin(Number(t)) * factor) / 10) * width) / 100,
 					y:
 						y +
 						Math.sin((t / 10) * factor) +

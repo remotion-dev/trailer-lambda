@@ -22,6 +22,7 @@ const getPath = (font: Font, char: string) => {
 	if (cache[char]) {
 		return cache[char];
 	}
+
 	const path = font.getPath(char, 0, 0, FONT_SIZE);
 	const leftPath = path.toPathData(3);
 	const viewBox = path.getBoundingBox();
@@ -73,6 +74,7 @@ const getStarryNumber = (
 			},
 		};
 	}
+
 	const svg = getPath(font, char);
 
 	return {

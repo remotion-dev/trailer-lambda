@@ -8,7 +8,9 @@ import {
 } from 'remotion';
 import {COLORS} from './colors';
 
-export const Curtain: React.FC = ({children}) => {
+export const Curtain: React.FC<{
+	children: React.ReactNode;
+}> = ({children}) => {
 	const {fps, width} = useVideoConfig();
 	const frame = useCurrentFrame();
 	const progress = spring({

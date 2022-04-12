@@ -86,7 +86,7 @@ export const WriteInReact: React.FC<{
 						transform: `scale(0.5) translateY(${
 							1000 +
 							interpolate(transitionIn, [0, 1], [500, 0]) +
-							+interpolate(transitionOut, [0, 1], [0, 1000])
+							Number(interpolate(transitionOut, [0, 1], [0, 1000]))
 						}px)`,
 						backfaceVisibility: 'hidden',
 					}}

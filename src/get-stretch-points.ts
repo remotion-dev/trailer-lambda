@@ -10,6 +10,7 @@ export const getStretchRanges = (
 		if (!isSameAsPreviousRow[column]) {
 			continue;
 		}
+
 		let opaquePixels = 0;
 		for (let row = 0; row < height; row++) {
 			if (!isSameAsPreviousRow[column]) {
@@ -29,6 +30,7 @@ export const getStretchRanges = (
 			if (a > 0) {
 				opaquePixels++;
 			}
+
 			const isTheSame =
 				r === prevR && g === prevG && b === prevB && a === prevA;
 
@@ -36,13 +38,16 @@ export const getStretchRanges = (
 				isSameAsPreviousRow[column] = false;
 			}
 		}
+
 		if (opaquePixels === 0) {
 			isSameAsPreviousRow[column] = false;
 		}
+
 		if (opaquePixels > height * 0.4) {
 			isSameAsPreviousRow[column] = false;
 		}
 	}
+
 	const ranges: [number, number][] = [];
 
 	let start = null;
@@ -50,13 +55,16 @@ export const getStretchRanges = (
 		if (isSameAsPreviousRow[i] && !start) {
 			start = i;
 		}
+
 		if (!isSameAsPreviousRow[i] && start) {
 			ranges.push([start, i]);
 			start = null;
 		}
 	}
+
 	if (start) {
 		ranges.push([start, width - 1]);
 	}
+
 	return ranges;
 };

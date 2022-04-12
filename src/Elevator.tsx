@@ -33,6 +33,7 @@ export const Elevator: React.FC<{
 	if (!font) {
 		return null;
 	}
+
 	const topWhereLowestIsCentered =
 		height / 2 - (charContainer.height as number) / 2;
 	const topWhereGreatestIsCentered =

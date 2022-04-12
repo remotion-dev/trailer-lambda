@@ -26,6 +26,7 @@ const groupBy = (vals: [string, string][]) => {
 		if (!groups[version]) {
 			groups[version] = [];
 		}
+
 		groups[version].push(pkg);
 	}
 

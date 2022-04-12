@@ -12,7 +12,6 @@ export const Circle: React.FC<{
 	return (
 		<div
 			style={{
-				border: '0px solid ' + 'white',
 				borderRadius: '50%',
 				width: height,
 				height,

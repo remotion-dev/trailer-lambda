@@ -9,8 +9,7 @@ export const TunnelNumber: React.FC<{
 	number: string;
 	isFinalNumber: boolean;
 	focalPoint: readonly [number, number];
-	scale: number;
-}> = ({number, focalPoint, scale, isFinalNumber}) => {
+}> = ({number, focalPoint, isFinalNumber}) => {
 	const rotation = interpolate(
 		focalPoint[0],
 		[0, 1],

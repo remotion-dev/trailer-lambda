@@ -131,6 +131,7 @@ export const Rocket: React.FC<{
 					if (!point) {
 						return null;
 					}
+
 					return (
 						<circle
 							cx={point?.x}

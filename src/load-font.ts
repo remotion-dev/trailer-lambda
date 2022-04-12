@@ -52,6 +52,7 @@ export const ensureSFProHeavyItalic = () => {
 			continueRender(handle);
 		});
 	}
+
 	return SF_PRO_HEAVY_ITALIC;
 };
 
@@ -67,6 +68,7 @@ export const ensureSFProBold = () => {
 			continueRender(handle);
 		});
 	}
+
 	return SF_PRO_BOLD;
 };
 

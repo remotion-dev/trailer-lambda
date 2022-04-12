@@ -102,6 +102,7 @@ export const Tunnel: React.FC = () => {
 				if (scale < 0) {
 					return null;
 				}
+
 				if (scale > 10) {
 					return null;
 				}
@@ -142,6 +143,7 @@ export const Tunnel: React.FC = () => {
 				if (relativeDistance < 0 && !isFinalNumber) {
 					return null;
 				}
+
 				if (relativeDistance > Math.PI / 2) {
 					return null;
 				}
@@ -168,7 +170,6 @@ export const Tunnel: React.FC = () => {
 						}}
 					>
 						<TunnelNumber
-							scale={scale}
 							focalPoint={focalPoint}
 							number={String(displayNumber)}
 							isFinalNumber={displayNumber === 15}
