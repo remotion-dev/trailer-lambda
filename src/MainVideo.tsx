@@ -17,7 +17,7 @@ export const MainVideo: React.FC = () => {
 				backgroundColor: 'white',
 			}}
 		>
-			<Audio src={staticFile('voiceover-all.mp3')} />
+			<Audio src={staticFile('voiceover.wav')} />
 			<Sequence durationInFrames={125} from={175}>
 				<NormallyTakesMultiplied />
 			</Sequence>
