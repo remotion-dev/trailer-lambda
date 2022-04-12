@@ -10,6 +10,7 @@ import {
 export const WheelTransition: React.FC<{
 	type: 'in' | 'out';
 	delay: number;
+	children: React.ReactNode;
 }> = ({children, delay, type}) => {
 	const {fps, height, width} = useVideoConfig();
 	const frame = useCurrentFrame();

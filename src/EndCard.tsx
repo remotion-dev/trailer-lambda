@@ -14,6 +14,7 @@ import {WhatWillYouBuild} from './WhatWillYouBuild';
 const Card: React.FC<{
 	strokeWidth: number;
 	color: string;
+	children: React.ReactNode;
 }> = ({strokeWidth, color, children}) => {
 	return (
 		<div
