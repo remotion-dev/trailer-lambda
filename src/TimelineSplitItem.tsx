@@ -27,7 +27,7 @@ const BORDER_RADIUS = 8;
 const ROWS = 1;
 const COLUMNS = 6;
 export const PIECES = ROWS * COLUMNS;
-const PIECE_RADIUS = 50;
+const PIECE_RADIUS = 25;
 
 const LAMBDA_PILL_SIZE = 100;
 
@@ -145,7 +145,6 @@ export const TimelineSplitItem: React.FC<{
 					top,
 					position: 'absolute',
 					boxShadow: `0 0 10px rgba(0, 0, 0, ${boxShadowOpacity})`,
-					overflow: 'hidden',
 					transform: `rotateY(${interpolate(flip, [0, 1], [0, Math.PI])}rad)`,
 					backfaceVisibility: 'hidden',
 				}}
@@ -155,6 +154,12 @@ export const TimelineSplitItem: React.FC<{
 						height: '100%',
 						width: interpolate(fill, [0, 0.96], [0, 100]) + '%',
 						backgroundColor: COLORS[0],
+						transform: 'scale(1.01)',
+						borderTopLeftRadius: index === 0 ? PIECE_RADIUS / 2 : 0,
+						borderBottomLeftRadius: index === 0 ? PIECE_RADIUS / 2 : 0,
+						borderTopRightRadius: index === PIECES - 1 ? PIECE_RADIUS / 2 : 0,
+						borderBottomRightRadius:
+							index === PIECES - 1 ? PIECE_RADIUS / 2 : 0,
 					}}
 				/>
 			</div>
