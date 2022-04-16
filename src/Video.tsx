@@ -16,6 +16,7 @@ import {ManySpin} from './ManySpin';
 import {VIDEO_FPS} from './math/fps';
 import {NormallyTakes} from './NormallyTakes';
 import {NormallyTakesMultiplied} from './NormallyTakesMultiplied';
+import {NpmInstallVideo} from './NpmInstall';
 import {BigNum} from './Number';
 import {Paid} from './Paid';
 import {Pitch} from './Pitch';
@@ -30,7 +31,6 @@ import {SourceAvailable} from './SourceAvailable';
 import {SpaceDust} from './SpaceDust';
 import {StarryNumber} from './StarryNumber';
 import {StarryNumbers} from './StarryNumbers';
-import {Texture} from './Texture';
 import {ThisVideo} from './ThisVideo';
 import {TimelineSplit} from './TimelineSplit';
 import {Tunnel} from './Tunnel';
@@ -43,6 +43,7 @@ import {WayTooSlow} from './WayTooSlow';
 import {WhatWillYouBuild} from './WhatWillYouBuild';
 import {WheelTransitionIn, WheelTransitionOut} from './WheelTransitionDemo';
 import {WriteInReact} from './WriteInReact';
+import {WriteInReactHomepage} from './WriteInReactHomepage';
 
 export const RemotionVideo: React.FC = () => {
 	return (
@@ -99,14 +100,6 @@ export const RemotionVideo: React.FC = () => {
 					frameNum: 0,
 					showSpecs: true,
 				}}
-			/>
-			<Composition
-				id="Texture"
-				component={Texture}
-				durationInFrames={180}
-				fps={VIDEO_FPS}
-				width={1280}
-				height={720}
 			/>
 
 			<Composition
@@ -268,6 +261,12 @@ export const RemotionVideo: React.FC = () => {
 				width={1920}
 				fps={24}
 			/>
+			<Still
+				id="WriteInReactHomepage"
+				component={WriteInReactHomepage}
+				height={1080}
+				width={1920}
+			/>
 			<Composition
 				id="Cursor"
 				component={Cursor}
@@ -284,13 +283,13 @@ export const RemotionVideo: React.FC = () => {
 				id="PlayerExample"
 				component={PlayerExample}
 				durationInFrames={300}
-				height={1080}
-				width={1920}
+				height={900}
+				width={1920 / 2}
 				fps={24}
 				defaultProps={{
 					delay: 0,
 					width: null,
-					flipProgress: null,
+					flipProgress: 0,
 				}}
 			/>
 			<Composition
@@ -428,9 +427,31 @@ export const RemotionVideo: React.FC = () => {
 				id="Cluster"
 				component={Cluster}
 				durationInFrames={300}
+				height={720}
+				width={1280}
+				fps={24}
+			/>
+			<Composition
+				id="NpmInstallVideoLight"
+				component={NpmInstallVideo}
+				durationInFrames={300}
 				height={1080}
 				width={1920}
 				fps={24}
+				defaultProps={{
+					background: 'white',
+				}}
+			/>
+			<Composition
+				id="NpmInstallVideoDark"
+				component={NpmInstallVideo}
+				durationInFrames={300}
+				height={1080}
+				width={1920}
+				fps={24}
+				defaultProps={{
+					background: '#18191a',
+				}}
 			/>
 		</>
 	);
