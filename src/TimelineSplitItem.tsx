@@ -145,7 +145,6 @@ export const TimelineSplitItem: React.FC<{
 					top,
 					position: 'absolute',
 					boxShadow: `0 0 10px rgba(0, 0, 0, ${boxShadowOpacity})`,
-					backgroundColor: 'white',
 					overflow: 'hidden',
 					transform: `rotateY(${interpolate(flip, [0, 1], [0, Math.PI])}rad)`,
 					backfaceVisibility: 'hidden',
@@ -154,7 +153,7 @@ export const TimelineSplitItem: React.FC<{
 				<div
 					style={{
 						height: '100%',
-						width: interpolate(fill, [0, 1], [0, 100]) + '%',
+						width: interpolate(fill, [0, 0.96], [0, 100]) + '%',
 						backgroundColor: COLORS[0],
 					}}
 				/>
