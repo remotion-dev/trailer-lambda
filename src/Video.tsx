@@ -7,6 +7,11 @@ import {Elevator} from './Elevator';
 import {EndCard} from './EndCard';
 import {FlatCasette} from './FlatCasette';
 import {Free} from './Free';
+import {Hype} from './Hype';
+import {HypeCircles} from './HypeCircles';
+import {HypeDate} from './HypeDate';
+import {HypeLogo} from './HypeLogo';
+import {HypeTrailer} from './HypeTrailer';
 import {IsSlow} from './IsSlow';
 import {Lambda} from './Lambda/Lambda';
 import {Cluster} from './LambdaCluster';
@@ -194,7 +199,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="TimelineSplit"
 				component={TimelineSplit}
-				durationInFrames={250}
+				durationInFrames={300}
 				height={1080}
 				width={1920}
 				fps={VIDEO_FPS}
@@ -452,6 +457,46 @@ export const RemotionVideo: React.FC = () => {
 				defaultProps={{
 					background: '#18191a',
 				}}
+			/>
+			<Composition
+				id="HypeTrailer"
+				component={HypeTrailer}
+				durationInFrames={300}
+				height={1080}
+				width={1080}
+				fps={24}
+			/>
+			<Composition
+				id="HypeCircles"
+				component={HypeCircles}
+				durationInFrames={300}
+				height={1080}
+				width={1080}
+				fps={24}
+			/>
+			<Composition
+				id="Hype"
+				component={Hype}
+				durationInFrames={300}
+				height={1080}
+				width={1080}
+				fps={24}
+			/>
+			<Composition
+				id="HypeLogo"
+				component={HypeLogo}
+				durationInFrames={300}
+				height={1080}
+				width={1080}
+				fps={24}
+			/>
+			<Composition
+				id="HypeDate"
+				component={HypeDate}
+				durationInFrames={300}
+				height={1080}
+				width={1080}
+				fps={24}
 			/>
 		</>
 	);

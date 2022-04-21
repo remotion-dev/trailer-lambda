@@ -8,7 +8,7 @@
 		"upgrade": "remotion upgrade",
 		"render-write-in-react": "remotion still src/index.tsx WriteInReactHomepage --scale=0.5 out/writeinreact.png",
 		"render-player": "remotion still src/index.tsx PlayerExample --frame=167 out/player-example.png",
-		"render-timeline-split": "remotion render src/index.tsx TimelineSplit --frames=0-230 out/timelinesplit.mp4 --scale=0.5",
+		"render-timeline-split": "remotion render src/index.tsx TimelineSplit out/timelinesplitlight.mp4 --scale=0.5",
 		"render-npminstall": "remotion render src/index.tsx NpmInstallVideoLight --frames=0-230 out/npminstalllight.mp4 --scale=0.5 && remotion render src/index.tsx NpmInstallVideoDark --frames=0-230 out/npminstalldark.mp4 --scale=0.5",
 		"render-cluster": "remotion still src/index.tsx Cluster --frame=157 out/cluster.png",
 		"test": "eslint src --ext ts,tsx,js,jsx && tsc"
