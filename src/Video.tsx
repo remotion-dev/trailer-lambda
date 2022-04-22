@@ -477,7 +477,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Hype"
 				component={Hype}
-				durationInFrames={300}
+				durationInFrames={197 * 5}
 				height={1080}
 				width={1080}
 				fps={24}

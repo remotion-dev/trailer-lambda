@@ -26,7 +26,7 @@ export const HypeLogo: React.FC = () => {
 		},
 	});
 
-	const beat = Math.sin(posterized / 5) * 0.025 - 0.025;
+	const beat = Math.sin(posterized / 4) * 0.05 - 0.05;
 
 	const randomRotatiom = () => simplexNoise.noise2D(posterized, 0) * 0.0;
 
