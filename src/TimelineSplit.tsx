@@ -52,23 +52,6 @@ export const TimelineSplit: React.FC = () => {
 		},
 	});
 
-	const transitionRotation1 = interpolate(
-		transitionToCard,
-		[0, 1],
-		[0, -Math.PI],
-		{
-			extrapolateRight: 'clamp',
-		}
-	);
-	const transitionRotation2 = interpolate(
-		transitionToCard,
-		[0, 1],
-		[Math.PI, 0],
-		{
-			extrapolateLeft: 'clamp',
-		}
-	);
-
 	return (
 		<AbsoluteFill
 			style={{
