@@ -6,7 +6,7 @@
   </a>
 </p>
 
-This is the source code the [Remotion Lambda trailer](https://todo.com). This video was written entirely in React using [Remotion](https://remotion.dev)
+This is the source code the [Remotion Lambda trailer](https://www.youtube.com/watch?v=GN2jkJphR5M). This video was written entirely in React using [Remotion](https://remotion.dev).
 
 ## Rendering via Remotion Lambda
 
@@ -51,5 +51,5 @@ Found an issue with Remotion? [File an issue here](https://github.com/JonnyBurge
 
 ## License
 
-This code: MIT
+This code: MIT  
 Remotion: Notice that for some entities a company license is needed. Read [the terms here](https://github.com/JonnyBurger/remotion/blob/main/LICENSE.md).
