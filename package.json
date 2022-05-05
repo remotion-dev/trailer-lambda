@@ -4,7 +4,7 @@
 	"description": "My Remotion video",
 	"scripts": {
 		"start": "remotion preview src/index.tsx",
-		"build": "remotion render src/index.tsx Main out.mp4",
+		"build": "remotion render src/index.tsx Main out.mkv",
 		"upgrade": "remotion upgrade",
 		"render-write-in-react": "remotion still src/index.tsx WriteInReactHomepage --scale=0.5 out/writeinreact.png",
 		"render-player": "remotion still src/index.tsx PlayerExample --frame=167 out/player-example.png",
@@ -16,9 +16,9 @@
 	"repository": {},
 	"license": "UNLICENSED",
 	"dependencies": {
-		"@remotion/cli": "3.0.0",
-		"@remotion/eslint-config": "3.0.0",
-		"@remotion/lambda": "3.0.0",
+		"@remotion/cli": "4.0.0-audio.35+765608889",
+		"@remotion/eslint-config": "4.0.0-audio.35+765608889",
+		"@remotion/lambda": "4.0.0-audio.35+765608889",
 		"@types/opentype.js": "^1.3.3",
 		"@types/react": "^18.0.7",
 		"@types/web": "^0.0.61",
@@ -29,7 +29,7 @@
 		"prettier-plugin-organize-imports": "^1.1.1",
 		"react": "18.0.0",
 		"react-dom": "18.0.0",
-		"remotion": "3.0.0",
+		"remotion": "4.0.0-audio.35+765608889",
 		"simplex-noise": "^2.4.0",
 		"svg-path-properties": "^1.0.11",
 		"typescript": "4.6.3"
